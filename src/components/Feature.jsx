@@ -61,11 +61,11 @@ const Feature = () => {
     <section className="bg-black pb-10">
       <div className="container mx-auto px-3 md:px-10">
         <div className="px-5 py-32">
-          <p className="font-circular-web text-lg text-blue-50">
+          <p className="font-circular-web text-2xl text-white">
             Into Very mysterious tantra world
           </p>
 
-          <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
+          <p className="max-w-md font-circular-web text-lg text-yellow-500">
             Immerse yourself in a rich tantric tradition where you will
             experience endless bliss, and your self will merge with the supreme
             consciousness.
@@ -132,3 +132,4 @@ We provide remedial solutions for Manglika Dosha, delayed marriage and progeny e
 };
 
 export default Feature;
+
