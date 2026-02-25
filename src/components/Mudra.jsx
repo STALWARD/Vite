@@ -1,0 +1,59 @@
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
+const ImageSlider = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true
+  };
+
+  const images = [
+    { src: "/mudra/abagunthan.png", title: "Abagunthan Mudra", description: "Symbol of concealment and protection." },
+    { src: "/mudra/abhay.png", title: "Abhay Mudra", description: "Gesture of fearlessness and reassurance." },
+    { src: "/mudra/ankush.png", title: "Ankush Mudra", description: "Represents control and guidance." },
+    { src: "/mudra/chakra.png", title: "Chakra Mudra", description: "Symbol of energy and cosmic power." },
+    { src: "/mudra/dhenu.png", title: "Dhenu Mudra", description: "Gesture symbolizing nourishment and abundance." },
+    { src: "/mudra/galini.png", title: "Galini Mudra", description: "Represents surrender and devotion." },
+    { src: "/mudra/jwalini.png", title: "Jwalini Mudra", description: "Gesture of fire and transformation." },
+    { src: "/mudra/kharga.png", title: "Kharga Mudra", description: "Symbol of strength and destruction of evil." },
+    { src: "/mudra/kurma.png", title: "Kurma Mudra", description: "Represents stability and endurance." },
+    { src: "/mudra/lelihan.png", title: "Lelihan Mudra", description: "Gesture of flowing energy and grace." },
+    { src: "/mudra/linga.png", title: "Linga Mudra", description: "Symbol of creation and divine union." },
+    { src: "/mudra/matsya.png", title: "Matsya Mudra", description: "Gesture representing fish and water element." },
+    { src: "/mudra/munda.png", title: "Munda Mudra", description: "Symbol of detachment and transcendence." },
+    { src: "/mudra/parmikaran.png", title: "Parmikaran Mudra", description: "Gesture of purification and clarity." },
+    { src: "/mudra/samhar.png", title: "Samhar Mudra", description: "Represents dissolution and transformation." },
+    { src: "/mudra/sannirodhini.png", title: "Sannirodhini Mudra", description: "Gesture of restraint and discipline." },
+    { src: "/mudra/tatva.png", title: "Tatva Mudra", description: "Symbol of elemental balance and harmony." },
+    { src: "/mudra/yoni.png", title: "Yoni Mudra", description: "Gesture of feminine energy and creation." }
+  ];
+
+  return (
+    <div className='text-center my-10'>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 className="special-font hero-heading bg-gradient-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
+          m<b>ud</b>r<b>a</b>s
+        </h2>
+        <div className="px-10 py-10 bg-black">
+          <Slider {...settings}>
+            {images.map((item, i) => (
+              <div key={i} className="text-white">
+                <img src={item.src} alt={item.title} className="mx-auto" />
+                <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
+                <p className="text-sm">{item.description}</p>
+              </div>
+            ))}
+          </Slider>
+        </div>
+        <hr />
+      </div>
+    </div>
+  );
+};
+
+export default ImageSlider;
