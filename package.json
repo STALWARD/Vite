@@ -13,7 +13,7 @@
     "@gsap/react": "^2.1.2",
     "@heroicons/react": "^2.2.0",
     "buffer": "^6.0.3",
-    "caniuse-lite": "^1.0.30001770",
+    "caniuse-lite": "^1.0.30001780",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "gsap": "^3.14.2",
