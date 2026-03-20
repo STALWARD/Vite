@@ -1,0 +1,199 @@
+import React, { useEffect, useRef, useState } from "react";
+import Button from "../components/Button";
+import { TiLocationArrow } from "react-icons/ti";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const Hero: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
+  const [hasClicked, setHasClicked] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loadedVideos, setLoadedVideos] = useState<number>(0);
+
+  const currentVideoRef = useRef<HTMLVideoElement | null>(null);
+  const nextVideoRef = useRef<HTMLVideoElement | null>(null);
+  const bgVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  const totalVideo = 4;
+  const upcomingVideoIndex = (currentIndex % totalVideo) + 1;
+
+  const handleMiniVideoClick = () => {
+    setHasClicked(true);
+    setCurrentIndex(upcomingVideoIndex);
+  };
+
+  const handleVideoLoad = () => {
+    setLoadedVideos((prev) => prev + 1);
+  };
+
+  // FIX: Failsafe for stuck loader
+  useEffect(() => {
+    // 1. Check if video is already cached/loaded on mount
+    if (bgVideoRef.current && bgVideoRef.current.readyState >= 2) {
+      setLoadedVideos((prev) => prev + 1);
+    }
+
+    // 2. Failsafe: Force hide loader after 5s if videos are slow/buggy
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Sync loading state with ScrollTrigger
+  useEffect(() => {
+    if (loadedVideos >= 1) {
+      setIsLoading(false);
+      // Ensure GSAP calculates positions AFTER the loader is gone
+      setTimeout(() => ScrollTrigger.refresh(), 100);
+    }
+  }, [loadedVideos]);
+
+  // Video Transition Animation
+  useGSAP(
+    () => {
+      if (hasClicked && nextVideoRef.current) {
+        gsap.set("#next-video", { visibility: "visible" });
+
+        gsap.to("#next-video", {
+          transformOrigin: "center center",
+          scale: 1,
+          width: "100%",
+          height: "100%",
+          duration: 1,
+          ease: "power1.inOut",
+          onStart: () => {
+            nextVideoRef.current?.play().catch(() => {});
+          },
+        });
+
+        gsap.from("#current-video", {
+          transformOrigin: "center center",
+          scale: 0,
+          duration: 1.5,
+          ease: "power1.inOut",
+        });
+      }
+    },
+    { dependencies: [currentIndex], revertOnUpdate: true }
+  );
+
+  // Main Intro + Scroll Animation
+  useGSAP(() => {
+    gsap.set("#video-frame", {
+      clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
+      borderRadius: "0 0 40% 10%",
+    });
+
+    gsap.from("#video-frame", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      borderRadius: "0 0 0 0",
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: "#video-frame",
+        start: "center center",
+        end: "bottom center",
+        scrub: true,
+      },
+    });
+  }, []);
+
+  const getVideoSrc = (index: number) => `videos/hero-bg-${index}.mp4`;
+
+  return (
+    <div className="relative h-screen w-screen overflow-x-hidden">
+      {isLoading && (
+        <div className="flex-center absolute z-100 h-screen w-screen bg-violet-50">
+          <div className="three-body">
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+          </div>
+        </div>
+      )}
+
+      <div
+        id="video-frame"
+        className="relative z-10 h-screen w-screen overflow-hidden rounded-lg bg-blue-75"
+      >
+        <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
+          <div
+            onClick={handleMiniVideoClick}
+            className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+          >
+            <video
+              ref={currentVideoRef}
+              src={getVideoSrc(upcomingVideoIndex)}
+              loop
+              muted
+              playsInline
+              id="current-video"
+              className="size-64 origin-center scale-150 object-cover object-center"
+            />
+          </div>
+        </div>
+
+        <video
+          ref={nextVideoRef}
+          src={getVideoSrc(currentIndex)}
+          loop
+          muted
+          playsInline
+          id="next-video"
+          className="absolute-center invisible absolute z-20 size-64 object-cover"
+        />
+
+        <video
+          ref={bgVideoRef}
+          src={getVideoSrc(currentIndex)}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute left-0 top-0 size-full object-cover"
+          onLoadedData={handleVideoLoad}
+        />
+
+        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 bg-linear-to-r from-green-400 via-red-500 to-indigo-500 bg-clip-text text-transparent">
+          BH<b>as</b>k<b>a</b>r
+        </h1>
+
+        <div className="absolute left-0 top-0 z-40 size-full">
+          <div className="mt-24 px-5 sm:px-10">
+            <h1 className="special-font hero-heading bg-linear-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent">
+              K<b>a</b>u<b>l</b>
+            </h1>
+            <p className="mb-5 max-w-72 font-robert-regular text-white">
+              देहोऽहमिति या बुद्धिर्विद्या सा प्रकीर्तिता।<br />
+              नाहं देहश्चिदात्मेति बुद्धिर्विद्येति भण्यते।।<br />
+              अविद्या संसृतेर्हेतु विद्या तस्या निवृत्तिका।<br />
+              तस्माद् यत्न: सदाकार्यो विद्याभ्यासे मुमुक्षुभि:।।<br />
+              <br />
+              We can help you on an adventure around the world of Tantra in just
+              a simple way.
+            </p>
+            <Button
+              id="kaulbhaskar-guru ji"
+              title="Know KAULBHASKAR Guru Ji"
+              leftIcon={<TiLocationArrow />}
+              containerClass="!bg-yellow-300 flex-center gap-1"
+              onClick={() =>
+                window.open("https://www.kaulbhaskar.com", "_blank")
+              }
+            />
+          </div>
+        </div>
+      </div>
+
+      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
+        BH<b>as</b>k<b>a</b>r
+      </h1>
+    </div>
+  );
+};
+
+export default Hero;
