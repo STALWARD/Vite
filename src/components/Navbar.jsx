@@ -66,7 +66,7 @@ const Navbar = () => {
       <nav className="flex items-center justify-between w-full">
         {/* Logo + Call Button */}
         <div className="flex items-center gap-7">
-          <img src="/img/logo.png" alt="logo" className="w-10" />
+          <img src="/img/LOGO.png" alt="logo" className="w-10" />
           <Button
             id="call-button"
             title="CALL US"
