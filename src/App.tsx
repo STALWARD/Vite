@@ -1,24 +1,32 @@
 // src/App.tsx
+import { lazy, Suspense } from 'react'; // 1. Import lazy and Suspense
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './components/Layout';
-import Home from './routes/Home';
-import About from './routes/About';
-import Services from './routes/Services';
-import Blog from './routes/Blog';
-import BlogPost from './routes/BlogPost';
-import Contact from './routes/Contact';
 import ScrollToTop from './components/ScrollToTop';
 
+// 2. Replace static imports with lazy imports
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+const Services = lazy(() => import('./routes/Services'));
+const Blog = lazy(() => import('./routes/Blog'));
+const BlogPost = lazy(() => import('./routes/BlogPost'));
+const Contact = lazy(() => import('./routes/Contact'));
+
+// 3. Wrap elements in <Suspense>
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, 
+    element: (
+      <Suspense fallback={<div className="loading-spinner" />}>
+        <Layout />
+      </Suspense>
+    ), 
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "services", element: <Services /> },
-      { path: "blog", element: <Blog /> }, // List view at /blog
-      { path: ":slug", element: <BlogPost /> }, // Slug view at /my-post (root level)
+      { path: "blog", element: <Blog /> },
+      { path: ":slug", element: <BlogPost /> },
       { path: "contact", element: <Contact /> },
     ],
   },
@@ -28,7 +36,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <ScrollToTop /> {/* 2. Add it here */}
+      <ScrollToTop />
     </>
   );
 }
