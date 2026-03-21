@@ -5,11 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- 1. Preconnect to external font domains (e.g., cdnfonts) -->
+    <!-- 1. Preconnect to external font domains to speed up discovery -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
 
-    <!-- 2. Preload the most critical local fonts (the ones visible on page load) -->
-    <!-- Use "crossorigin" even for local fonts to match how browsers request them -->
+    <!-- 2. Preload critical local fonts so they download in parallel with JS/CSS -->
+    <!-- Added Zentry here as it is critical for your hero headings -->
+    <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
@@ -18,6 +19,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- This remains your main entry point -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
