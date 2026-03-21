@@ -22,11 +22,11 @@ interface TestimonialData {
 const TestimonialCard: FC<TestimonialData> = ({ name, profession, comment }) => {
   return (
     <div className="bg-white m-4 p-5 my-10 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-      <h3 className="text-base font-normal text-black my-4">{comment}</h3>
+      <h2 className="text-base font-normal text-black my-4">{comment}</h2>
       <hr style={{ borderColor: "#D7D5D5" }} />
       <div className="flex justify-between items-center mt-4">
         <div>
-          <h4 className="text-lg font-medium text-slate-900">{name}</h4>
+          <h3 className="text-lg font-medium text-slate-900">{name}</h3>
           <h4 className="text-sm font-normal text-black">{profession}</h4>
         </div>
         <div className="flex gap-1">
