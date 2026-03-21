@@ -67,7 +67,7 @@ export default function Navbar() {
     >
       <nav className="flex items-center justify-between w-full px-4">
         <div className="flex items-center gap-6">
-          <img src="/img/logo.png" alt="logo" className="w-10" />
+          <img src="/img/LOGO.png" alt="logo" className="w-10" />
           <button 
             onClick={() => window.location.href='tel:+919934418459'}
             className="hidden md:flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-transform active:scale-95"
