@@ -42,10 +42,11 @@
     overflow-x: hidden;
     background-color: #dfdff0;
     font-family: "General Sans", sans-serif;
+    color: #1a1a1a; /* Ensure base text contrast */
   }
 }
 
-/* 4. CUSTOM UTILITIES (Registered so @apply works) */
+/* 4. CUSTOM UTILITIES */
 @utility special-font {
   b {
     font-family: "Zentry";
@@ -65,10 +66,30 @@
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
-/* 5. COMPONENTS & COMPLEX CLASSES */
+/* 5. COMPONENTS & ACCESSIBILITY OVERRIDES */
 @layer utilities {
+  /* Accessibility: Global Contrast Fix for Orange Text (WCAG AA) */
+  .text-orange-600 {
+    color: #c2410c !important; /* Forces orange-700 equivalent for 4.5:1 ratio */
+  }
+
+  /* Accessibility: React Big Calendar Contrast Fixes */
+  .rbc-off-range-bg {
+    background-color: #e5e7eb !important; /* gray-200 for better visibility */
+  }
+
+  .rbc-off-range .rbc-button-link {
+    color: #4b5563 !important; /* gray-600 for legible off-range dates */
+  }
+
+  .rbc-button-link {
+    color: #111827 !important; /* gray-900 for active dates */
+    font-weight: 600;
+  }
+
   .nav-hover-btn {
-    @apply relative ms-10 font-general text-xs uppercase text-blue-50 cursor-pointer;
+    /* Adjusted from blue-50 to blue-900 for contrast on light backgrounds */
+    @apply relative ms-10 font-general text-xs uppercase text-blue-900 cursor-pointer;
     @apply after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65,0.05,0.36,1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white;
   }
 
