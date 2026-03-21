@@ -33,7 +33,7 @@ const Intro: React.FC = () => {
     <div id="about" className="min-h-screen w-screen">
       <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
         <h2 className="font-general text-sm text-center uppercase md:text-[30px]">
-          Welcome To KAUL TANTRA SADHANA
+          Under Mentorship Of KAULBHASKAR Guru Ji
         </h2>
         
         <AnimatedTitle
