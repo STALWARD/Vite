@@ -1,49 +1,43 @@
-import React from "react";
-import Hero from "../components/Hero";
-
+import React, { lazy, Suspense } from "react";
+import Hero from "../components/Hero"; // LCP component (Keep static)
+import Intro from "../components/Intro"; // Above the fold (Keep static)
 import SEO from "../components/SEO"; 
-import Intro from "../components/Intro";
-import Feature from "../components/Feature";
-import Camp from "../components/Camp";
-import CalendarComponent from "../components/CalendarComponent";
-import Gallery from "../components/Gallery";
-import Mudra from "../components/Mudra";
-import FAQ from "../components/FAQ";
-import Story from "../components/Story";
-import Testimonial from "../components/Testimonial";
-import Mentor from "../components/Team";
-import Meet from "../components/Meet";
-import LatestPost from "../components/LatestPost";
 
+// Lazy load the rest
+const Feature = lazy(() => import("../components/Feature"));
+const Camp = lazy(() => import("../components/Camp"));
+const CalendarComponent = lazy(() => import("../components/CalendarComponent"));
+const Gallery = lazy(() => import("../components/Gallery"));
+const Mudra = lazy(() => import("../components/Mudra"));
+const FAQ = lazy(() => import("../components/FAQ"));
+const Story = lazy(() => import("../components/Story"));
+const Testimonial = lazy(() => import("../components/Testimonial"));
+const Mentor = lazy(() => import("../components/Team"));
+const Meet = lazy(() => import("../components/Meet"));
+const LatestPost = lazy(() => import("../components/LatestPost"));
 
 const Home: React.FC = () => {
   return (
     <div>
-      {/* Page-specific SEO using reusable component */}
-      <SEO
-        title="Kaulbhaskar | Tantra, Astrology & Spiritual Guidance"
-        description="Experience authentic Tantric teachings and Astrology with Sri Kaulbhaskar Guru Ji. Explore spiritual rituals, mudras, and guidance from the lineage of 84 Maha Siddhas."
-        canonical="https://www.tantrasadhana.org"
-        keywords="Tantra, Astrology, Spiritual Guidance, Kaulbhaskar, Maha Siddhas"
-        breadcrumbs={[
-          { name: "Home", url: "https://www.tantrasadhana.org" },
-        ]}
-      />
+      <SEO title="..." description="..." />
 
       <Hero />
       <Intro />
-      <Feature />
-      <Camp />
-      <CalendarComponent />
-      <Gallery />
-      <Mudra />
-      <FAQ />
-      <Story />
-      <Testimonial />
-      <Mentor />
-      <LatestPost />
-      <Meet />
 
+      {/* Wrap everything else in Suspense */}
+      <Suspense fallback={<div className="h-40" />}>
+        <Feature />
+        <Camp />
+        <CalendarComponent />
+        <Gallery />
+        <Mudra />
+        <FAQ />
+        <Story />
+        <Testimonial />
+        <Mentor />
+        <LatestPost />
+        <Meet />
+      </Suspense>
     </div>
   );
 };
