@@ -1,22 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import tailwindcss from '@tailwindcss/vite'
-
+// vite.config.js
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
   build: {
-    // 1. Increases the warning limit if you have large assets
-    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        // 2. Automatically splits node_modules into a separate 'vendor' file
-        // This allows the browser to cache libraries separately from your code
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor';
+            // Split big libraries into their own files
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return '@framework'; 
+            }
+            // Let other libraries stay separate or grouped by package name
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
           }
         },
       },
