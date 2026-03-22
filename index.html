@@ -4,28 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <!-- 1. Preconnect to external font domains to speed up discovery -->
-    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
     
-    <!-- 1. Parallelize JavaScript discovery -->
-    <link rel="modulepreload" href="/src/main.tsx">
+    <!-- 1. Preconnect to external font domains to speed up discovery -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
 
-    <!-- 2. Preload LCP Image (Ensure path matches your <img> tag exactly) -->
-    <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
-
-    <!-- 3. Preload critical local fonts -->
+    <!-- 2. Preload critical local fonts so they download in parallel with JS/CSS -->
+    <!-- Added Zentry here as it is critical for your hero headings -->
     <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Note: Removed cdnfonts preconnect as it was flagged as unused -->
+    <!-- ADD THE IMAGE PRELOAD HERE -->
+    <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
-    <title>Kaulbhaskar | Tantra & Astrology</title>
+    <title>my-app</title>
   </head>
   <body>
     <div id="root"></div>
+    <!-- This remains your main entry point -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
