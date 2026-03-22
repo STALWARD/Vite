@@ -52,11 +52,12 @@ const Intro: React.FC = () => {
       <div className="h-screen w-screen" id="clip">
         <div className="mask-clip-path about-image">
           <img 
-            alt="bgImage" 
-            class="absolute left-0 top-0 size-full object-cover" 
-            src="/img/intro.webp" 
-            fetchpriority="high" 
-          />
+  alt="bgImage" 
+  className="absolute left-0 top-0 size-full object-cover" 
+  src="/img/intro.webp" 
+  fetchpriority="high" 
+  decoding="sync"
+/>
         </div>
       </div>
     </div>
