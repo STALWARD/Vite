@@ -40,7 +40,7 @@ const About: React.FC = () => {
         </h2>
       </div>
 
-      <section className="flex-row md:flex mx-auto items-center w-full h-full bg-linear-to-r from-green-400 via-indigo-500 to-yellow-400">
+      <section className="flex-row md:flex mx-auto items-center w-full bg-linear-to-r from-green-400 via-indigo-500 to-yellow-400">
         <div className="sm:w-1/2 sm:ml-10 sm:mr-10 w-full flex justify-center mt-12 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
           <img
             src="/img/satyendra-large.webp"
