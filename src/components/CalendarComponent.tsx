@@ -33,32 +33,43 @@ const CalendarComponent: FC = () => {
   const [currentView, setCurrentView] = useState<View>("month");
 
   return (
-    <div style={{ height: "100vh", width: "90vw", margin: "0 auto" }}>
-      <h1 style={{ 
-        textAlign: "center", 
-        fontSize: "3.5rem", 
-        color: "#B22222",  
-        margin: "30px 0 20px",  
-        fontWeight: "600"
-      }}>
-        Event Calendar
-      </h1>
-      
+  <div style={{ 
+    height: "100vh", 
+    width: "90vw", 
+    margin: "0 auto",
+    /* 
+       'layout' stops layout changes from leaking out.
+       'size' (optional) tells the browser the container size 
+       doesn't depend on its children. 
+    */
+    contain: "layout style" 
+  }}>
+    <h1 style={{ 
+      textAlign: "center", 
+      fontSize: "3.5rem", 
+      color: "#B22222",  
+      margin: "30px 0 20px",  
+      fontWeight: "600"
+    }}>
+      Event Calendar
+    </h1>
+    
+    <div style={{ height: 500, contain: "content" }}> {/* Additional layer for the grid itself */}
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
-        
-        // 3. Bind state and handlers to the toolbar
+        style={{ height: "100%" }} // Let it fill the contained div
         date={currentDate}
         onNavigate={(newDate) => setCurrentDate(newDate)}
         view={currentView}
         onView={(newView) => setCurrentView(newView)}
       />
     </div>
-  );
+  </div>
+);
+
 };
 
 export default CalendarComponent;
