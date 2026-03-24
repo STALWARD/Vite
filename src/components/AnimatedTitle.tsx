@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react"; // Switched to useLayoutEffect
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,15 +12,16 @@ interface AnimatedTitleProps {
 const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "" }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    // gsap.context handles scope and easy cleanup for React
+  // useLayoutEffect is better for GSAP to prevent layout thrashing/reflow
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const titleAnimation = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "100 bottom",
           end: "center bottom",
-          toggleActions: "play none none reverse", // corrected property name
+          toggleActions: "play none none reverse",
+          refreshPriority: 1, // Helps prioritize layout calculation
         },
       });
 
@@ -32,7 +33,7 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
       });
     }, containerRef);
 
-    return () => ctx.revert(); // Cleanup GSAP context on unmount
+    return () => ctx.revert(); 
   }, []);
 
   return (
