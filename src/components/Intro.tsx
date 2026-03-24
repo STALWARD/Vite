@@ -50,27 +50,15 @@ const Intro: React.FC = () => {
       </div>
 
       <div className="h-screen w-screen" id="clip">
-        <div className="mask-clip-path about-image relative h-full w-full">
-  <picture className="block h-full w-full"> {/* Ensure picture tag has dimensions */}
-    <source 
-      srcSet="/img/intro-1920.webp 1920w, /img/intro-3840.webp 3840w" 
-      media="(min-width: 1024px)" 
-    />
-    <source 
-      srcSet="/img/intro-800.webp 800w, /img/intro-1200.webp 1200w" 
-      media="(max-width: 1023px)" 
-    />
-    <img 
-      alt="Intro Background" 
-      className="absolute left-0 top-0 size-full object-cover" 
-      src="/img/intro.webp" 
-      fetchPriority="high" 
-      decoding="sync"
-    />
-  </picture>
-</div>
-
-
+        <div className="mask-clip-path about-image">
+          <img 
+            alt="bgImage" 
+            className="absolute left-0 top-0 size-full object-cover" 
+            src="/img/intro.webp" 
+            fetchPriority="high" 
+            decoding="sync"
+          />
+        </div>
       </div>
     </div>
   );
