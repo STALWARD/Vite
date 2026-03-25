@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
-import Hero from "../components/Hero"; // LCP component (Keep static)
-import Intro from "../components/Intro"; // Above the fold (Keep static)
+import Hero from "../components/Hero"; 
+import Intro from "../components/Intro"; 
 import SEO from "../components/SEO"; 
 
 // Lazy load the rest
@@ -19,12 +19,35 @@ const LatestPost = lazy(() => import("../components/LatestPost"));
 const Home: React.FC = () => {
   return (
     <div>
-      <SEO title="..." description="..." />
+      <SEO 
+        title="Yoga Retreats & Wellness Camps | [Brand Name]" 
+        description="Experience transformative yoga camps, mindfulness workshops, and expert mentorship. Join our community for a holistic wellness journey."
+        keywords="yoga retreat, wellness camp, mindfulness, yoga mentorship, mudras"
+        canonical="https://yourdomain.com"
+        // FAQ Schema Data
+        faq={[
+          { 
+            question: "What is included in the wellness camp?", 
+            answer: "Our camps include daily yoga sessions, mudra workshops, expert mentorship, and organic meals." 
+          },
+          { 
+            question: "Are the programs suitable for beginners?", 
+            answer: "Yes, we offer sessions tailored for all levels, from absolute beginners to advanced practitioners." 
+          }
+        ]}
+        // Mentors Schema Data
+        mentors={[
+          { 
+            name: "Lead Mentor Name", 
+            role: "Senior Yoga Instructor", 
+            image: "https://yourdomain.commentor-image.jpg" 
+          }
+        ]}
+      />
 
       <Hero />
       <Intro />
 
-      {/* Wrap everything else in Suspense */}
       <Suspense fallback={<div className="h-40" />}>
         <Feature />
         <Camp />
