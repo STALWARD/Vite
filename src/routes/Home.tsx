@@ -20,27 +20,32 @@ const Home: React.FC = () => {
   return (
     <div>
       <SEO 
-        title="Yoga Retreats & Wellness Camps | [Brand Name]" 
-        description="Experience transformative yoga camps, mindfulness workshops, and expert mentorship. Join our community for a holistic wellness journey."
-        keywords="yoga retreat, wellness camp, mindfulness, yoga mentorship, mudras"
+        title="Tantra, Astrology & Spiritual Guidance | KAULBHASKAR Guru Ji" 
+        description="Connect with experts in Tantra & Astrology led by Sri KAULBHASKAR Ji, lineage of Sri MATSYENDRA NATH Ji. Services include Puja, Rituals, and Astro-consultation."
+        keywords="Tantra, Astrology, KAULBHASKAR Guru Ji, Sri MATSYENDRA NATH lineage, Puja Rituals, Astrology Consultation, Yantra"
         canonical="https://yourdomain.com"
-        // FAQ Schema Data
+        // FAQ Schema Data from your provided list
         faq={[
-          { 
-            question: "What is included in the wellness camp?", 
-            answer: "Our camps include daily yoga sessions, mudra workshops, expert mentorship, and organic meals." 
+          {
+            question: "Who we are ?",
+            answer: "We are a team of experts in Tantra & Astrology from renowned lineages. Our mentor Sri KAULBHASKAR Ji belongs to the lineage of the famous siddha yogi Sri MATSYENDRA NATH Ji."
           },
-          { 
-            question: "Are the programs suitable for beginners?", 
-            answer: "Yes, we offer sessions tailored for all levels, from absolute beginners to advanced practitioners." 
+          {
+            question: "What services we provide ?",
+            answer: "We provide Tantra teachings and rituals, Astrology consultation, Gems, Talismans, and Worship Yantras like Meru & Kurma."
+          },
+          {
+            question: "What is the charges, if any ?",
+            answer: "Services range from Astrology Consultation (₹5,000) to specialized rituals like Shat Chandi (₹2,50,000). Contact us for specific details."
           }
         ]}
-        // Mentors Schema Data
+        // Mentor Schema Data
         mentors={[
           { 
-            name: "Lead Mentor Name", 
-            role: "Senior Yoga Instructor", 
-            image: "https://yourdomain.commentor-image.jpg" 
+            name: "KAULBHASKAR Guru Ji", 
+            role: "Spiritual Mentor & Expert in Tantra", 
+            description: "Belongs to the lineage of famous siddha yogi Sri MATSYENDRA NATH Ji.",
+            image: "https://yourdomain.comguru-ji-photo.jpg" // Update with actual URL
           }
         ]}
       />
