@@ -1,23 +1,34 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
-// Define the shape of a single breadcrumb
+// --- Interfaces for Structured Data ---
 interface Breadcrumb {
   name: string;
   url: string;
 }
 
-// Define the Props for the SEO component
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Mentor {
+  name: string;
+  role: string;
+  image?: string;
+  description?: string;
+}
+
 interface SEOProps {
   title: string;
   description: string;
   canonical?: string;
   keywords?: string;
   breadcrumbs?: Breadcrumb[];
+  faq?: FAQItem[];
+  mentors?: Mentor[];
   featuredImage?: string; 
   type?: string;
-  authorName?: string;
-  publishDate?: string;
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -26,8 +37,13 @@ const SEO: React.FC<SEOProps> = ({
   canonical,
   keywords,
   breadcrumbs,
+  faq,
+  mentors,
+  featuredImage = "https://yourdomain.com", // Add a default fallback
+  type = "website",
 }) => {
-  // Structured Data (JSON-LD) for Breadcrumbs
+
+  // 1. Breadcrumb Schema
   const breadcrumbSchema = breadcrumbs && {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -36,6 +52,38 @@ const SEO: React.FC<SEOProps> = ({
       "position": index + 1,
       "name": crumb.name,
       "item": crumb.url,
+    })),
+  };
+
+  // 2. FAQ Schema (Helps get rich snippets in Google search)
+  const faqSchema = faq && {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer,
+      },
+    })),
+  };
+
+  // 3. Mentors/Team Schema
+  const mentorSchema = mentors && {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Our Mentors",
+    "itemListElement": mentors.map((mentor, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Person",
+        "name": mentor.name,
+        "jobTitle": mentor.role,
+        "image": mentor.image,
+        "description": mentor.description,
+      },
     })),
   };
 
@@ -48,19 +96,33 @@ const SEO: React.FC<SEOProps> = ({
       {canonical && <link rel="canonical" href={canonical} />}
 
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
+      <meta property="og:image" content={featuredImage} />
 
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={featuredImage} />
 
-      {/* Structured Data (Schema.org) */}
+      {/* Inject Structured Data */}
       {breadcrumbSchema && (
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}
+        </script>
+      )}
+      
+      {faqSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      )}
+
+      {mentorSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(mentorSchema)}
         </script>
       )}
     </Helmet>
