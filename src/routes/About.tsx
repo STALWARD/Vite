@@ -1,7 +1,9 @@
-import React from "react";
-import CalendarComponent from "../components/CalendarComponent";
+import React, { lazy, Suspense } from "react";
 import LatestPost from "../components/LatestPost";
 import SEO from "../components/SEO";
+
+// ✅ Lazy load CalendarComponent
+const CalendarComponent = lazy(() => import("../components/CalendarComponent"));
 
 const About: React.FC = () => {
   return (
@@ -82,7 +84,10 @@ const About: React.FC = () => {
       </section>
       
       <div className="bg-yellow-400">
-        <CalendarComponent />
+        {/* ✅ Lazy loaded calendar wrapped in Suspense */}
+        <Suspense fallback={<div>Loading calendar…</div>}>
+          <CalendarComponent />
+        </Suspense>
         <LatestPost />
       </div>
 
