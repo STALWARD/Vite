@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import React, { useLayoutEffect, useRef } from "react"; // Switched to useLayoutEffect
+import React, { useLayoutEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,28 +12,35 @@ interface AnimatedTitleProps {
 const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "" }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // useLayoutEffect is better for GSAP to prevent layout thrashing/reflow
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // 1. "Set" initial state immediately to avoid layout reads during the animation start
+      gsap.set(".animated-word", {
+        opacity: 0,
+        transform: "translate3d(10px, 51px, 0) rotateY(10deg) rotateX(-10deg)",
+        transformOrigin: "left center",
+      });
+
       const titleAnimation = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "100 bottom",
           end: "center bottom",
           toggleActions: "play none none reverse",
-          refreshPriority: 1, // Helps prioritize layout calculation
+          fastScrollEnd: true, // Prevents layout recalculations on rapid scrolling
         },
       });
 
       titleAnimation.to(".animated-word", {
         opacity: 1,
-        transform: "translate3d(0,0,0) rotate(0deg) rotateX(0deg)",
+        transform: "translate3d(0,0,0) rotateY(0deg) rotateX(0deg)",
         ease: "power2.inOut",
         stagger: 0.02,
+        overwrite: "auto", // Prevents conflict if user scrolls up/down quickly
       });
     }, containerRef);
 
-    return () => ctx.revert(); 
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -47,6 +54,11 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
             <span
               key={i}
               className="animated-word"
+              style={{ 
+                display: "inline-block", // Essential: Inline elements cannot be transformed efficiently
+                willChange: "transform, opacity", // Promotes to GPU layer to avoid forced reflows
+                backfaceVisibility: "hidden" 
+              }}
               dangerouslySetInnerHTML={{ __html: word }}
             />
           ))}
