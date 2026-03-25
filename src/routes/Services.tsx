@@ -1,9 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import FAQ from "../components/FAQ";
 import MultipleItems from "../components/MultipleItems";
-import CalendarComponent from "../components/CalendarComponent";
 import LatestPost from "../components/LatestPost";
 import SEO from "../components/SEO";
+
+// ✅ Lazy load CalendarComponent
+const CalendarComponent = lazy(() => import("../components/CalendarComponent"));
 
 const Services: React.FC = () => {
   return (
@@ -22,7 +24,11 @@ const Services: React.FC = () => {
       <MultipleItems />
       <FAQ />
       <LatestPost />
-      <CalendarComponent />      
+
+      {/* ✅ Lazy loaded calendar wrapped in Suspense */}
+      <Suspense fallback={<div>Loading calendar…</div>}>
+        <CalendarComponent />
+      </Suspense>
     </div>
   );
 };
