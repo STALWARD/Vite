@@ -42,7 +42,7 @@ const Meet: FC = () => {
             clipClass="absolute md:scale-125"
           />
           <ImageClipBox
-            src="/img/swordman.webp"
+            src="/img/tantra-ritual.webp"
             clipClass="sword-man-clip-path md:scale-125"
           />
         </div>
