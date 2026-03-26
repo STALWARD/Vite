@@ -48,18 +48,17 @@ interface BentoCardProps {
 const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  // SAFE EXTRACTION: Robust regex to get YouTube ID and avoid Vercel "undefined" crashes
+  // FIXED EXTRACTION: Correctly returns the 11-char ID string
   const getYouTubeId = (url: string): string => {
     const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
-    return match && match[2].length === 11 ? match[2] : "";
+    return (match && match[2].length === 11) ? match[2] : "";
   };
 
-  const videoId = getYouTubeId(src);
+  const videoId = src.includes("youtube.com") || src.includes("youtu.be") ? getYouTubeId(src) : "";
   const isYouTube = videoId !== "";
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  // Performance: Eager load top 2 items for LCP, lazy load the rest
   const loadingStrategy = index < 2 ? "eager" : "lazy";
 
   return (
@@ -68,7 +67,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
         isPlaying ? (
           <iframe
             src={`https://www.youtube.com{videoId}?autoplay=1`}
-            title={typeof title === "string" ? title : "Video"}
+            title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -76,9 +75,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
           />
         ) : (
           <img
-            // FIX: Modern WebP format for YouTube thumbnails
             src={`https://i.ytimg.com{videoId}/hqdefault.webp`}
-            alt={typeof title === "string" ? title : "Thumbnail"}
+            alt="YouTube thumbnail"
             className="w-full h-auto object-contain bg-black"
             loading={loadingStrategy}
           />
@@ -86,7 +84,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
       ) : isImage ? (
         <img
           src={src}
-          alt={typeof title === "string" ? title : "Gallery image"}
+          alt="Gallery item"
           className="w-full h-auto object-contain bg-black"
           loading={loadingStrategy}
         />
@@ -148,7 +146,7 @@ const Gallery: FC = () => {
         <div className="grid h-auto grid-cols-1 md:grid-cols-2 gap-5">
           {mediaItems.map((src, i) => (
             <BentoTilt
-              key={`gallery-item-${i}`}
+              key={`item-${i}`}
               className="border-hsl relative mb-7 w-full overflow-hidden rounded-md"
             >
               <BentoCard src={src} index={i} />
