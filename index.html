@@ -4,27 +4,31 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- 1. Preconnect to external font domains to speed up discovery -->
-   <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    
+    <!-- 1. Preconnect to external font domains -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
 
-
-    <!-- 2. Preload critical local fonts so they download in parallel with JS/CSS -->
-    <!-- Added Zentry here as it is critical for your hero headings -->
+    <!-- 2. Preload critical assets -->
     <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- ADD THE IMAGE PRELOAD HERE -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
+
+    <!-- 3. DEFER CSS LOADING: Tells Vite to load styles without blocking LCP -->
+    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <link rel="stylesheet" href="/assets/index-CZMhnSqO.css">
+      <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css">
+    </noscript>
 
     <title>my-app</title>
   </head>
   <body>
     <div id="root"></div>
-    <!-- This remains your main entry point -->
     <script type="module" src="/src/main.tsx"></script>
-     <!-- ✅ Optional: load gray-matter only if needed -->
-
   </body>
 </html>
