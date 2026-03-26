@@ -50,25 +50,17 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  // Helper to safely get YouTube ID as a string
+  // FIXED: Reliable YouTube ID extraction using Regex
   const getYouTubeId = (url: string): string => {
-    try {
-      if (url.includes("watch?v=")) {
-        return url.split("watch?v=")[1].split("&")[0];
-      } else if (url.includes("youtu.be")) {
-        return url.split("youtu.be/")[1].split("?")[0];
-      }
-    } catch (e) {
-      console.error("Invalid YouTube URL:", url);
-    }
-    return "";
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : "";
   };
 
   const videoId = isYouTube ? getYouTubeId(src) : "";
 
-  // Performance strategy: eager load the first 2 items (LCP), lazy load the rest
+  // Performance: Eager load top 2, Lazy load others
   const loadingStrategy = index < 2 ? "eager" : "lazy";
-  const fetchPriority = index < 2 ? "high" : "auto";
 
   return (
     <div className="relative w-full">
@@ -76,36 +68,30 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
         isPlaying ? (
           <iframe
             src={`https://www.youtube.com{videoId}?autoplay=1`}
-            title={typeof title === "string" ? title : "YouTube video"}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            title={typeof title === "string" ? title : "Video"}
             className="w-full h-auto aspect-video"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
           />
         ) : (
           <img
-            src={`https://i.ytimg.com{videoId}/hqdefault.webp`}
-            alt={typeof title === "string" ? title : "YouTube thumbnail"}
+            src={`https://i.ytimg.com{videoId}/hqdefault.webp`} // Modern WebP format
+            alt="Thumbnail"
             className="w-full h-auto object-contain bg-black"
             loading={loadingStrategy}
-            fetchPriority={fetchPriority}
           />
         )
       ) : isImage ? (
         <img
           src={src}
-          alt={typeof title === "string" ? title : "Gallery image"}
+          alt="Gallery"
           className="w-full h-auto object-contain bg-black"
           loading={loadingStrategy}
-          fetchPriority={fetchPriority}
         />
       ) : (
         <video
           src={src}
-          loop
-          autoPlay
-          playsInline
-          muted
+          loop autoPlay playsInline muted
           className="w-full h-auto object-contain bg-black"
         />
       )}
@@ -114,18 +100,17 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
         <div className="bento-title special-font">
           {title}
           {description && (
-            <p className="mt-3 max-w-64 wrap-break-word text-xs md:text-base text-yellow-400">
+            <p className="mt-3 max-w-64 text-xs md:text-base text-yellow-400">
               {description}
             </p>
           )}
         </div>
-
         {isYouTube && (
           <button
-            onClick={() => setIsPlaying((prev) => !prev)}
-            className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-md text-sm transition-colors hover:bg-black/90"
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-md text-sm"
           >
-            {isPlaying ? "⏸ Pause" : "▶ Play"}
+            {isPlaying ? "Pause" : "Play"}
           </button>
         )}
       </div>
@@ -149,17 +134,14 @@ const Gallery: FC = () => {
     <section className="bg-black">
       <div className="container mx-auto px-3 md:px-10">
         <div className="px-5 py-32">
-          <p className="special-font hero-heading bg-linear-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent text-lg">
-            g<b>a</b>ll<b>er</b>y
+          <p className="special-font hero-heading bg-linear-to-r from-red-500 to-pink-500 bg-clip-text text-transparent text-lg">
+            gallery
           </p>
         </div>
 
-        <div className="grid h-auto grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {mediaItems.map((src, i) => (
-            <BentoTilt
-              key={i}
-              className="border-hsl relative mb-7 w-full overflow-hidden rounded-md"
-            >
+            <BentoTilt key={src} className="relative mb-7 overflow-hidden rounded-md">
               <BentoCard src={src} index={i} />
             </BentoTilt>
           ))}
