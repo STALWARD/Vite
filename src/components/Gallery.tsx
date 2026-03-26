@@ -30,7 +30,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       onMouseLeave={handleMouseLeave}
       style={{ 
         transform: transformStyle,
-        transition: "transform 0.3s ease-out" // Added smooth glide back
+        transition: "transform 0.3s ease-out" 
       }}
     >
       {children}
@@ -42,23 +42,23 @@ interface BentoCardProps {
   src: string;
   title?: ReactNode;
   description?: string;
+  index: number; // Added index to handle priority loading
 }
 
-const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
+const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
   const getYouTubeEmbedUrl = (url: string): string => {
-    let cleanUrl = url;
+    let videoId = "";
     if (url.includes("watch?v=")) {
-      cleanUrl = url.replace("watch?v=", "embed/");
+      videoId = url.split("watch?v=")[1].split("&")[0];
     } else if (url.includes("youtu.be")) {
-      const videoId = url.split("youtu.be/")[1];
-      cleanUrl = `https://www.youtube.com/embed/${videoId}`;
+      videoId = url.split("youtu.be/")[1];
     }
-    return `${cleanUrl}?autoplay=1`;
+    return `https://www.youtube.com{videoId}?autoplay=1`;
   };
 
   const getYouTubeThumbnail = (url: string): string => {
@@ -68,8 +68,13 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    // FIX: Using the modern WebP endpoint to resolve Lighthouse warnings
+    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
   };
+
+  // Performance optimization: Lazy load everything except the first 2 items
+  const loadingStrategy = index < 2 ? "eager" : "lazy";
+  const fetchPriority = index < 2 ? "high" : "auto";
 
   return (
     <div className="relative w-full">
@@ -88,6 +93,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
             src={getYouTubeThumbnail(src)}
             alt={typeof title === "string" ? title : "YouTube thumbnail"}
             className="w-full h-auto object-contain bg-black"
+            loading={loadingStrategy}
+            fetchPriority={fetchPriority}
           />
         )
       ) : isImage ? (
@@ -95,6 +102,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           src={src}
           alt={typeof title === "string" ? title : "Gallery image"}
           className="w-full h-auto object-contain bg-black"
+          loading={loadingStrategy}
+          fetchPriority={fetchPriority}
         />
       ) : (
         <video
@@ -132,10 +141,10 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
 
 const Gallery: FC = () => {
   const mediaItems = [
-    "https://youtu.be/KJn2Leu8yVo",
-    "https://youtu.be/WhknjROROXM",
-    "https://youtu.be/ht_cYcnxlSQ",
-    "https://youtu.be/XJPMQzTKq0g",
+    "https://youtu.be",
+    "https://youtu.be",
+    "https://youtu.be",
+    "https://youtu.be",
     "/img/Vindhyachal1.webp",
     "/img/Vindhyachal2.webp",
     "/img/Vindhyachal3.webp",
@@ -157,7 +166,7 @@ const Gallery: FC = () => {
               key={i}
               className="border-hsl relative mb-7 w-full overflow-hidden rounded-md"
             >
-              <BentoCard src={src} />
+              <BentoCard src={src} index={i} />
             </BentoTilt>
           ))}
         </div>
