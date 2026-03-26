@@ -30,7 +30,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       onMouseLeave={handleMouseLeave}
       style={{ 
         transform: transformStyle,
-        transition: "transform 0.3s ease-out"
+        transition: "transform 0.3s ease-out" 
       }}
     >
       {children}
@@ -42,46 +42,33 @@ interface BentoCardProps {
   src: string;
   title?: ReactNode;
   description?: string;
+  index: number;
 }
 
-const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
+const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
+  // SAFE EXTRACTION: Robust regex to get YouTube ID and avoid Vercel "undefined" crashes
+  const getYouTubeId = (url: string): string => {
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : "";
+  };
+
+  const videoId = getYouTubeId(src);
+  const isYouTube = videoId !== "";
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  const getYouTubeEmbedUrl = (url: string): string => {
-    let cleanUrl = url;
-    if (url.includes("watch?v=")) {
-      cleanUrl = url.replace("watch?v=", "embed/");
-    } else if (url.includes("youtu.be")) {
-      // FIX: Added [1] to get the string ID
-      const videoId = url.split("youtu.be/")[1];
-      cleanUrl = `https://www.youtube.com{videoId}`;
-    }
-    return `${cleanUrl}?autoplay=1`;
-  };
-
-  const getYouTubeThumbnail = (url: string): string => {
-    let videoId = "";
-    if (url.includes("watch?v=")) {
-      // FIX: Added [1] and [0] to extract exactly the ID string
-      videoId = url.split("watch?v=")[1].split("&")[0];
-    } else if (url.includes("youtu.be")) {
-      // FIX: Added [1] to extract the ID string
-      videoId = url.split("youtu.be/")[1];
-    }
-    // Optimization: Using .webp and i.ytimg to fix Lighthouse warning
-    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
-  };
+  // Performance: Eager load top 2 items for LCP, lazy load the rest
+  const loadingStrategy = index < 2 ? "eager" : "lazy";
 
   return (
     <div className="relative w-full">
       {isYouTube ? (
         isPlaying ? (
           <iframe
-            src={getYouTubeEmbedUrl(src)}
-            title={typeof title === "string" ? title : "YouTube video"}
+            src={`https://www.youtube.com{videoId}?autoplay=1`}
+            title={typeof title === "string" ? title : "Video"}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -89,10 +76,11 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           />
         ) : (
           <img
-            src={getYouTubeThumbnail(src)}
-            alt={typeof title === "string" ? title : "YouTube thumbnail"}
+            // FIX: Modern WebP format for YouTube thumbnails
+            src={`https://i.ytimg.com{videoId}/hqdefault.webp`}
+            alt={typeof title === "string" ? title : "Thumbnail"}
             className="w-full h-auto object-contain bg-black"
-            loading="lazy"
+            loading={loadingStrategy}
           />
         )
       ) : isImage ? (
@@ -100,7 +88,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           src={src}
           alt={typeof title === "string" ? title : "Gallery image"}
           className="w-full h-auto object-contain bg-black"
-          loading="lazy"
+          loading={loadingStrategy}
         />
       ) : (
         <video
@@ -160,10 +148,10 @@ const Gallery: FC = () => {
         <div className="grid h-auto grid-cols-1 md:grid-cols-2 gap-5">
           {mediaItems.map((src, i) => (
             <BentoTilt
-              key={i}
+              key={`gallery-item-${i}`}
               className="border-hsl relative mb-7 w-full overflow-hidden rounded-md"
             >
-              <BentoCard src={src} />
+              <BentoCard src={src} index={i} />
             </BentoTilt>
           ))}
         </div>
