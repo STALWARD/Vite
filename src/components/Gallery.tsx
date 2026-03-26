@@ -56,7 +56,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
       cleanUrl = url.replace("watch?v=", "embed/");
     } else if (url.includes("youtu.be")) {
       const videoId = url.split("youtu.be/")[1];
-      cleanUrl = `https://www.youtube.com/embed/${videoId}`;
+      cleanUrl = `https://www.youtube.com{videoId}`;
     }
     return `${cleanUrl}?autoplay=1`;
   };
@@ -68,8 +68,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    // FIX: Using .webp format and the modern ytimg domain for Lighthouse
-    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
+    // REVERTED: Back to original JPG format
+    return `https://img.youtube.com{videoId}/hqdefault.jpg`;
   };
 
   return (
@@ -135,10 +135,10 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
 
 const Gallery: FC = () => {
   const mediaItems = [
-    "https://youtu.be/KJn2Leu8yVo",
-    "https://youtu.be/WhknjROROXM",
-    "https://youtu.be/ht_cYcnxlSQ",
-    "https://youtu.be/XJPMQzTKq0g",
+    "https://youtu.be",
+    "https://youtu.be",
+    "https://youtu.be",
+    "https://youtu.be",
     "/img/Vindhyachal1.webp",
     "/img/Vindhyachal2.webp",
     "/img/Vindhyachal3.webp",
