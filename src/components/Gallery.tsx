@@ -30,7 +30,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       onMouseLeave={handleMouseLeave}
       style={{ 
         transform: transformStyle,
-        transition: "transform 0.3s ease-out" 
+        transition: "transform 0.3s ease-out"
       }}
     >
       {children}
@@ -55,8 +55,9 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     if (url.includes("watch?v=")) {
       cleanUrl = url.replace("watch?v=", "embed/");
     } else if (url.includes("youtu.be")) {
+      // FIX: Added [1] to get the string ID
       const videoId = url.split("youtu.be/")[1];
-      cleanUrl = `https://www.youtube.com/embed/${videoId}`;
+      cleanUrl = `https://www.youtube.com{videoId}`;
     }
     return `${cleanUrl}?autoplay=1`;
   };
@@ -64,11 +65,13 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const getYouTubeThumbnail = (url: string): string => {
     let videoId = "";
     if (url.includes("watch?v=")) {
+      // FIX: Added [1] and [0] to extract exactly the ID string
       videoId = url.split("watch?v=")[1].split("&")[0];
     } else if (url.includes("youtu.be")) {
+      // FIX: Added [1] to extract the ID string
       videoId = url.split("youtu.be/")[1];
     }
-    // Optimization: Switched .jpg to .webp and img.youtube to i.ytimg (WebP support)
+    // Optimization: Using .webp and i.ytimg to fix Lighthouse warning
     return `https://i.ytimg.com{videoId}/hqdefault.webp`;
   };
 
@@ -135,10 +138,10 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
 
 const Gallery: FC = () => {
   const mediaItems = [
-    "https://youtu.be/KJn2Leu8yVo",
-    "https://youtu.be/WhknjROROXM",
-    "https://youtu.be/ht_cYcnxlSQ",
-    "https://youtu.be/XJPMQzTKq0g",
+    "https://youtu.be",
+    "https://youtu.be",
+    "https://youtu.be",
+    "https://youtu.be",
     "/img/Vindhyachal1.webp",
     "/img/Vindhyachal2.webp",
     "/img/Vindhyachal3.webp",
