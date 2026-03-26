@@ -68,7 +68,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.webp`;
   };
 
   return (
