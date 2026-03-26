@@ -47,19 +47,18 @@ interface BentoCardProps {
 const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
-  const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
-
-  // FIXED: Reliable YouTube ID extraction using Regex
+  // Helper to extract YouTube ID safely
   const getYouTubeId = (url: string): string => {
-    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|[?&]v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : "";
   };
 
+  const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
+  const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
   const videoId = isYouTube ? getYouTubeId(src) : "";
 
-  // Performance: Eager load top 2, Lazy load others
+  // Performance Strategy: Eager load top 2, Lazy load others
   const loadingStrategy = index < 2 ? "eager" : "lazy";
 
   return (
@@ -68,14 +67,14 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
         isPlaying ? (
           <iframe
             src={`https://www.youtube.com{videoId}?autoplay=1`}
-            title={typeof title === "string" ? title : "Video"}
+            title={typeof title === "string" ? title : "YouTube Video"}
             className="w-full h-auto aspect-video"
             allow="autoplay; encrypted-media"
             allowFullScreen
           />
         ) : (
           <img
-            src={`https://i.ytimg.com{videoId}/hqdefault.webp`} // Modern WebP format
+            src={`https://i.ytimg.com{videoId}/hqdefault.webp`}
             alt="Thumbnail"
             className="w-full h-auto object-contain bg-black"
             loading={loadingStrategy}
@@ -84,7 +83,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
       ) : isImage ? (
         <img
           src={src}
-          alt="Gallery"
+          alt="Gallery Item"
           className="w-full h-auto object-contain bg-black"
           loading={loadingStrategy}
         />
@@ -141,7 +140,7 @@ const Gallery: FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {mediaItems.map((src, i) => (
-            <BentoTilt key={src} className="relative mb-7 overflow-hidden rounded-md">
+            <BentoTilt key={`media-${i}`} className="relative mb-7 overflow-hidden rounded-md">
               <BentoCard src={src} index={i} />
             </BentoTilt>
           ))}
