@@ -30,7 +30,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       onMouseLeave={handleMouseLeave}
       style={{ 
         transform: transformStyle,
-        transition: "transform 0.3s ease-out" 
+        transition: "transform 0.3s ease-out" // Added smooth glide back
       }}
     >
       {children}
@@ -51,13 +51,14 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
   const getYouTubeEmbedUrl = (url: string): string => {
-    let videoId = "";
+    let cleanUrl = url;
     if (url.includes("watch?v=")) {
-      videoId = url.split("watch?v=")[1].split("&")[0];
+      cleanUrl = url.replace("watch?v=", "embed/");
     } else if (url.includes("youtu.be")) {
-      videoId = url.split("youtu.be/")[1];
+      const videoId = url.split("youtu.be/")[1];
+      cleanUrl = `https://www.youtube.com/embed/${videoId}`;
     }
-    return `https://www.youtube.com{videoId}?autoplay=1`;
+    return `${cleanUrl}?autoplay=1`;
   };
 
   const getYouTubeThumbnail = (url: string): string => {
@@ -67,8 +68,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    // Updated to modern WebP format
-    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
   };
 
   return (
@@ -132,10 +132,10 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
 
 const Gallery: FC = () => {
   const mediaItems = [
-    "https://youtu.be",
-    "https://youtu.be",
-    "https://youtu.be",
-    "https://youtu.be",
+    "https://youtu.be/KJn2Leu8yVo",
+    "https://youtu.be/WhknjROROXM",
+    "https://youtu.be/ht_cYcnxlSQ",
+    "https://youtu.be/XJPMQzTKq0g",
     "/img/Vindhyachal1.webp",
     "/img/Vindhyachal2.webp",
     "/img/Vindhyachal3.webp",
