@@ -30,7 +30,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       onMouseLeave={handleMouseLeave}
       style={{ 
         transform: transformStyle,
-        transition: "transform 0.3s ease-out" // Added smooth glide back
+        transition: "transform 0.3s ease-out" 
       }}
     >
       {children}
@@ -68,7 +68,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    // FIX: Using .webp format and the modern ytimg domain for Lighthouse
+    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
   };
 
   return (
@@ -88,6 +89,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
             src={getYouTubeThumbnail(src)}
             alt={typeof title === "string" ? title : "YouTube thumbnail"}
             className="w-full h-auto object-contain bg-black"
+            loading="lazy" 
           />
         )
       ) : isImage ? (
@@ -95,6 +97,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           src={src}
           alt={typeof title === "string" ? title : "Gallery image"}
           className="w-full h-auto object-contain bg-black"
+          loading="lazy" 
         />
       ) : (
         <video
