@@ -51,14 +51,13 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
   const getYouTubeEmbedUrl = (url: string): string => {
-    let cleanUrl = url;
+    let videoId = "";
     if (url.includes("watch?v=")) {
-      cleanUrl = url.replace("watch?v=", "embed/");
+      videoId = url.split("watch?v=")[1].split("&")[0];
     } else if (url.includes("youtu.be")) {
-      const videoId = url.split("youtu.be/")[1];
-      cleanUrl = `https://www.youtube.com{videoId}`;
+      videoId = url.split("youtu.be/")[1];
     }
-    return `${cleanUrl}?autoplay=1`;
+    return `https://www.youtube.com{videoId}?autoplay=1`;
   };
 
   const getYouTubeThumbnail = (url: string): string => {
@@ -68,8 +67,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    // REVERTED: Back to original JPG format
-    return `https://img.youtube.com{videoId}/hqdefault.jpg`;
+    // Updated to modern WebP format
+    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
   };
 
   return (
@@ -89,7 +88,6 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
             src={getYouTubeThumbnail(src)}
             alt={typeof title === "string" ? title : "YouTube thumbnail"}
             className="w-full h-auto object-contain bg-black"
-            loading="lazy" 
           />
         )
       ) : isImage ? (
@@ -97,7 +95,6 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           src={src}
           alt={typeof title === "string" ? title : "Gallery image"}
           className="w-full h-auto object-contain bg-black"
-          loading="lazy" 
         />
       ) : (
         <video
