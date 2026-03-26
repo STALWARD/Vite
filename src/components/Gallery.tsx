@@ -14,7 +14,6 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
     if (!itemRef.current) return;
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
-
     const rotateX = (clientY / innerHeight) * 20;
     const rotateY = (clientX / innerWidth) * -20;
     setTransformStyle(`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
@@ -42,7 +41,7 @@ interface BentoCardProps {
   src: string;
   title?: ReactNode;
   description?: string;
-  index: number; // Added index to handle priority loading
+  index: number;
 }
 
 const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
@@ -51,28 +50,23 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  const getYouTubeEmbedUrl = (url: string): string => {
-    let videoId = "";
-    if (url.includes("watch?v=")) {
-      videoId = url.split("watch?v=")[1].split("&")[0];
-    } else if (url.includes("youtu.be")) {
-      videoId = url.split("youtu.be/")[1];
+  // Helper to safely get YouTube ID as a string
+  const getYouTubeId = (url: string): string => {
+    try {
+      if (url.includes("watch?v=")) {
+        return url.split("watch?v=")[1].split("&")[0];
+      } else if (url.includes("youtu.be")) {
+        return url.split("youtu.be/")[1].split("?")[0];
+      }
+    } catch (e) {
+      console.error("Invalid YouTube URL:", url);
     }
-    return `https://www.youtube.com{videoId}?autoplay=1`;
+    return "";
   };
 
-  const getYouTubeThumbnail = (url: string): string => {
-    let videoId = "";
-    if (url.includes("watch?v=")) {
-      videoId = url.split("watch?v=")[1].split("&")[0];
-    } else if (url.includes("youtu.be")) {
-      videoId = url.split("youtu.be/")[1];
-    }
-    // FIX: Using the modern WebP endpoint to resolve Lighthouse warnings
-    return `https://i.ytimg.com{videoId}/hqdefault.webp`;
-  };
+  const videoId = isYouTube ? getYouTubeId(src) : "";
 
-  // Performance optimization: Lazy load everything except the first 2 items
+  // Performance strategy: eager load the first 2 items (LCP), lazy load the rest
   const loadingStrategy = index < 2 ? "eager" : "lazy";
   const fetchPriority = index < 2 ? "high" : "auto";
 
@@ -81,7 +75,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
       {isYouTube ? (
         isPlaying ? (
           <iframe
-            src={getYouTubeEmbedUrl(src)}
+            src={`https://www.youtube.com{videoId}?autoplay=1`}
             title={typeof title === "string" ? title : "YouTube video"}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -90,7 +84,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description, index }) => {
           />
         ) : (
           <img
-            src={getYouTubeThumbnail(src)}
+            src={`https://i.ytimg.com{videoId}/hqdefault.webp`}
             alt={typeof title === "string" ? title : "YouTube thumbnail"}
             className="w-full h-auto object-contain bg-black"
             loading={loadingStrategy}
