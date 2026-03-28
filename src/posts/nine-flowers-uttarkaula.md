@@ -3,7 +3,7 @@ title: "उत्तर कौलो के नवपुष्प"
 featuredImage: "/blog/NINEFLOWER.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "स्वपुष्प, स्वंयभू कुसुम आदि उत्तर कौलो के नवपुष्पों का विवरण ।"
 date: "2022-10-21"
 ---
