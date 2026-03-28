@@ -3,7 +3,7 @@ title: "सामान्यार्घ्य और कारण-कलश �
 featuredImage: "/blog/CHAKRA.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "तन्त्र के रहस्यात्मक पूजन चक्रार्चन में सामान्यार्घ्य और कारण-कलश स्थापन की विधि"
 date: "2023-01-13"
 ---
