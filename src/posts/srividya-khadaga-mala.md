@@ -3,7 +3,7 @@ title: "श्री श्रीविद्या खड्ग-माला"
 featuredImage: "/blog/khadag-mala.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "श्री श्रीविद्या खड्ग-माला श्रीविद्या के १५ विग्रहों का उनके शिव-सहित आराधना का विज्ञान है ।श्रीविद्या के १५ विग्रह और उनके शिव ...... । "
 date: "2022-10-10"
 ---
