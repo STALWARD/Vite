@@ -3,7 +3,7 @@ title: "ऊर्ध्वाम्नायोक्त सिद्ध वी�
 featuredImage: "/blog/guru.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "ऊर्ध्वाम्नायोक्त औघ-त्रय अंतर्गत वीरौघ-गुरु का यह कवच काफी चमत्कारी है।"
 date: "2022-10-26"
 ---
