@@ -3,7 +3,7 @@ title: "साधको की साधना-सहचरी के लक्�
 featuredImage: "/blog/photo.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "साधको की साधना-सहचरी को शक्ति कहते हैं। पूरी शाक्तोपासना शक्ति के सहयोग पर हीं निर्भर है।"
 date: "2022-10-16"
 ---
