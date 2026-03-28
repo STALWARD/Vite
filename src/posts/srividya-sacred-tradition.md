@@ -3,7 +3,7 @@ title: "SRI VIDYA - A Sacred Tradition"
 featuredImage: "/blog/SHODASHI.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "A brief introduction about sacred tradition of Sri Vidya in ancient wisdom of India"
 date: "2023-02-23"
 ---
