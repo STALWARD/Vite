@@ -6,6 +6,7 @@ authorBio: "A SRIVIDYA UPASKA"
 authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "धन-प्राप्ति के लिये कनकधारा स्तोत्र और श्रीसूक्त का प्रयोग"
 date: "2023-08-10"
+password: "my-secret-pass"
 ---
 
 दारिद्रय-दहन व धन-प्रदायक साधन
