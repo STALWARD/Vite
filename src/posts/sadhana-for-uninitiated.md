@@ -3,7 +3,7 @@ title: "अदीक्षितों के लिए अनुभूत स�
 featuredImage: "/blog/tantrasadhana.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "यह अनुभूत साधन मेरे कौलावधूत गुरु द्वारा, जब मैं उनसे दीक्षित नहीं हुआ था तब, मुझे बताया गया था ।  मेरे साथ-साथ असंख्य व्यक्तियों द्वारा यह अनुभूत है । प्रातः एवं रात्री काल एक निश्चित समय पर इसे कर के कोई भी इसके लाभ को अनुभव कर सकता है ।"
 date: "2022-10-14"
 ---
