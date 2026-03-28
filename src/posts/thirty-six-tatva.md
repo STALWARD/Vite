@@ -3,7 +3,7 @@ title: "षट्-त्रिंशत तत्व का उपदेश"
 featuredImage: "/blog/36TATVA.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "षट्-त्रिंशत तत्व का उपदेश महानारायणोपनिषद् , नारद परिव्राजकोपनिषद् में दिया गया है जिन्हें शुद्ध, शुद्धाशुद्ध तथा अशुद्ध कोटि में विभक्त किया गया है ।"
 date: "2022-10-12"
 ---
