@@ -6,6 +6,7 @@ authorBio: "A SRIVIDYA UPASKA"
 authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "वीर-मार्गोक्त शमशान साधन की विधि"
 date: "2022-09-29"
+password: "my-secret-pass"
 ---
 ### **श्मशान साधन**
 
