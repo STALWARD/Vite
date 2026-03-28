@@ -3,7 +3,7 @@ title: "गुरु पादुका मन्त्र का पुरश�
 featuredImage: "/blog/GURUPADUKA.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "गुरु-पादुका मन्त्र साधन विधि"
 date: "2022-10-03"
 ---
