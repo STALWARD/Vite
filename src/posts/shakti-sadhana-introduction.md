@@ -3,7 +3,7 @@ title: "शक्ति-साधना का संक्षिप्त क�
 featuredImage: "/blog/duti.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "शक्ति-साधना क्या है ? - एक परिचय"
 date: "2023-07-12"
 ---
