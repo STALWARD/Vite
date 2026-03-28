@@ -3,7 +3,7 @@ title: "श्रीविद्या के बाह्य पूजा क�
 featuredImage: "/blog/SRIVIDYA.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "महामहाभट्टारिका महाकामेश्वराङ्कनिलया श्रीमहात्रिपुरसुन्दरी श्रीविद्या के बाह्य पूजा के अधिकारी वही हैं जो आन्तर पूजा में समर्थ हैं। आन्तर पूजा से जाग्रत किया आत्मतेज.....।"
 date: "2022-11-03"
 ---
