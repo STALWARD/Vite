@@ -3,7 +3,7 @@ title: "कलिकाल के लिए तन्त्र की महत�
 featuredImage: "/blog/tantra.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "बिना ह्यागममार्गेण नास्ति सिद्धि: कलौ प्रिये-कलियुग में आगम(तन्त्र) मार्ग के अलावा और किसी मार्ग से सिद्धि नहीं हो सकती। कलियुग में गृहस्थ केवल आगम-तन्त्र के अनुसार ही कार्य करेंगे। अन्य मार्गों से गृहस्थों को कभी सिद्धि नहीं होगी।"
 date: "2022-10-15"
 ---
