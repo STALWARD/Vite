@@ -6,7 +6,7 @@ authorBio: "A SRIVIDYA UPASKA"
 authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "देवि सरस्वती की वह रहस्यमय साधना जिसे महर्षि मार्कण्डेय ने किया था"
 date: "2022-10-12"
-
+password: "my-secret-pass"
 ---
 श्री महर्षि मार्कण्डेय प्रणीत सरस्वती साधना
 
