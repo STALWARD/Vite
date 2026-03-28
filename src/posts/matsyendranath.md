@@ -3,7 +3,7 @@ title: "Matsyendra Nath - My Great Grand Guru"
 featuredImage: "/blog/MATSYENDRANATH.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "A brief about my great grand guru Sri MATSYENDRANATH Ji, a legend of the Naths and one of 84 Maha Siddhas."
 date: "2022-10-20"
 ---
