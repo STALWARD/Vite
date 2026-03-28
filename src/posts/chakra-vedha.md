@@ -3,7 +3,7 @@ title: "चक्रवेध"
 featuredImage: "/blog/kshatchakra.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "षट्-चक्रों का संक्षिप्त परिचय"
 date: "2022-10-01"
 ---
