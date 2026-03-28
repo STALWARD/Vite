@@ -3,7 +3,7 @@ title: "निगम एवं आगम विचारश्रोतों �
 featuredImage: "/blog/CULT.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "निगम एवं आगम विचारश्रोतों की धारायें मुख्य रूप से तीन हैं- १.कर्म काण्ड २.ज्ञान काण्ड ३.उपासना काण्ड..... ।"
 date: "2023-01-16"
 ---
