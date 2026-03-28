@@ -6,6 +6,7 @@ authorBio: "A SRIVIDYA UPASKA"
 authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "महाविद्या मातंगी की मन्त्र साधना"
 date: "2022-09-23"
+password: "my-secret-pass"
 ---
 
 ### मातंगी मन्त्र साधना
