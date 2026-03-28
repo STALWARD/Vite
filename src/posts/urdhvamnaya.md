@@ -3,7 +3,7 @@ title: "कुलशास्त्र में वर्णित उर्ध
 featuredImage: "/blog/URDHVA.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "वेद, शास्त्र और पुराण आदि सभी सर्वत्र प्रकाशन के योग्य हैं। किन्तु शाक्त और शैव जितने आगम हैं, वे सर्वप्रकाश्य नहीं माने जाते। उन्हे इसी आधार पर रहस्यशास्त्र कहते हैं। जहाँ तक कुलशास्त्रों का प्रश्न है, ये केवल रहस्य हीं नही, अपितु रहस्यातिरहस्य शास्त्र माने जाते हैं। "
 date: "2022-10-17"
 ---
