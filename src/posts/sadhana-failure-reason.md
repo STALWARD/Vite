@@ -3,7 +3,7 @@ title: "पुजा पाठ में असफलता क्यों ?"
 featuredImage: "/blog/pujapath.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "पुजा पाठ में असफलता के विविध कारणों का विवेचन"
 date: "2022-10-31"
 ---
