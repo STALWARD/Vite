@@ -3,7 +3,7 @@ title: "संकेत-त्रयान्तर्गत मन्त्र 
 featuredImage: "/blog/MANTRASANKET.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "संकेत-त्रय में सबसे महत्वपूर्ण मन्त्र संकेत है। देवता का बोध मन्त्र द्वारा होता है। अतएव देवता वाच्य है एवं मन्त्र उसका वाचक है। वाच्य वाचक शब्दों को ही अभिधान, अभिधेय, नाम-नामी पर्याय के द्वारा व्यवहृत किया जाता है। वाच्य और वाचक में अभेद सम्बन्ध शास्त्र में प्रतिपादित है। ‘वाक्यप्रदीप’ में भतृहरि ने कहा है-....."
 date: "2022-09-23"
 ---
