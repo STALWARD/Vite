@@ -3,7 +3,7 @@ title: "षोडशी विद्या का गोपनीयत्व"
 featuredImage: "/blog/SHODASHI.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "श्रीविद्या का षोडशी स्वरूप अतिगोपनीय क्यों ? "
 date: "2022-10-03"
 ---
