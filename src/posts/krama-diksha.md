@@ -3,7 +3,7 @@ title: "तन्त्र शास्त्र में क्रम-दी�
 featuredImage: "/blog/DIKSHA.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "तन्त्र शास्त्र में क्रम-दीक्षा का बड़ा महत्व दिया गया है। इसमें मन्त्रों का षट्-चक्र शोधन नहीं होता। यह दीक्षा सिर्फ कौल-गुरु की अद्वितीय कृपा से ही उपलब्ध होती है। इसमें दिवस, मास और वर्षों के क्रम से दीक्षा और अभिषेक होते रहते हैं, अतएव इसका नाम क्रम-दीक्षा है।"
 date: "2022-10-14"
 ---
