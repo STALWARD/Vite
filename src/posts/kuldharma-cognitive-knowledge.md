@@ -3,7 +3,7 @@ title: "कुलधर्म का बोधात्मक ज्ञान"
 featuredImage: "/blog/duti.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "तात्विक दृष्टि में कुलधर्म"
 date: "2023-01-13"
 ---
