@@ -3,7 +3,7 @@ title: "शक्ति उपासना का सर्वश्रेष्
 featuredImage: "/blog/SHODASHI.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "श्रीविद्या, जो मन्त्रों में मातृका, शब्दों में ज्ञान, ज्ञानों में चिन्मयातीता एवं शून्यों में शून्यसाक्षिणी है। “देव्युपनिषद्” में कहा भी गया है-मन्त्राणां मातृका देवी शब्दानां ज्ञानरूपिणी । ज्ञानानां चिन्मयातीता शून्यानां शून्यसाक्षिणी ।।"
 date: "2022-09-25"
 ---
