@@ -3,7 +3,7 @@ title: "कौलाश्रम या अवधूताश्रम"
 featuredImage: "/blog/duti.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "कौलाश्रम या अवधूताश्रम का संक्षिप्त परिचय"
 date: "2023-08-19"
 ---
