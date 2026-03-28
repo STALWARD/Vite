@@ -3,7 +3,7 @@ title: "श्रीविद्या साधनअंगभूता श्�
 featuredImage: "/blog/ganesha.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "श्रीविद्या साधना के पूर्व महागणपति के साधन की आवश्यकता"
 date: "2022-10-08"
 ---
