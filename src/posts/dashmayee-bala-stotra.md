@@ -3,7 +3,7 @@ title: "संकट-नाशिनी श्री दश-मयी बाल�
 featuredImage: "/blog/BalaTripuraSundari.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "मेरु-तन्त्रोक्त दश-महाविद्या-मयी श्रीबाला-त्रिपुर-सुन्दरी का यह स्तोत्र समस्त संकटों का नाश करता है ।"
 date: "2022-10-09"
 ---
