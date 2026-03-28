@@ -3,7 +3,7 @@ title: "MALE BORN IN ASHVINI NAKSHATRA"
 featuredImage: "/blog/ASHWINI.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "Physical Features, Character and other results of male born in ASHVINI NAKSHATRA"
 date: "2022-11-05"
 ---
