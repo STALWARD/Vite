@@ -3,7 +3,7 @@ title: "प्रज्ञावर्धन स्तोत्र"
 featuredImage: "/blog/SARSWATI.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "प्रज्ञा-वृद्धि करने की अचूक साधना"
 date: "2022-09-27"
 ---
