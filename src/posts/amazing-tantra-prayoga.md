@@ -3,7 +3,7 @@ title: "कतिपय आश्चर्यजनक व सरल तन्�
 featuredImage: "/blog/clipart.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "आम जन के करने योग्य कुछ सरल व चमत्कारी प्रयोग"
 date: "2023-08-13"
 ---
