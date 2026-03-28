@@ -3,7 +3,7 @@ title: "श्री महर्षि मार्कण्डेय प्र
 featuredImage: "/blog/SARSWATI.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "देवि सरस्वती की वह रहस्यमय साधना जिसे महर्षि मार्कण्डेय ने किया था"
 date: "2022-10-12"
 
