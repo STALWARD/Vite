@@ -3,7 +3,7 @@ title: "परम गोपनीय व सर्वश्रेष्ठ क�
 featuredImage: "/blog/duti.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "शास्त्रों में कौल-धर्म की सर्वश्रेष्ठता"
 date: "2022-11-05"
 ---
