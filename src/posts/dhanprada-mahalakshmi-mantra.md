@@ -6,6 +6,7 @@ authorBio: "A SRIVIDYA UPASKA"
 authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "महालक्ष्मी की मन्त्र साधना"
 date: "2022-10-15"
+password: "my-secret-pass"
 ---
 
 श्री धन-प्रद महालक्ष्मी सिद्ध मन्त्र
