@@ -3,7 +3,7 @@ title: "कुण्डलिनी-शक्ति-स्तोत्रम"
 featuredImage: "/blog/kundalini2.webp"
 authorName: "KAULBHASKAR GURU JI"
 authorBio: "A SRIVIDYA UPASKA"
-authorAvatar: "/KAULBHASKAR.jpg"
+authorAvatar: "/img/KAULBHASKAR.jpg"
 excerpt: "कुण्डलिनी जागरण में उपयोगी स्तोत्र"
 date: "2023-01-04"
 ---
