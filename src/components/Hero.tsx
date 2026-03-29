@@ -180,7 +180,7 @@ const Hero: React.FC = () => {
               id="kaulbhaskar-guru ji"
               title="Visit my other WEBSITE"
               leftIcon={<TiLocationArrow />}
-              containerClass="!bg-yellow-300 flex-center gap-1"
+              containerClass="!bg-yellow-300 hover:bg-white flex-center gap-1"
               onClick={() =>
                 window.open("https://www.tantrasadhana.org", "_blank")
               }
