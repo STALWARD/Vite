@@ -3,7 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha"; // 1. Import reCAPTCHA
 import phoneImage from "/img/phone-image.jpeg";
-import contactImage from "/img/contact-form-image.webp";
+import contactImage from "/img/contact.webp";
 import SEO from "../components/SEO";
 
 interface FormData {
