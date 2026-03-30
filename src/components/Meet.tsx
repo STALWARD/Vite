@@ -38,7 +38,7 @@ const Meet: FC = () => {
         {/* Right decoration */}
         <div className="absolute -top-20 left-10 w-40 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
           <ImageClipBox
-            src="/img/swordman-partial.webp"
+            src="/img/contact-lady.webp"
             clipClass="absolute md:scale-125"
           />
           <ImageClipBox
