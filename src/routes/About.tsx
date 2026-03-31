@@ -73,11 +73,10 @@ const About: React.FC = () => {
 
       <section className="w-full bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 text-black font-semibold text-xl p-10 h-full mt-5">
         <p>
-          Apart from spiritual guidance and education , WE can also help you in
-          performing various tantrik rituals by qualified experts. Just make a
-          schedule with our Astrologers and judge the accuracy of their divine
-          knowledge. Certainly ! our astrologers will out-perform other so
-          called famous astrologers around you.
+          KAULBHASKAR Guru Ji has born in a respectable Bhumihar Brahmin Family of Bihar. After getting educational degree of B.Sc., L.L.B., he adopted the profession of Lawyer. He did roaring practice as a lawyer in Patna High Court till the year 2010. Now a whole timer spreading his Guru's phiosophy of Tantra.
+ Guru Ji is a hard follower of KAUL MARGA. Guru Ji has expertise also in different systems of ASTROLOGY like Parasara, Jaimini and Krishnamurthi.
+Guru Ji has married with a most humble and noble lady. Guru-Mata is not only a philanthropist, but also a great upasika of DASHMAYEE BALA, the supreme head of Urdhva Amanaya.
+Guru Ji is popularly known as KAULBHASKAR, the name given to him by my his Guru. His KAULAVADHUTA GURU bestow him the MAHA PURN KRAM DIKSHA of all the Amnayas.
         </p>
       </section>
       
