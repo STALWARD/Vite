@@ -36,9 +36,7 @@ const About: React.FC = () => {
         </h1>
 
         <h2 className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-xl text-white font-semibold p-6 text-center max-w-3xl pageHeader">
-          We are experienced team of Experts in Tantra & Astrology. We offer
-          spiritual guidance and education to those seeking to deepen their
-          understanding of Tantric teachings.
+          We offer spiritual guidance and education to those seeking to deepen their understanding of Tantric teachings.
         </h2>
       </div>
 
