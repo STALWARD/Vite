@@ -21,8 +21,8 @@ const localizer = dateFnsLocalizer({
 const events: Event[] = [
   {
     title: "Field day",
-    start: new Date(2026, 2, 12, 10, 0),
-    end: new Date(2026, 2, 12, 11, 0),
+    start: new Date(2026, 2, 19, 7, 0),
+    end: new Date(2026, 2, 28, 16, 0),
   },
 ];
 
