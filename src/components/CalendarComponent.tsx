@@ -1,6 +1,7 @@
-import { useState, FC } from "react";
+import { useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
+import type { FC } from "react";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -25,33 +26,6 @@ const events: Event[] = [
   },
 ];
 
-// ✅ Lightweight wrapper around Calendar
-const CalendarWrapper: FC<{
-  localizer: typeof localizer;
-  events: Event[];
-  date: Date;
-  view: View;
-  onNavigate: (newDate: Date) => void;
-  onView: (newView: View) => void;
-}> = ({ localizer, events, date, view, onNavigate, onView }) => {
-  return (
-    <Calendar
-      localizer={localizer}
-      events={events}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-      date={date}
-      onNavigate={onNavigate}
-      view={view}
-      onView={onView}
-    />
-  );
-};
-
-// ✅ Memoize the wrapper instead of the library export
-const MemoizedCalendar = React.memo(CalendarWrapper);
-
 const CalendarComponent: FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 2, 12));
   const [currentView, setCurrentView] = useState<View>("month");
@@ -62,7 +36,7 @@ const CalendarComponent: FC = () => {
         height: "100vh",
         width: "90vw",
         margin: "0 auto",
-        contain: "layout style",
+        contain: "layout style", // contain layout scope
       }}
     >
       <h1
@@ -77,18 +51,22 @@ const CalendarComponent: FC = () => {
         Event Calendar
       </h1>
 
+      {/* Fixed height container to avoid repeated % recalculations */}
       <div
         style={{
           height: 500,
-          contain: "content",
+          contain: "content", // isolate grid rendering
         }}
       >
-        <MemoizedCalendar
+        <Calendar
           localizer={localizer}
           events={events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }} // fixed height instead of 100%
           date={currentDate}
-          view={currentView}
           onNavigate={(newDate) => setCurrentDate(newDate)}
+          view={currentView}
           onView={(newView) => setCurrentView(newView)}
         />
       </div>
