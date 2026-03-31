@@ -17,6 +17,7 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
     const container = containerRef.current;
     if (!container) return;
 
+    // Use the actual generated class name from CSS Modules
     const words = container.querySelectorAll(`.${styles.animatedWord}`);
     if (!words || words.length === 0) return;
 
