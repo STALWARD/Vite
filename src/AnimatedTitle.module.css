@@ -1,5 +1,6 @@
-/* AnimatedTitle.css */
-.animated-word {
+/* AnimatedTitle.module.css */
+
+.animatedWord {
   display: inline-block;
   opacity: 0;
   transform: translateY(50px) rotateX(-10deg) rotateY(10deg);
