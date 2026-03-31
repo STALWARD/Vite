@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import React, { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./AnimatedTitle.css"; // ✅ Import scoped CSS
+import styles from "./AnimatedTitle.module.css"; // ✅ Import CSS Module
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +17,7 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
     const container = containerRef.current;
     if (!container) return;
 
-    const words = container.querySelectorAll(".animated-word");
+    const words = container.querySelectorAll(`.${styles.animatedWord}`);
     if (!words || words.length === 0) return;
 
     const ctx = gsap.context(() => {
@@ -58,7 +58,7 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
           {line.split(" ").map((word, i) => (
             <span
               key={i}
-              className="animated-word"
+              className={styles.animatedWord} // ✅ Scoped class
               dangerouslySetInnerHTML={{ __html: word }}
             />
           ))}
