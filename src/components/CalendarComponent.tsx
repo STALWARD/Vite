@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
 import type { FC } from "react";
@@ -25,9 +25,6 @@ const events: Event[] = [
     end: new Date(2026, 2, 12, 11, 0),
   },
 ];
-
-// Memoized Calendar to avoid unnecessary re-renders
-const MemoizedCalendar = memo(Calendar);
 
 const CalendarComponent: FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 2, 12));
@@ -61,7 +58,7 @@ const CalendarComponent: FC = () => {
           contain: "content", // isolate grid rendering
         }}
       >
-        <MemoizedCalendar
+        <Calendar
           localizer={localizer}
           events={events}
           startAccessor="start"
