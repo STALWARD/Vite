@@ -79,7 +79,7 @@ const Mudra: React.FC = () => {
             ))}
           </Slider>
         </div>
-        <hr className="border-gray-800 mt-10" />
+        
       </div>
     </div>
   );
