@@ -17,7 +17,7 @@
     <!-- Preload hero image -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
-    <!-- Inline critical CSS -->
+    <!-- Inline minimal critical CSS -->
     <style>
       body {
         margin: 0;
@@ -34,7 +34,8 @@
   <body>
     <div id="root"></div>
 
-    <!-- Vite will inject built CSS/JS automatically -->
+    <!-- IMPORTANT: Let Vite inject built CSS/JS automatically -->
+    <!-- Do NOT hardcode /assets/index-[hash].js or /src/main.tsx -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
