@@ -16,10 +16,8 @@
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
     <!-- 3. Preload + load CSS without blocking -->
-    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" />
-    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" />
-    <link rel="stylesheet" href="/assets/index-CZMhnSqO.css" />
-    <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css" />
+    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <!-- Inline critical CSS (above-the-fold only) -->
     <style>
