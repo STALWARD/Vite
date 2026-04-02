@@ -14,12 +14,8 @@
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Preload hero image with high priority -->
+    <!-- Preload hero image -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
-
-    <!-- Preload + load CSS asynchronously -->
-    <link rel="preload" href="/assets/index-[hash].css" as="style" fetchpriority="high" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/assets/vendor-[hash].css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <!-- Inline critical CSS -->
     <style>
@@ -33,24 +29,12 @@
       }
     </style>
 
-    <!-- Fallback for users with JS disabled -->
-    <noscript>
-      <link rel="stylesheet" href="/assets/index-[hash].css">
-      <link rel="stylesheet" href="/assets/vendor-[hash].css">
-    </noscript>
-
     <title>my-app</title>
   </head>
   <body>
     <div id="root"></div>
 
-    <!-- Preload main JS bundle -->
-    <link rel="preload" href="/assets/index-[hash].js" as="script" />
-
-    <!-- Defer JS execution -->
-    <script type="module" src="/assets/index-[hash].js" defer></script>
-
-    <!-- Example: defer non-critical scripts -->
-    <!-- <script src="/assets/analytics.js" defer></script> -->
+    <!-- Vite will inject built CSS/JS automatically -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
