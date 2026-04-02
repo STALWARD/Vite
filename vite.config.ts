@@ -8,16 +8,15 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
+    // 1. Merge all CSS into one file to shorten the discovery chain
+    cssCodeSplit: false, 
     rollupOptions: {
       output: {
-        // Split vendor code for better caching
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-        },
+        // 2. Remove manualChunks! 6KB is too small to justify a separate file.
+        manualChunks: undefined, 
       },
     },
-    assetsInlineLimit: 20000,
-    minify: 'esbuild',
-    sourcemap: false,
+    // 3. Optional: Increase limit to inline small assets as base64
+    assetsInlineLimit: 10000, 
   },
 })
