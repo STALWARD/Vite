@@ -5,21 +5,23 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 1. Preconnect to external font domains -->
+    <!-- Preconnect to external font domains -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
 
-    <!-- 2. Preload critical assets -->
+    <!-- Preload critical fonts -->
     <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Preload hero image with high priority -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
-    <!-- 3. Preload + load CSS without blocking -->
-    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Preload + load CSS asynchronously -->
+    <link rel="preload" href="/assets/index-[hash].css" as="style" fetchpriority="high" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/assets/vendor-[hash].css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-    <!-- Inline critical CSS (above-the-fold only) -->
+    <!-- Inline critical CSS -->
     <style>
       body {
         margin: 0;
@@ -31,10 +33,10 @@
       }
     </style>
 
-    <!-- Fallback for users with JavaScript disabled -->
+    <!-- Fallback for users with JS disabled -->
     <noscript>
-      <link rel="stylesheet" href="/assets/index-CZMhnSqO.css">
-      <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css">
+      <link rel="stylesheet" href="/assets/index-[hash].css">
+      <link rel="stylesheet" href="/assets/vendor-[hash].css">
     </noscript>
 
     <title>my-app</title>
@@ -43,10 +45,10 @@
     <div id="root"></div>
 
     <!-- Preload main JS bundle -->
-    <link rel="preload" href="/src/main.tsx" as="script" />
+    <link rel="preload" href="/assets/index-[hash].js" as="script" />
 
     <!-- Defer JS execution -->
-    <script type="module" src="/src/main.tsx" defer></script>
+    <script type="module" src="/assets/index-[hash].js" defer></script>
 
     <!-- Example: defer non-critical scripts -->
     <!-- <script src="/assets/analytics.js" defer></script> -->
