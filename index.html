@@ -5,19 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Preconnect to external font domains -->
+    <!-- 1. Preconnect to external font domains -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
 
-    <!-- Preload critical fonts -->
+    <!-- 2. Preload critical assets -->
     <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Preload hero image -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
-    <!-- Inline minimal critical CSS -->
+    <!-- 3. Preload + load CSS without blocking -->
+    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <!-- Inline critical CSS (above-the-fold only) -->
     <style>
       body {
         margin: 0;
@@ -29,12 +31,24 @@
       }
     </style>
 
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <link rel="stylesheet" href="/assets/index-CZMhnSqO.css">
+      <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css">
+    </noscript>
+
     <title>my-app</title>
   </head>
   <body>
     <div id="root"></div>
 
-    <!-- Entry point: Vite replaces this with hashed bundle -->
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Preload main JS bundle -->
+    <link rel="preload" href="/src/main.tsx" as="script" />
+
+    <!-- Defer JS execution -->
+    <script type="module" src="/src/main.tsx" defer></script>
+
+    <!-- Example: defer non-critical scripts -->
+    <!-- <script src="/assets/analytics.js" defer></script> -->
   </body>
 </html>
