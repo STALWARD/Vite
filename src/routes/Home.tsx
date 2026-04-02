@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <SEO 
-        title="Tantra, Astrology & Spiritual Guidance | KAULBHASKAR Guru Ji" 
+        title="KAULBHASKAR a Legend KAUL | Tantra, Astrology & Spiritual Guidance" 
         description="Connect with experts in Tantra & Astrology led by Sri KAULBHASKAR Ji, lineage of Sri MATSYENDRA NATH Ji. Services include Puja, Rituals, and Astro-consultation."
         keywords="Tantra, Astrology, KAULBHASKAR Guru Ji, Sri MATSYENDRA NATH lineage, Puja Rituals, Astrology Consultation, Yantra"
         canonical="https://yourdomain.com"
