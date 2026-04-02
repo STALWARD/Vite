@@ -8,17 +8,15 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    // Allow Rollup to split vendor code for better caching
     rollupOptions: {
       output: {
+        // Split vendor code for better caching
         manualChunks: {
           vendor: ['react', 'react-dom'],
         },
       },
     },
-    // Inline small assets to reduce requests
     assetsInlineLimit: 20000,
-    // Minify and optimize output
     minify: 'esbuild',
     sourcemap: false,
   },
