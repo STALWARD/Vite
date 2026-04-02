@@ -79,7 +79,7 @@ const Mudra: React.FC = () => {
             ))}
           </Slider>
         </div>
-        
+        <hr className="border-transparent mt-10" />
       </div>
     </div>
   );
