@@ -20,7 +20,7 @@ const Meet: FC = () => {
   };
 
   return (
-    <div id="contact" className="my-20 min-h-96 w-screen px-4 sm:px-10">
+    <div id="contact" className="my-20 min-h-96 w-screen ">
       <div className="relative rounded-lg bg-black py-16 sm:py-24 text-blue-50 sm:overflow-hidden">
         
         {/* Left decoration */}
