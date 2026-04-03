@@ -1,5 +1,3 @@
-"use client"; // Required in Next.js App Router
-
 import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
@@ -34,28 +32,29 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  const [mounted, setMounted] = useState(false);
+  // Start with null to avoid hydration mismatch
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [currentView, setCurrentView] = useState<View>("month");
 
+  // Set actual current date only after client-side mount
   useEffect(() => {
-    setMounted(true);
-
-    const now = new Date();
-    const upcoming = events
-      .filter((e) => e.start >= now)
-      .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
-
-    setCurrentDate(upcoming ? upcoming.start : now);
+    setCurrentDate(new Date());
   }, []);
 
-  if (!mounted || !currentDate) {
-    // Render nothing until client mount to avoid hydration mismatch
-    return null;
+  if (!currentDate) {
+    // Render a placeholder until the date is set
+    return <div>Loading calendar...</div>;
   }
 
   return (
-    <div style={{ height: "100vh", width: "90vw", margin: "0 auto" }}>
+    <div
+      style={{
+        height: "100vh",
+        width: "90vw",
+        margin: "0 auto",
+        contain: "layout style",
+      }}
+    >
       <h1
         style={{
           textAlign: "center",
@@ -68,7 +67,12 @@ const CalendarComponent: FC = () => {
         Event Calendar
       </h1>
 
-      <div style={{ height: 500 }}>
+      <div
+        style={{
+          height: 500,
+          contain: "content",
+        }}
+      >
         <Calendar
           localizer={localizer}
           events={events}
