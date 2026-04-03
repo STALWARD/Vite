@@ -24,6 +24,11 @@ const events: Event[] = [
     start: new Date(2026, 2, 19, 7, 0),
     end: new Date(2026, 2, 28, 16, 0),
   },
+  {
+    title: "Guru Purnima and Diksha Mahotsava",
+    start: new Date(2026, 6, 29, 6, 0),
+    end: new Date(2026, 6, 29, 17, 30),
+  },
 ];
 
 const CalendarComponent: FC = () => {
