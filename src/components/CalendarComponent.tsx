@@ -1,6 +1,4 @@
-"use client"; // Needed if using Next.js App Router
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
 import type { FC } from "react";
@@ -22,11 +20,6 @@ const localizer = dateFnsLocalizer({
 
 const events: Event[] = [
   {
-    title: "Chandi Yag",
-    start: new Date(2026, 2, 19, 7, 0),
-    end: new Date(2026, 2, 28, 16, 0),
-  },
-  {
     title: "Guru Purnima and Diksha Mahotsava",
     start: new Date(2026, 6, 29, 6, 0),
     end: new Date(2026, 6, 29, 17, 30),
@@ -34,28 +27,18 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [currentDate, setCurrentDate] = useState(new Date(2026, 2, 12));
   const [currentView, setCurrentView] = useState<View>("month");
 
-  useEffect(() => {
-    const now = new Date();
-
-    // Find the next upcoming event
-    const upcoming = events
-      .filter((e) => e.start >= now)
-      .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
-
-    // Default to upcoming event date, or today if none
-    setCurrentDate(upcoming ? upcoming.start : now);
-    setCurrentView("month");
-  }, []);
-
-  if (!currentDate) {
-    return <div>Loading calendar...</div>;
-  }
-
   return (
-    <div style={{ height: "100vh", width: "90vw", margin: "0 auto" }}>
+    <div
+      style={{
+        height: "100vh",
+        width: "90vw",
+        margin: "0 auto",
+        contain: "layout style", // contain layout scope
+      }}
+    >
       <h1
         style={{
           textAlign: "center",
@@ -65,16 +48,22 @@ const CalendarComponent: FC = () => {
           fontWeight: "600",
         }}
       >
-        Upcoming Event
+        Upcoming Event 
       </h1>
 
-      <div style={{ height: 500 }}>
+      {/* Fixed height container to avoid repeated % recalculations */}
+      <div
+        style={{
+          height: 500,
+          contain: "content", // isolate grid rendering
+        }}
+      >
         <Calendar
           localizer={localizer}
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{ height: 500 }} // fixed height instead of 100%
           date={currentDate}
           onNavigate={(newDate) => setCurrentDate(newDate)}
           view={currentView}
