@@ -1,3 +1,5 @@
+"use client"; // if using Next.js App Router
+
 import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
@@ -37,17 +39,11 @@ const CalendarComponent: FC = () => {
 
   useEffect(() => {
     const now = new Date();
-    // Find the next upcoming event
     const upcoming = events
       .filter((e) => e.start >= now)
       .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
 
-    if (upcoming) {
-      setCurrentDate(upcoming.start);
-    } else {
-      // fallback: show today if no upcoming events
-      setCurrentDate(now);
-    }
+    setCurrentDate(upcoming ? upcoming.start : now);
   }, []);
 
   if (!currentDate) {
