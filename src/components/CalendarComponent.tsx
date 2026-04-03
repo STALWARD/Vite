@@ -32,17 +32,25 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  // Start with null to avoid hydration mismatch
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [currentView, setCurrentView] = useState<View>("month");
 
-  // Set actual current date only after client-side mount
   useEffect(() => {
-    setCurrentDate(new Date());
+    const now = new Date();
+    // Find the next upcoming event
+    const upcoming = events
+      .filter((e) => e.start >= now)
+      .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
+
+    if (upcoming) {
+      setCurrentDate(upcoming.start);
+    } else {
+      // fallback: show today if no upcoming events
+      setCurrentDate(now);
+    }
   }, []);
 
   if (!currentDate) {
-    // Render a placeholder until the date is set
     return <div>Loading calendar...</div>;
   }
 
