@@ -50,7 +50,7 @@ const CalendarComponent: FC = () => {
   }, []);
 
   if (!mounted || !currentDate) {
-    // Prevent SSR mismatch by rendering nothing until client mount
+    // Render nothing until client mount to avoid hydration mismatch
     return null;
   }
 
@@ -77,4 +77,12 @@ const CalendarComponent: FC = () => {
           style={{ height: 500 }}
           date={currentDate}
           onNavigate={(newDate) => setCurrentDate(newDate)}
-          view={currentView
+          view={currentView}
+          onView={(newView) => setCurrentView(newView)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default CalendarComponent;
