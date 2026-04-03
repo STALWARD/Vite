@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
 import type { FC } from "react";
@@ -32,8 +32,19 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 2, 12));
+  // Start with null to avoid hydration mismatch
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [currentView, setCurrentView] = useState<View>("month");
+
+  // Set actual current date only after client-side mount
+  useEffect(() => {
+    setCurrentDate(new Date());
+  }, []);
+
+  if (!currentDate) {
+    // Render a placeholder until the date is set
+    return <div>Loading calendar...</div>;
+  }
 
   return (
     <div
@@ -41,7 +52,7 @@ const CalendarComponent: FC = () => {
         height: "100vh",
         width: "90vw",
         margin: "0 auto",
-        contain: "layout style", // contain layout scope
+        contain: "layout style",
       }}
     >
       <h1
@@ -56,11 +67,10 @@ const CalendarComponent: FC = () => {
         Event Calendar
       </h1>
 
-      {/* Fixed height container to avoid repeated % recalculations */}
       <div
         style={{
           height: 500,
-          contain: "content", // isolate grid rendering
+          contain: "content",
         }}
       >
         <Calendar
@@ -68,7 +78,7 @@ const CalendarComponent: FC = () => {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }} // fixed height instead of 100%
+          style={{ height: 500 }}
           date={currentDate}
           onNavigate={(newDate) => setCurrentDate(newDate)}
           view={currentView}
