@@ -1,4 +1,4 @@
-"use client"; // if using Next.js App Router
+"use client"; // required in Next.js App Router
 
 import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
@@ -34,10 +34,13 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
+  const [mounted, setMounted] = useState(false);
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [currentView, setCurrentView] = useState<View>("month");
 
   useEffect(() => {
+    setMounted(true);
+
     const now = new Date();
     const upcoming = events
       .filter((e) => e.start >= now)
@@ -46,8 +49,9 @@ const CalendarComponent: FC = () => {
     setCurrentDate(upcoming ? upcoming.start : now);
   }, []);
 
-  if (!currentDate) {
-    return <div>Loading calendar...</div>;
+  if (!mounted || !currentDate) {
+    // Prevent SSR mismatch by rendering nothing until client mount
+    return null;
   }
 
   return (
