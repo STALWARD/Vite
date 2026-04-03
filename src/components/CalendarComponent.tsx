@@ -1,4 +1,6 @@
-import { useState } from "react";
+"use client"; // Needed if using Next.js App Router
+
+import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
 import type { FC } from "react";
@@ -20,6 +22,11 @@ const localizer = dateFnsLocalizer({
 
 const events: Event[] = [
   {
+    title: "Chandi Yag",
+    start: new Date(2026, 2, 19, 7, 0),
+    end: new Date(2026, 2, 28, 16, 0),
+  },
+  {
     title: "Guru Purnima and Diksha Mahotsava",
     start: new Date(2026, 6, 29, 6, 0),
     end: new Date(2026, 6, 29, 17, 30),
@@ -27,19 +34,28 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  // Default to the event's start date
-  const [currentDate, setCurrentDate] = useState(events[0].start);
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [currentView, setCurrentView] = useState<View>("month");
 
+  useEffect(() => {
+    const now = new Date();
+
+    // Find the next upcoming event
+    const upcoming = events
+      .filter((e) => e.start >= now)
+      .sort((a, b) => a.start.getTime() - b.start.getTime())[0];
+
+    // Default to upcoming event date, or today if none
+    setCurrentDate(upcoming ? upcoming.start : now);
+    setCurrentView("month");
+  }, []);
+
+  if (!currentDate) {
+    return <div>Loading calendar...</div>;
+  }
+
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "90vw",
-        margin: "0 auto",
-        contain: "layout style",
-      }}
-    >
+    <div style={{ height: "100vh", width: "90vw", margin: "0 auto" }}>
       <h1
         style={{
           textAlign: "center",
@@ -52,21 +68,16 @@ const CalendarComponent: FC = () => {
         Upcoming Event
       </h1>
 
-      <div
-        style={{
-          height: 500,
-          contain: "content",
-        }}
-      >
+      <div style={{ height: 500 }}>
         <Calendar
           localizer={localizer}
           events={events}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 500 }}
-          date={currentDate} // defaults to event date
+          date={currentDate}
           onNavigate={(newDate) => setCurrentDate(newDate)}
-          view={currentView} // defaults to month view
+          view={currentView}
           onView={(newView) => setCurrentView(newView)}
         />
       </div>
