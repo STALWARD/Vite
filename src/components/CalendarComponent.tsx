@@ -1,4 +1,4 @@
-"use client"; // required in Next.js App Router
+"use client"; // Required in Next.js App Router
 
 import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
@@ -55,14 +55,7 @@ const CalendarComponent: FC = () => {
   }
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "90vw",
-        margin: "0 auto",
-        contain: "layout style",
-      }}
-    >
+    <div style={{ height: "100vh", width: "90vw", margin: "0 auto" }}>
       <h1
         style={{
           textAlign: "center",
@@ -75,12 +68,7 @@ const CalendarComponent: FC = () => {
         Event Calendar
       </h1>
 
-      <div
-        style={{
-          height: 500,
-          contain: "content",
-        }}
-      >
+      <div style={{ height: 500 }}>
         <Calendar
           localizer={localizer}
           events={events}
@@ -89,12 +77,4 @@ const CalendarComponent: FC = () => {
           style={{ height: 500 }}
           date={currentDate}
           onNavigate={(newDate) => setCurrentDate(newDate)}
-          view={currentView}
-          onView={(newView) => setCurrentView(newView)}
-        />
-      </div>
-    </div>
-  );
-};
-
-export default CalendarComponent;
+          view={currentView
