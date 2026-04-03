@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { Event, View } from "react-big-calendar";
 import type { FC } from "react";
@@ -20,11 +20,6 @@ const localizer = dateFnsLocalizer({
 
 const events: Event[] = [
   {
-    title: "Chandi Yag",
-    start: new Date(2026, 2, 19, 7, 0),
-    end: new Date(2026, 2, 28, 16, 0),
-  },
-  {
     title: "Guru Purnima and Diksha Mahotsava",
     start: new Date(2026, 6, 29, 6, 0),
     end: new Date(2026, 6, 29, 17, 30),
@@ -32,19 +27,8 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  // Start with null to avoid hydration mismatch
-  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [currentDate, setCurrentDate] = useState(new Date(2026, 2, 12));
   const [currentView, setCurrentView] = useState<View>("month");
-
-  // Set actual current date only after client-side mount
-  useEffect(() => {
-    setCurrentDate(new Date());
-  }, []);
-
-  if (!currentDate) {
-    // Render a placeholder until the date is set
-    return <div>Loading calendar...</div>;
-  }
 
   return (
     <div
@@ -52,7 +36,7 @@ const CalendarComponent: FC = () => {
         height: "100vh",
         width: "90vw",
         margin: "0 auto",
-        contain: "layout style",
+        contain: "layout style", // contain layout scope
       }}
     >
       <h1
@@ -64,13 +48,14 @@ const CalendarComponent: FC = () => {
           fontWeight: "600",
         }}
       >
-        Event Calendar
+        Upcoming Event 
       </h1>
 
+      {/* Fixed height container to avoid repeated % recalculations */}
       <div
         style={{
           height: 500,
-          contain: "content",
+          contain: "content", // isolate grid rendering
         }}
       >
         <Calendar
@@ -78,7 +63,7 @@ const CalendarComponent: FC = () => {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{ height: 500 }} // fixed height instead of 100%
           date={currentDate}
           onNavigate={(newDate) => setCurrentDate(newDate)}
           view={currentView}
