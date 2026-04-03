@@ -27,7 +27,8 @@ const events: Event[] = [
 ];
 
 const CalendarComponent: FC = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 2, 12));
+  // Default to the event's start date
+  const [currentDate, setCurrentDate] = useState(events[0].start);
   const [currentView, setCurrentView] = useState<View>("month");
 
   return (
@@ -36,7 +37,7 @@ const CalendarComponent: FC = () => {
         height: "100vh",
         width: "90vw",
         margin: "0 auto",
-        contain: "layout style", // contain layout scope
+        contain: "layout style",
       }}
     >
       <h1
@@ -48,14 +49,13 @@ const CalendarComponent: FC = () => {
           fontWeight: "600",
         }}
       >
-        Upcoming Event 
+        Upcoming Event
       </h1>
 
-      {/* Fixed height container to avoid repeated % recalculations */}
       <div
         style={{
           height: 500,
-          contain: "content", // isolate grid rendering
+          contain: "content",
         }}
       >
         <Calendar
@@ -63,10 +63,10 @@ const CalendarComponent: FC = () => {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }} // fixed height instead of 100%
-          date={currentDate}
+          style={{ height: 500 }}
+          date={currentDate} // defaults to event date
           onNavigate={(newDate) => setCurrentDate(newDate)}
-          view={currentView}
+          view={currentView} // defaults to month view
           onView={(newView) => setCurrentView(newView)}
         />
       </div>
