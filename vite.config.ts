@@ -11,15 +11,12 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        // Use a function instead of an object for manualChunks
+        // Manual chunking function
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) {
-              return 'react'
-            }
-            if (id.includes('@headlessui') || id.includes('@heroicons')) {
-              return 'ui'
-            }
+            if (id.includes('react')) return 'react'
+            if (id.includes('@headlessui') || id.includes('@heroicons')) return 'ui'
+            if (id.includes('tailwindcss')) return 'tailwind'
             return 'vendor'
           }
         },
