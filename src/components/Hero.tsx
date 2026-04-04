@@ -12,6 +12,7 @@ const Hero: React.FC = () => {
   const [hasClicked, setHasClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadedVideos, setLoadedVideos] = useState<number>(0);
+  const [isClient, setIsClient] = useState(false);
 
   const currentVideoRef = useRef<HTMLVideoElement | null>(null);
   const nextVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -29,14 +30,26 @@ const Hero: React.FC = () => {
     setLoadedVideos((prev) => prev + 1);
   };
 
-  // FIX: Failsafe for stuck loader
+  // Client-only guard
   useEffect(() => {
-    // 1. Check if video is already cached/loaded on mount
+    setIsClient(true);
+  }, []);
+
+  // Force autoplay on mount
+  useEffect(() => {
+    if (bgVideoRef.current) {
+      bgVideoRef.current.play().catch(() => {
+        console.log("Autoplay blocked, waiting for user interaction");
+      });
+    }
+  }, []);
+
+  // Failsafe loader
+  useEffect(() => {
     if (bgVideoRef.current && bgVideoRef.current.readyState >= 2) {
       setLoadedVideos((prev) => prev + 1);
     }
 
-    // 2. Failsafe: Force hide loader after 5s if videos are slow/buggy
     const timeout = setTimeout(() => {
       setIsLoading(false);
     }, 5000);
@@ -48,8 +61,9 @@ const Hero: React.FC = () => {
   useEffect(() => {
     if (loadedVideos >= 1) {
       setIsLoading(false);
-      // Ensure GSAP calculates positions AFTER the loader is gone
-      setTimeout(() => ScrollTrigger.refresh(), 100);
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh(true);
+      });
     }
   }, [loadedVideos]);
 
@@ -147,16 +161,22 @@ const Hero: React.FC = () => {
           className="absolute-center invisible absolute z-20 size-64 object-cover"
         />
 
-        <video
-          ref={bgVideoRef}
-          src={getVideoSrc(currentIndex)}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute left-0 top-0 size-full object-cover"
-          onLoadedData={handleVideoLoad}
-        />
+        {isClient && (
+          <video
+            ref={bgVideoRef}
+            src={getVideoSrc(currentIndex)}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute left-0 top-0 size-full object-cover"
+            onLoadedData={handleVideoLoad}
+            onCanPlay={() => {
+              setIsLoading(false);
+              bgVideoRef.current?.play();
+            }}
+          />
+        )}
 
         <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 bg-linear-to-r from-green-400 via-red-500 to-indigo-500 bg-clip-text text-transparent">
           BH<b>as</b>k<b>a</b>r
