@@ -8,15 +8,18 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    // 1. Merge all CSS into one file to shorten the discovery chain
-    cssCodeSplit: false, 
+    // Keep CSS splitting enabled so critical styles can be inlined separately
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
-        // 2. Remove manualChunks! 6KB is too small to justify a separate file.
-        manualChunks: undefined, 
+        // Manual chunking: separate vendor libraries and app code
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          ui: ['@headlessui/react', '@heroicons/react'],
+        },
       },
     },
-    // 3. Optional: Increase limit to inline small assets as base64
-    assetsInlineLimit: 10000, 
+    // Inline small assets as base64 to reduce requests
+    assetsInlineLimit: 10000,
   },
 })
