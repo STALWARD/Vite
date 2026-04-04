@@ -8,18 +8,23 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    // Keep CSS splitting enabled so critical styles can be inlined separately
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        // Manual chunking: separate vendor libraries and app code
-        manualChunks: {
-          react: ['react', 'react-dom'],
-          ui: ['@headlessui/react', '@heroicons/react'],
+        // Use a function instead of an object for manualChunks
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) {
+              return 'react'
+            }
+            if (id.includes('@headlessui') || id.includes('@heroicons')) {
+              return 'ui'
+            }
+            return 'vendor'
+          }
         },
       },
     },
-    // Inline small assets as base64 to reduce requests
     assetsInlineLimit: 10000,
   },
 })
