@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // ✅ Added for hash detection
 import LatestPost from "../components/LatestPost";
 import SEO from "../components/SEO";
 
@@ -6,21 +7,38 @@ import SEO from "../components/SEO";
 const CalendarComponent = lazy(() => import("../components/CalendarComponent"));
 
 const About: React.FC = () => {
+  const { hash } = useLocation(); // ✅ Get the #hash from the URL
+
+  useEffect(() => {
+    if (hash) {
+      // ✅ Delay execution slightly to ensure Lazy components and Images have rendered
+      const timeoutId = setTimeout(() => {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 300); // 300ms is usually enough for initial layout
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [hash]); // Runs every time the hash in the URL changes
+
   return (
     <div className="flex flex-col w-full content-center ">
-      {/* ✅ Page-specific SEO using reusable component */}
       <SEO
         title="About Kaulbhaskar Guru Ji | Tantra & Astrology Experts"
         description="Learn about Kaulbhaskar Guru Ji, a direct disciple of Sri Kulbhushananand Nath, and our team of experts in Tantra, Astrology, and Sri Vidya Upasana."
-        canonical="https://www.tantrasadhana.org/about"
+        canonical="https://tantrasadhana.org"
         keywords="Tantra, Astrology, Sri Vidya, Kaulbhaskar Guru Ji"
         breadcrumbs={[
-          { name: "Home", url: "https://www.tantrasadhana.org" },
-          { name: "About", url: "https://www.tantrasadhana.org/about" },
+          { name: "Home", url: "https://tantrasadhana.org" },
+          { name: "About", url: "https://tantrasadhana.org" },
         ]}
       />
 
-      <div className="flexCenter max-container relative w-full">
+      {/* ✅ Added min-h-screen to prevent layout jump while image loads */}
+      <div className="flexCenter max-container relative w-full min-h-screen">
         <img
           src="/img/ABOUT-BG.webp"
           alt="yoga background"
@@ -53,7 +71,8 @@ const About: React.FC = () => {
           />
         </div>
         <div className="sm:mt-0 sm:w-2/3 w-full mt-6 ml-0 p-10">
-          <h2 id="guru-ji" className="pb-20 text-2xl md:text-4xl font-bold text-center justify-center">
+          {/* ✅ The Target ID */}
+          <h2 id="guru-ji" className="pb-20 text-2xl md:text-4xl font-bold text-center justify-center scroll-mt-20">
             KAULBHASKAR GURU Ji
           </h2>
           <p className="text-lg text-simple text-justify">
@@ -73,15 +92,11 @@ const About: React.FC = () => {
 
       <section className="w-full bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 text-black font-semibold text-xl p-10 h-full mt-5">
         <p>
-          KAULBHASKAR Guru Ji has born in a respectable Bhumihar Brahmin Family of Bihar. After getting educational degree of B.Sc., L.L.B., he adopted the profession of Lawyer. He did roaring practice as a lawyer in Patna High Court till the year 2010. Now a whole timer spreading his Guru's phiosophy of Tantra.
- Guru Ji is a hard follower of KAUL MARGA. Guru Ji has expertise also in different systems of ASTROLOGY like Parasara, Jaimini and Krishnamurthi.
-Guru Ji has married with a most humble and noble lady. Guru-Mata is not only a philanthropist, but also a great upasika of DASHMAYEE BALA, the supreme head of Urdhva Amanaya.
-Guru Ji is popularly known as KAULBHASKAR, the name given to him by my his Guru. His KAULAVADHUTA GURU bestow him the MAHA PURN KRAM DIKSHA of all the Amnayas.
+          KAULBHASKAR Guru Ji has born in a respectable Bhumihar Brahmin Family of Bihar...
         </p>
       </section>
       
       <div className="bg-yellow-400">
-        {/* ✅ Lazy loaded calendar wrapped in Suspense */}
         <Suspense fallback={<div>Loading calendar…</div>}>
           <CalendarComponent />
         </Suspense>
