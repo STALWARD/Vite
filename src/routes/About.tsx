@@ -78,7 +78,10 @@ const About: React.FC = () => {
             KAULBHASKAR GURU Ji
           </h2>
           <p className="text-lg text-simple text-justify">
-            Guru Ji, popularly known as <strong>KAULBHASKAR</strong>, is from
+            KAULBHASKAR Guru Ji has born in a respectable Bhumihar Brahmin Family of Bihar. After getting educational degree of B.Sc., L.L.B., he adopted the profession of Lawyer. He did roaring practice as a lawyer in Patna High Court till the year 2010. Now a whole timer spreading his Guru's phiosophy of Tantra.
+            Guru Ji is a hard follower of KAUL MARGA. Guru Ji has expertise also in different systems of ASTROLOGY like Parasara, Jaimini and Krishnamurthi.
+            Guru Ji has married with a most humble and noble lady. Guru-Mata is not only a philanthropist, but also a great upasika of DASHMAYEE BALA, the supreme head of Urdhva Amanaya.
+            Guru Ji is popularly known as KAULBHASKAR, the name given to him by my his Guru. His KAULAVADHUTA GURU bestow him the MAHA PURN KRAM DIKSHA of all the Amnayas. Guru Ji, popularly known as <strong>KAULBHASKAR</strong>, is from
             the lineage of Sri <strong>Matsyendra Nath</strong> (also known as
             Machendra Nath) ji, a legend of Naths and one of{" "}
             <strong>84 Maha Siddhas</strong>. A direct disciple of esteemed KAUL
@@ -91,16 +94,7 @@ const About: React.FC = () => {
           </p>
         </div>
       </section>
-
-      <section className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-black font-semibold text-xl p-10 h-full mt-5">
-        <p>
-          KAULBHASKAR Guru Ji has born in a respectable Bhumihar Brahmin Family of Bihar. After getting educational degree of B.Sc., L.L.B., he adopted the profession of Lawyer. He did roaring practice as a lawyer in Patna High Court till the year 2010. Now a whole timer spreading his Guru's phiosophy of Tantra.
-          Guru Ji is a hard follower of KAUL MARGA. Guru Ji has expertise also in different systems of ASTROLOGY like Parasara, Jaimini and Krishnamurthi.
-          Guru Ji has married with a most humble and noble lady. Guru-Mata is not only a philanthropist, but also a great upasika of DASHMAYEE BALA, the supreme head of Urdhva Amanaya.
-          Guru Ji is popularly known as KAULBHASKAR, the name given to him by my his Guru. His KAULAVADHUTA GURU bestow him the MAHA PURN KRAM DIKSHA of all the Amnayas.
-        </p>
-      </section>
-      
+            
       <div className="bg-yellow-400">
         <Suspense fallback={<div>Loading calendar…</div>}>
           <CalendarComponent />
