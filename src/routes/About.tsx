@@ -53,7 +53,7 @@ const About: React.FC = () => {
           />
         </div>
         <div className="sm:mt-0 sm:w-2/3 w-full mt-6 ml-0 p-10">
-          <h2 className="pb-20 text-2xl md:text-4xl font-bold text-center justify-center">
+          <h2 id="guru-ji" className="pb-20 text-2xl md:text-4xl font-bold text-center justify-center">
             KAULBHASKAR GURU Ji
           </h2>
           <p className="text-lg text-simple text-justify">
