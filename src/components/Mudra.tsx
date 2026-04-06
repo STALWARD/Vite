@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-// @ts-ignore
+// @ts-ignore - Critical for Vite Production builds to avoid Error #130
 const Slider = (SliderComponent as any).default || SliderComponent;
 
 interface MudraImage {
@@ -15,30 +15,35 @@ interface MudraImage {
 }
 
 const Mudra: React.FC = () => {
+  // 1. Dynamic slides state to force correct mobile view
+  const [slidesToShow, setSlidesToShow] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setSlidesToShow(3); // Desktop
+      } else if (width >= 640) {
+        setSlidesToShow(2); // Tablet
+      } else {
+        setSlidesToShow(1); // Mobile
+      }
+    };
+
+    // Initialize on mount
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,      // START with 1 (Mobile)
+    slidesToShow: slidesToShow, // Use our dynamic state
     slidesToScroll: 1,
     autoplay: true,
-    mobileFirst: true,    // IMPORTANT: Changes breakpoints to 'min-width'
-    responsive: [
-      {
-        breakpoint: 639,  // 640px and up
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 1023, // 1024px and up
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      }
-    ]
+    arrows: false, // Often helps mobile stability
   };
 
   const images: MudraImage[] = [
@@ -69,16 +74,17 @@ const Mudra: React.FC = () => {
           m<b>ud</b>r<b>a</b>s
         </h2>
         
-        {/* min-w-0 is vital for calculation */}
+        {/* Container with min-w-0 helps prevent 'exponential width' bugs */}
         <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden min-w-0">
-          <Slider {...settings}>
+          <Slider {...settings} key={slidesToShow}> 
+            {/* Added 'key' to force re-render when slides change */}
             {images.map((item, i) => (
               <div key={i} className="text-white outline-none w-full px-2">
                 <div className="flex flex-col items-center">
                   <img 
                     src={item.src} 
                     alt={item.title} 
-                    className="h-72 w-auto object-contain pointer-events-none" 
+                    className="h-72 w-auto object-contain" 
                   />
                   <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
                   <p className="text-sm px-2 text-gray-400">{item.description}</p>
