@@ -202,7 +202,9 @@ const Hero: React.FC = () => {
               title="Visit my other WEBSITE"
               leftIcon={<TiLocationArrow className="pointer-events-none" />}
               containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 w-full cursor-pointer active:scale-95 transition-transform"
-              // Remove onClick from the Button since the <a> tag handles it now
+              onClick={() =>
+                window.open("https://www.tantrasadhana.org", "_blank")
+              }
             />
           
           </div>
