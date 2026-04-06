@@ -19,26 +19,17 @@ const Mudra: React.FC = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1, // Start with 1 slide (Mobile default)
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    mobileFirst: true, // Enable mobile-first mode
     responsive: [
       {
-        // For Tablets (640px and UP)
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
+        breakpoint: 1024,
+        settings: { slidesToShow: 2, slidesToScroll: 1 }
       },
       {
-        // For Desktops (1024px and UP)
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        }
+        breakpoint: 640,
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
       }
     ]
   };
