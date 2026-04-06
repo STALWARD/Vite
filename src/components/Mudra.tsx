@@ -15,24 +15,34 @@ interface MudraImage {
 }
 
 const Mudra: React.FC = () => {
-  const settings: Settings = {
+    const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1, // Start with 1 slide (Mobile default)
     slidesToScroll: 1,
     autoplay: true,
+    mobileFirst: true, // Enable mobile-first mode
     responsive: [
       {
-        breakpoint: 1024,
-        settings: { slidesToShow: 2, slidesToScroll: 1 }
+        // For Tablets (640px and UP)
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
       },
       {
-        breakpoint: 768,
-        settings: { slidesToShow: 1, slidesToScroll: 1 }
+        // For Desktops (1024px and UP)
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
       }
     ]
   };
+
 
   const images: MudraImage[] = [
     { src: "/mudra/abagunthan.png", title: "Abagunthan Mudra", description: "Symbol of concealment and protection." },
