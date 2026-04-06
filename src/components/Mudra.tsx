@@ -1,5 +1,5 @@
 import React from "react";
-import SliderComponent from "react-slick";
+import Slider from "react-slick";
 import type { Settings } from "react-slick";
 
 import "slick-carousel/slick/slick.css"; 
@@ -28,7 +28,7 @@ const Mudra: React.FC = () => {
         settings: { slidesToShow: 2, slidesToScroll: 1 }
       },
       {
-        breakpoint: 640,
+        breakpoint: 768,
         settings: { slidesToShow: 1, slidesToScroll: 1 }
       }
     ]
