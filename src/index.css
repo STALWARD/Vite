@@ -248,10 +248,7 @@
   transform: rotate(60deg);
   transform-origin: 50% 85%;
 }
-.three-body__dot:nth-child(1)::after {
-  bottom: 0; left: 0;
-  animation: wobble1 var(--uib-speed) infinite ease-in-out;
-  animation-delay: calc(var(--uib-speed) * -0.3Here’s your **complete updated `index.css`** with the slick carousel responsive fixes added at the end. This version keeps all your existing Tailwind utilities and custom styles intact, then appends the overrides needed to make `react-slick` behave correctly on mobile.
+.three-body__dot:nthHere’s a **clean, complete version of your `index.css`** with all your existing styles intact and the slick carousel responsive fixes appended at the end. This version is syntactically valid and should deploy fine on Vercel:
 
 ```css
 @import "tailwindcss";
@@ -507,4 +504,4 @@
 .three-body__dot:nth-child(1)::after {
   bottom: 0; left: 0;
   animation: wobble1 var(--uib-speed) infinite ease-in-out;
-  animation
+  animation-delay: calc(var(--uib
