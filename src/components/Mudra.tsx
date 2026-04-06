@@ -1,12 +1,10 @@
 import React from "react";
-// 1. Import it as a base object first
 import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-// 2. Extract the actual component correctly for Vite/TypeScript
 // @ts-ignore
 const Slider = (SliderComponent.default || SliderComponent) as any;
 
@@ -27,11 +25,11 @@ const Mudra: React.FC = () => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 }
+        settings: { slidesToShow: 2, slidesToScroll: 1 }
       },
       {
         breakpoint: 640,
-        settings: { slidesToShow: 1 }
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
       }
     ]
   };
@@ -58,13 +56,12 @@ const Mudra: React.FC = () => {
   ];
 
   return (
-    <div className='text-center my-10'>
+    <div className="text-center my-10">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        {/* Fixed: Tailwind 4 uses bg-linear-to-r, Tailwind 3 uses bg-gradient-to-r */}
         <h2 className="special-font hero-heading bg-linear-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
           m<b>ud</b>r<b>a</b>s
         </h2>
-        <div className="px-10 py-10 bg-black mt-6">
+        <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden">
           <Slider {...settings}>
             {images.map((item, i) => (
               <div key={i} className="text-white outline-none">
@@ -79,7 +76,6 @@ const Mudra: React.FC = () => {
             ))}
           </Slider>
         </div>
-        
       </div>
     </div>
   );
