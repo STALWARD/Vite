@@ -109,31 +109,31 @@ const About: React.FC = () => {
       <section className='flex flex-col mx-auto w-auto h-auto px-4 lg:px-8 pb-10'>
   <div className='flex lg:flex-row flex-col w-auto h-auto gap-5 mx-auto justify-center items-center'>
     <img
-      src="/about/S.BAKSHI.webp"
+      src="/mentor/S.BAKSHI.webp"
       alt="S.BAKSHI"
       aria-label="image of S.BAKSHI"
       className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
     />
     <img
-      src="/about/Aradhya.webp"
+      src="/mentor/Aradhya.webp"
       alt="PRATIK"
       aria-label="image of PRATIK"
       className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
     />
     <img
-      src="/about/SUBHAS.webp"
+      src="/mentor/SUBHAS.webp"
       alt="SUBHAS"
       aria-label="image of SUBHAS"
       className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
     />
     <img
-      src="/about/KIRAN.webp"
+      src="/mentor/KIRAN.webp"
       alt="KIRAN"
       aria-label="image of KIRAN"
       className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
     />
     <img
-      src="/about/Yatan.webp"
+      src="/mentor/Yatan.webp"
       alt="Yatan"
       aria-label="image of Yatan"
       className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
