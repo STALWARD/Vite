@@ -196,13 +196,21 @@ const Hero: React.FC = () => {
               We can help you on an adventure around the world of Tantra in just
               a simple way.
             </p>
-            <Button
-              id="kaulbhaskar-guru-ji"
-              title="Visit my other WEBSITE"
-              leftIcon={<TiLocationArrow className="pointer-events-none" />} // Prevents icon from stealing the click
-              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 relative z-10 w-full md:w-auto active:scale-95 transition-transform" 
-              onClick={() => window.open("https://www.tantrasadhana.org", "_blank")}
-            />
+            <a 
+              href="https://tantrasadhana.org" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block w-full md:w-auto" // Ensures the link wraps the button tightly
+            >
+              <Button
+                id="kaulbhaskar-guru-ji"
+                title="Visit my other WEBSITE"
+                leftIcon={<TiLocationArrow className="pointer-events-none" />}
+                containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 w-full cursor-pointer active:scale-95 transition-transform"
+                // Remove onClick from the Button since the <a> tag handles it now
+              />
+            </a>
+
 
           </div>
         </div>
