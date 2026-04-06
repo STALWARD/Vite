@@ -107,39 +107,14 @@ const About: React.FC = () => {
       </section>
 
       <section className='flex flex-col mx-auto w-auto h-auto px-4 lg:px-8 pb-10'>
-  <div className='flex lg:flex-row flex-col w-auto h-auto gap-5 mx-auto justify-center items-center'>
-    <img
-      src="/mentor/S.BAKSHI.webp"
-      alt="S.BAKSHI"
-      aria-label="image of S.BAKSHI"
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
-    />
-    <img
-      src="/mentor/Aradhya.webp"
-      alt="PRATIK"
-      aria-label="image of PRATIK"
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
-    />
-    <img
-      src="/mentor/SUBHAS.webp"
-      alt="SUBHAS"
-      aria-label="image of SUBHAS"
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
-    />
-    <img
-      src="/mentor/KIRAN.webp"
-      alt="KIRAN"
-      aria-label="image of KIRAN"
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
-    />
-    <img
-      src="/mentor/Yatan.webp"
-      alt="Yatan"
-      aria-label="image of Yatan"
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
-    />
-  </div>
-</section>
+        <div className='flex lg:flex-row flex-col w-auto h-auto gap-5 mx-auto justify-center items-center'>
+          <img src="/mentor/S.Bakshi.webp" alt="Expert S. Bakshi" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
+          <img src="/mentor/Aradhya.webp" alt="Expert Aradhya" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
+          <img src="/mentor/Subhas.webp" alt="Expert Subhas" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
+          <img src="/mentor/Kiran.webp" alt="Expert Kiran" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
+          <img src="/mentor/YATAN.webp" alt="Expert Yatan" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
+        </div>
+      </section>
 
     </div>
   );
