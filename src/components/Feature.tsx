@@ -121,7 +121,7 @@ const Feature: FC = () => {
 
           <BentoTilt className="bento-title_1 md:col-span-1">
             <BentoCard
-              src="videos/feature-3.mp4"
+              src="videos/Yantra.mp4"
               title={
                 <>
                   <b>astrology</b> <b>services</b>
