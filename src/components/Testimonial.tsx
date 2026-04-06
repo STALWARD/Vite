@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type FC } from "react";
+import { useState, useEffect, type FC } from "react"; // Removed 'React' here
 import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 import { FaStar } from "react-icons/fa";
@@ -48,18 +48,17 @@ const testimonialData: TestimonialData[] = [
 ];
 
 const Testimonial: FC = () => {
-  // 1. Dynamic slides state (The logic that worked for Mudra)
   const [slidesToShow, setSlidesToShow] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width >= 1024) {
-        setSlidesToShow(3); // Desktop
+        setSlidesToShow(3); 
       } else if (width >= 640) {
-        setSlidesToShow(2); // Tablet
+        setSlidesToShow(2); 
       } else {
-        setSlidesToShow(1); // Mobile
+        setSlidesToShow(1); 
       }
     };
 
@@ -72,7 +71,7 @@ const Testimonial: FC = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: slidesToShow, // Applying dynamic state
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     autoplay: true,
     arrows: false,
@@ -86,11 +85,8 @@ const Testimonial: FC = () => {
         <h2 className="text-center text-3xl font-bold text-white mb-10 uppercase tracking-widest">
           Testimonials
         </h2>
-        
-        {/* Container with min-w-0 for correct width calculation */}
         <div className="w-full min-w-0">
           <Slider {...settings} key={slidesToShow}> 
-            {/* key={slidesToShow} is the magic fix for mobile display */}
             {testimonialData.map((item, index) => (
               <TestimonialCard
                 key={index}
