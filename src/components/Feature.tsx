@@ -67,7 +67,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           {title}
           {description && (
             // Swapped break-words for wrap-break-word as requested
-            <p className="mt-3 wrap-break-word text-xs md:text-base text-red font-robert-regular">
+            <p className="mt-3 wrap-break-word text-xs md:text-base text-white font-robert-regular">
               {description}
             </p>
           )}
