@@ -197,14 +197,13 @@ const Hero: React.FC = () => {
               a simple way.
             </p>
             <Button
-              id="kaulbhaskar-guru ji"
+              id="kaulbhaskar-guru-ji"
               title="Visit my other WEBSITE"
-              leftIcon={<TiLocationArrow />}
-              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1"
-              onClick={() =>
-                window.open("https://www.tantrasadhana.org", "_blank")
-              }
+              leftIcon={<TiLocationArrow className="pointer-events-none" />} // Prevents icon from stealing the click
+              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 relative z-10 w-full md:w-auto active:scale-95 transition-transform" 
+              onClick={() => window.open("https://www.tantrasadhana.org", "_blank")}
             />
+
           </div>
         </div>
       </div>
