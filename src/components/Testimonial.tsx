@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import React, { useState, useEffect, type FC } from "react";
 import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 import { FaStar } from "react-icons/fa";
@@ -6,8 +6,8 @@ import { FaStar } from "react-icons/fa";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-// @ts-ignore
-const Slider = (SliderComponent.default || SliderComponent) as any;
+// @ts-ignore - Critical for Vite Production builds to avoid Error #130
+const Slider = (SliderComponent as any).default || SliderComponent;
 
 interface TestimonialData {
   name: string;
@@ -17,22 +17,22 @@ interface TestimonialData {
 
 const TestimonialCard: FC<TestimonialData> = ({ name, profession, comment }) => {
   return (
-    <div className="bg-white m-4 p-5 my-10 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-      <h2 className="text-base font-normal text-black my-4">{comment}</h2>
-      <hr style={{ borderColor: "#D7D5D5" }} />
-      <div className="flex justify-between items-center mt-4">
-        <div>
-          <h3 className="text-lg font-medium text-slate-900">{name}</h3>
-          <h4 className="text-sm font-normal text-black">{profession}</h4>
-        </div>
-        <div className="flex gap-1">
-          {[...Array(5)].map((_, i) => (
-            <FaStar 
-              key={i} 
-              className={i === 4 ? "text-amber-500" : "text-orange-300"} 
-              size={20}
-            />
-          ))}
+    <div className="bg-white m-4 p-5 min-h-[300px] flex flex-col justify-between overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+      <div>
+        <h2 className="text-base font-normal text-black my-4 leading-relaxed">"{comment}"</h2>
+      </div>
+      <div>
+        <hr className="border-gray-200" />
+        <div className="flex justify-between items-center mt-4">
+          <div>
+            <h3 className="text-lg font-bold text-slate-900">{name}</h3>
+            <h4 className="text-sm font-normal text-gray-600">{profession}</h4>
+          </div>
+          <div className="flex gap-1">
+            {[...Array(5)].map((_, i) => (
+              <FaStar key={i} className={i === 4 ? "text-amber-500" : "text-orange-300"} size={16} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -40,75 +40,61 @@ const TestimonialCard: FC<TestimonialData> = ({ name, profession, comment }) => 
 };
 
 const testimonialData: TestimonialData[] = [
-  {
-    name: "J. Kartikeyan",
-    profession: "Entrepreneur",
-    comment: "I am a huge fan of GURU Ji. I have found the whole team to be incredibly intuitive overall. Would definitely recommend this website if you are looking for a source of learning tantra that bit easier.",
-  },
-  {
-    name: "N. Ramaswami",
-    profession: "MD, Tech Infra",
-    comment: "This website has been pivotal for helping me on tantra rituals. I would definitely recommend this website if you would like to perform any tantra rituals.",
-  },
-  {
-    name: "C. Mathew",
-    profession: "Bureaucrat",
-    comment: "I absolutely love the services provided by KAULBHASKAR Guru Ji and his team members. It really helped streamline my workflows. I would definitely recommend.",
-  },
-  {
-    name: "Maheshwer Kumar",
-    profession: "Lawyer",
-    comment: "I am utterly grateful that KAULBHASKAR Ji imparts the high teaching of tantra, specially of hidden KAUL MARGA. He gives personal attention to each knowledge seeker. My life has been changed since I have been learning from him.",
-  },
-  {
-    name: "Dr. Rupinder Singh",
-    profession: "Doctor",
-    comment: "I have always wanted to learn authentic SRI VIDYA but unfortunately, it is extremely difficult to find genuine practitioners. Thanks to the Goddess that my desire finally found its fulfillment in KAULBHASKAR GURU Ji. His command over the intricacies is unparalleled.",
-  },
+  { name: "J. Kartikeyan", profession: "Entrepreneur", comment: "I am a huge fan of GURU Ji. I have found the whole team to be incredibly intuitive overall. Would definitely recommend this website if you are looking for a source of learning tantra that bit easier." },
+  { name: "N. Ramaswami", profession: "MD, Tech Infra", comment: "This website has been pivotal for helping me on tantra rituals. I would definitely recommend this website if you would like to perform any tantra rituals." },
+  { name: "C. Mathew", profession: "Bureaucrat", comment: "I absolutely love the services provided by KAULBHASKAR Guru Ji and his team members. It really helped streamline my workflows. I would definitely recommend." },
+  { name: "Maheshwer Kumar", profession: "Lawyer", comment: "I am utterly grateful that KAULBHASKAR Ji imparts the high teaching of tantra, specially of hidden KAUL MARGA. He gives personal attention to each knowledge seeker. My life has been changed since I have been learning from him." },
+  { name: "Dr. Rupinder Singh", profession: "Doctor", comment: "I have always wanted to learn authentic SRI VIDYA but unfortunately, it is extremely difficult to find genuine practitioners. Thanks to the Goddess that my desire finally found its fulfillment in KAULBHASKAR GURU Ji." },
 ];
 
 const Testimonial: FC = () => {
+  // 1. Same dynamic state logic from Mudra component
+  const [slidesToShow, setSlidesToShow] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setSlidesToShow(3); // Desktop
+      } else if (width >= 640) {
+        setSlidesToShow(2); // Tablet
+      } else {
+        setSlidesToShow(1); // Mobile
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const settings: Settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
     speed: 500,
+    slidesToShow: slidesToShow, // Using the dynamic state
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: false,
     autoplaySpeed: 5000,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 2, slidesToScroll: 1 },
-      },
-      {
-        breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1 },
-      },
-    ],
+    cssEase: "ease-in-out",
   };
 
   return (
-    <div 
-      className="bg-linear-to-r from-red-500 via-green-400 to-pink-500 py-20" 
-      id="testimonial"
-    >
-      <div className="mx-auto max-w-7xl px-4 w-full max-w-full overflow-hidden">
-        <h1 className="special-font hero-subheading">
-          t<b>es</b>ti<b>mo</b>ni<b>a</b>ls
-        </h1>
-        <Slider {...settings}>
-          {testimonialData.map((item, index) => (
-            <TestimonialCard
-              key={index}
-              name={item.name}
-              profession={item.profession}
-              comment={item.comment}
-            />
-          ))}
-        </Slider>
+    <div className="bg-linear-to-r from-red-500 via-green-400 to-pink-500 py-20 overflow-hidden" id="testimonial">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-center text-3xl font-bold text-white mb-10 uppercase tracking-widest">
+          Testimonials
+        </h2>
+        
+        {/* Use min-w-0 to ensure slider calculates mobile width correctly */}
+        <div className="w-full min-w-0">
+          <Slider {...settings} key={slidesToShow}>
+            {testimonialData.map((item, index) => (
+              <TestimonialCard key={index} {...item} />
+            ))}
+          </Slider>
+        </div>
       </div>
     </div>
   );
