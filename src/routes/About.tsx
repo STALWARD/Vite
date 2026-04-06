@@ -106,15 +106,46 @@ const About: React.FC = () => {
         <p>We are some of the experts in Tantra & Astrology</p>
       </section>
 
-      <section className="mx-auto w-full h-auto px-4 lg:px-8 pb-10">
-        <div className="flex flex-col md:flex-row w-full h-auto gap-5 justify-center items-center ">
-          <img src="/mentor/S.Bakshi.webp" alt="Expert S. Bakshi" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
-          <img src="/mentor/Aradhya.webp" alt="Expert Aradhya" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
-          <img src="/mentor/Subhas.webp" alt="Expert Subhas" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
-          <img src="/mentor/Kiran.webp" alt="Expert Kiran" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
-          <img src="/mentor/YATAN.webp" alt="Expert Yatan" loading="lazy" decoding="async" className="w-1/5 h-auto object-cover rounded-lg" />
-        </div>
-      </section>
+      <section className="mx-auto w-auto h-auto px-4 lg:px-8 pb-10">
+  <div className="flex flex-col lg:flex-row w-auto h-auto gap-5 mx-auto justify-center items-center">
+    <img 
+      src="/mentor/S.Bakshi.webp" 
+      alt="Expert S. Bakshi" 
+      loading="lazy" 
+      decoding="async" 
+      className="w-auto h-auto object-cover rounded-lg" 
+    />
+    <img 
+      src="/mentor/Aradhya.webp" 
+      alt="Expert Aradhya" 
+      loading="lazy" 
+      decoding="async" 
+      className="w-auto h-auto object-cover rounded-lg" 
+    />
+    <img 
+      src="/mentor/Subhas.webp" 
+      alt="Expert Subhas" 
+      loading="lazy" 
+      decoding="async" 
+      className="w-auto h-auto object-cover rounded-lg" 
+    />
+    <img 
+      src="/mentor/Kiran.webp" 
+      alt="Expert Kiran" 
+      loading="lazy" 
+      decoding="async" 
+      className="w-auto h-auto object-cover rounded-lg" 
+    />
+    <img 
+      src="/mentor/YATAN.webp" 
+      alt="Expert Yatan" 
+      loading="lazy" 
+      decoding="async" 
+      className="w-auto h-auto object-cover rounded-lg" 
+    />
+  </div>
+</section>
+
     </div>
   );
 };
