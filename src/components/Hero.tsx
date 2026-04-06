@@ -30,12 +30,10 @@ const Hero: React.FC = () => {
     setLoadedVideos((prev) => prev + 1);
   };
 
-  // Client-only guard
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Force autoplay on mount
   useEffect(() => {
     if (bgVideoRef.current) {
       bgVideoRef.current.play().catch(() => {
@@ -44,7 +42,6 @@ const Hero: React.FC = () => {
     }
   }, []);
 
-  // Failsafe loader
   useEffect(() => {
     if (bgVideoRef.current && bgVideoRef.current.readyState >= 2) {
       setLoadedVideos((prev) => prev + 1);
@@ -57,7 +54,6 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Sync loading state with ScrollTrigger
   useEffect(() => {
     if (loadedVideos >= 1) {
       setIsLoading(false);
@@ -67,7 +63,6 @@ const Hero: React.FC = () => {
     }
   }, [loadedVideos]);
 
-  // Video Transition Animation
   useGSAP(
     () => {
       if (hasClicked && nextVideoRef.current) {
@@ -96,7 +91,6 @@ const Hero: React.FC = () => {
     { dependencies: [currentIndex], revertOnUpdate: true }
   );
 
-  // Main Intro + Scroll Animation
   useGSAP(() => {
     gsap.set("#video-frame", {
       clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
@@ -134,10 +128,11 @@ const Hero: React.FC = () => {
         id="video-frame"
         className="relative z-10 h-screen w-screen overflow-hidden rounded-lg bg-blue-75"
       >
-        <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
+        {/* MINI VIDEO POPUP: Smaller size on mobile (size-40) */}
+        <div className="mask-clip-path absolute-center absolute z-50 size-40 md:size-64 cursor-pointer overflow-hidden rounded-lg">
           <div
             onClick={handleMiniVideoClick}
-            className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+            className="origin-center scale-100 opacity-100 md:scale-50 md:opacity-0 transition-all duration-500 ease-in md:hover:scale-100 md:hover:opacity-100"
           >
             <video
               ref={currentVideoRef}
@@ -146,7 +141,7 @@ const Hero: React.FC = () => {
               muted
               playsInline
               id="current-video"
-              className="size-64 origin-center scale-150 object-cover object-center"
+              className="size-40 md:size-64 origin-center scale-150 object-cover object-center"
             />
           </div>
         </div>
@@ -158,7 +153,7 @@ const Hero: React.FC = () => {
           muted
           playsInline
           id="next-video"
-          className="absolute-center invisible absolute z-20 size-64 object-cover"
+          className="absolute-center invisible absolute z-20 size-40 md:size-64 object-cover"
         />
 
         {isClient && (
@@ -178,13 +173,13 @@ const Hero: React.FC = () => {
           />
         )}
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 bg-linear-to-r from-green-400 via-red-500 to-indigo-500 bg-clip-text text-transparent">
+        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 bg-gradient-to-r from-green-400 via-red-500 to-indigo-500 bg-clip-text text-transparent">
           BH<b>as</b>k<b>a</b>r
         </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading bg-linear-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="special-font hero-heading bg-gradient-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent">
               K<b>a</b>u<b>l</b>
             </h1>
             <p className="mb-5 max-w-72 font-robert-regular text-white">
@@ -197,15 +192,20 @@ const Hero: React.FC = () => {
               a simple way.
             </p>
             
-            <Button
-              id="kaulbhaskar-guru-ji"
-              title="Visit my other WEBSITE"
-              leftIcon={<TiLocationArrow className="pointer-events-none" />}
-              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 cursor-pointer active:scale-95 transition-transform"
-              onClick={() =>
-                window.open("https://www.tantrasadhana.org", "_blank")
-              }
-            />
+            {/* BULLETPROOF BUTTON: Wrapped in <a> for 100% click reliability */}
+            <a 
+              href="https://tantrasadhana.org" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block w-fit"
+            >
+              <Button
+                id="kaulbhaskar-guru-ji"
+                title="Visit my other WEBSITE"
+                leftIcon={<TiLocationArrow className="pointer-events-none" />}
+                containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 cursor-pointer active:scale-95 transition-transform px-6 py-3"
+              />
+            </a>
           
           </div>
         </div>
