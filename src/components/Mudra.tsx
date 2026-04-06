@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // @ts-ignore
-const Slider = (SliderComponent.default || SliderComponent) as any;
+
 
 interface MudraImage {
   src: string;
