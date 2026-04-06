@@ -113,39 +113,38 @@ const About: React.FC = () => {
       alt="Expert S. Bakshi" 
       loading="lazy" 
       decoding="async" 
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer" 
+      className="w-auto h-auto object-cover rounded-lg" 
     />
     <img 
       src="/mentor/Aradhya.webp" 
       alt="Expert Aradhya" 
       loading="lazy" 
       decoding="async" 
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer" 
+      className="w-auto h-auto object-cover rounded-lg" 
     />
     <img 
       src="/mentor/Subhas.webp" 
       alt="Expert Subhas" 
       loading="lazy" 
       decoding="async" 
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer" 
+      className="w-auto h-auto object-cover rounded-lg" 
     />
     <img 
       src="/mentor/Kiran.webp" 
       alt="Expert Kiran" 
       loading="lazy" 
       decoding="async" 
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer" 
+      className="w-auto h-auto object-cover rounded-lg" 
     />
     <img 
       src="/mentor/YATAN.webp" 
       alt="Expert Yatan" 
       loading="lazy" 
       decoding="async" 
-      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer" 
+      className="w-auto h-auto object-cover rounded-lg" 
     />
   </div>
 </section>
-
 
     </div>
   );
