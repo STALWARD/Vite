@@ -106,50 +106,41 @@ const About: React.FC = () => {
         <p>We are some of the experts in Tantra & Astrology</p>
       </section>
 
-      <section className='flex flex-col mx-auto w-auto h-auto px-4 lg:px-8'>
-				<div className='flex lg:flex-row flex-col w-auto h-auto gap-5 mx-auto justify-center'>
-					<Image
-						priority={false}
-						width={250}
-						height={350}
-						aria-label={"image of S.BAKSHI"}
-						alt={"S.BAKSHI"}
-						src={"/about/S.BAKSHI.webp"}
-						className="w-auto h-auto"/>
-					<Image
-						priority={false}
-						width={250}
-						height={350}
-						aria-label={"image of PRATIK"}
-						alt={"PRATIK"}
-						src={"/about/Aradhya.webp"}
-						className="w-auto h-auto"/>
-					<Image
-						priority={false}
-						width={250}
-						height={350}
-						aria-label={"image of SUBHAS"}
-						alt={"SUBHAS"}
-						src={"/about/SUBHAS.webp"}
-					className="w-auto h-auto"/>
-					<Image
-						priority={false}
-						width={250}
-						height={350}
-						aria-label={"image of KIRAN"}
-						alt={"KIRAN"}
-						src={"/about/KIRAN.webp"}
-					className="w-auto h-auto"/>
-					<Image
-						priority={false}
-						width={250}
-						height={350}
-						aria-label={"image of Yatan"}
-						alt={"Yatan"}
-						src={"/about/Yatan.webp"}
-					className="w-auto h-auto"/>
-				</div>
-			</section>
+      <section className='flex flex-col mx-auto w-auto h-auto px-4 lg:px-8 pb-10'>
+  <div className='flex lg:flex-row flex-col w-auto h-auto gap-5 mx-auto justify-center items-center'>
+    <img
+      src="/about/S.BAKSHI.webp"
+      alt="S.BAKSHI"
+      aria-label="image of S.BAKSHI"
+      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
+    />
+    <img
+      src="/about/Aradhya.webp"
+      alt="PRATIK"
+      aria-label="image of PRATIK"
+      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
+    />
+    <img
+      src="/about/SUBHAS.webp"
+      alt="SUBHAS"
+      aria-label="image of SUBHAS"
+      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
+    />
+    <img
+      src="/about/KIRAN.webp"
+      alt="KIRAN"
+      aria-label="image of KIRAN"
+      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
+    />
+    <img
+      src="/about/Yatan.webp"
+      alt="Yatan"
+      aria-label="image of Yatan"
+      className="w-auto h-auto object-cover rounded-lg transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-xl cursor-pointer"
+    />
+  </div>
+</section>
+
     </div>
   );
 };
