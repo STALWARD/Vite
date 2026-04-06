@@ -62,17 +62,21 @@ const Mudra: React.FC = () => {
         <h2 className="special-font hero-heading bg-linear-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
           m<b>ud</b>r<b>a</b>s
         </h2>
+        
+        {/* Parent container MUST have min-w-0 for slick to calculate correctly */}
         <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden min-w-0">
           <Slider {...settings}>
             {images.map((item, i) => (
-              <div key={i} className="text-white outline-none">
-                <img 
-                  src={item.src} 
-                  alt={item.title} 
-                  className="mx-auto h-72 w-auto object-contain" 
-                />
-                <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
-                <p className="text-sm px-2">{item.description}</p>
+              <div key={i} className="text-white outline-none w-full px-2">
+                <div className="flex flex-col items-center">
+                  <img 
+                    src={item.src} 
+                    alt={item.title} 
+                    className="h-72 w-auto object-contain" 
+                  />
+                  <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
+                  <p className="text-sm px-2 text-gray-400">{item.description}</p>
+                </div>
               </div>
             ))}
           </Slider>
@@ -81,6 +85,5 @@ const Mudra: React.FC = () => {
     </div>
   );
 };
-
 
 export default Mudra;
