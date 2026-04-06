@@ -17,7 +17,7 @@ interface TestimonialData {
 
 const TestimonialCard: FC<TestimonialData> = ({ name, profession, comment }) => {
   return (
-    <div className="bg-white m-4 p-5 min-h-[300px] flex flex-col justify-between overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="bg-white m-4 p-5 min-h-[350px] flex flex-col justify-between overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       <div>
         <h2 className="text-base font-normal text-black my-4 leading-relaxed italic">"{comment}"</h2>
       </div>
@@ -30,11 +30,7 @@ const TestimonialCard: FC<TestimonialData> = ({ name, profession, comment }) => 
           </div>
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
-              <FaStar 
-                key={i} 
-                className={i === 4 ? "text-amber-500" : "text-orange-300"} 
-                size={16}
-              />
+              <FaStar key={i} className={i === 4 ? "text-amber-500" : "text-orange-300"} size={16} />
             ))}
           </div>
         </div>
@@ -52,7 +48,7 @@ const testimonialData: TestimonialData[] = [
 ];
 
 const Testimonial: FC = () => {
-  // 1. Dynamic slides state (Same as Mudra)
+  // 1. Dynamic slides state (The logic that worked for Mudra)
   const [slidesToShow, setSlidesToShow] = useState(1);
 
   useEffect(() => {
@@ -76,7 +72,7 @@ const Testimonial: FC = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: slidesToShow, // Use our dynamic state
+    slidesToShow: slidesToShow, // Applying dynamic state
     slidesToScroll: 1,
     autoplay: true,
     arrows: false,
@@ -91,9 +87,10 @@ const Testimonial: FC = () => {
           Testimonials
         </h2>
         
-        {/* Same container pattern as Mudra component */}
+        {/* Container with min-w-0 for correct width calculation */}
         <div className="w-full min-w-0">
-          <Slider {...settings} key={slidesToShow}>
+          <Slider {...settings} key={slidesToShow}> 
+            {/* key={slidesToShow} is the magic fix for mobile display */}
             {testimonialData.map((item, index) => (
               <TestimonialCard
                 key={index}
