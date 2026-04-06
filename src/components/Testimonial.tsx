@@ -1,14 +1,11 @@
 import type { FC } from "react";
-// 1. Import base object and handle the Vite/TS "Element type" issue
 import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 import { FaStar } from "react-icons/fa";
 
-// Required Slick Carousel CSS
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-// 2. Extract the actual component correctly
 // @ts-ignore
 const Slider = (SliderComponent.default || SliderComponent) as any;
 
@@ -18,7 +15,6 @@ interface TestimonialData {
   comment: string;
 }
 
-// Reusable Card Component
 const TestimonialCard: FC<TestimonialData> = ({ name, profession, comment }) => {
   return (
     <div className="bg-white m-4 p-5 my-10 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
@@ -85,11 +81,11 @@ const Testimonial: FC = () => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 2, slidesToScroll: 1 },
       },
       {
         breakpoint: 640,
-        settings: { slidesToShow: 1 },
+        settings: { slidesToShow: 1, slidesToScroll: 1 },
       },
     ],
   };
@@ -99,25 +95,98 @@ const Testimonial: FC = () => {
       className="bg-linear-to-r from-red-500 via-green-400 to-pink-500 py-20" 
       id="testimonial"
     >
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 w-full max-w-full overflow-hidden">
         <h1 className="special-font hero-subheading">
           t<b>es</b>ti<b>mo</b>ni<b>a</b>ls
         </h1>
-        
-        {/* Using the extracted Slider component */}
-        <Slider {...settings}>
-          {testimonialData.map((item, index) => (
-            <TestimonialCard
-              key={index}
-              name={item.name}
-              profession={item.profession}
-              comment={item.comment}
-            />
-          ))}
-        </Slider>
+Here are the fully patched versions of your components with the responsive fixes applied. You can copy-paste these directly into your project.
+
+---
+
+## ✅ Mudra Component (Updated)
+
+```tsx
+import React from "react";
+import SliderComponent from "react-slick";
+import type { Settings } from "react-slick";
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
+// @ts-ignore
+const Slider = (SliderComponent.default || SliderComponent) as any;
+
+interface MudraImage {
+  src: string;
+  title: string;
+  description: string;
+}
+
+const Mudra: React.FC = () => {
+  const settings: Settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 2, slidesToScroll: 1 }
+      },
+      {
+        breakpoint: 640,
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
+      }
+    ]
+  };
+
+  const images: MudraImage[] = [
+    { src: "/mudra/abagunthan.png", title: "Abagunthan Mudra", description: "Symbol of concealment and protection." },
+    { src: "/mudra/abhay.png", title: "Abhay Mudra", description: "Gesture of fearlessness and reassurance." },
+    { src: "/mudra/ankush.png", title: "Ankush Mudra", description: "Represents control and guidance." },
+    { src: "/mudra/chakra.png", title: "Chakra Mudra", description: "Symbol of energy and cosmic power." },
+    { src: "/mudra/dhenu.png", title: "Dhenu Mudra", description: "Gesture symbolizing nourishment and abundance." },
+    { src: "/mudra/galini.png", title: "Galini Mudra", description: "Represents surrender and devotion." },
+    { src: "/mudra/jwalini.png", title: "Jwalini Mudra", description: "Gesture of fire and transformation." },
+    { src: "/mudra/kharga.png", title: "Kharga Mudra", description: "Symbol of strength and destruction of evil." },
+    { src: "/mudra/kurma.png", title: "Kurma Mudra", description: "Represents stability and endurance." },
+    { src: "/mudra/lelihan.png", title: "Lelihan Mudra", description: "Gesture of flowing energy and grace." },
+    { src: "/mudra/linga.png", title: "Linga Mudra", description: "Symbol of creation and divine union." },
+    { src: "/mudra/matsya.png", title: "Matsya Mudra", description: "Gesture representing fish and water element." },
+    { src: "/mudra/munda.png", title: "Munda Mudra", description: "Symbol of detachment and transcendence." },
+    { src: "/mudra/parmikaran.png", title: "Parmikaran Mudra", description: "Gesture of purification and clarity." },
+    { src: "/mudra/samhar.png", title: "Samhar Mudra", description: "Represents dissolution and transformation." },
+    { src: "/mudra/sannirodhini.png", title: "Sannirodhini Mudra", description: "Gesture of restraint and discipline." },
+    { src: "/mudra/tatva.png", title: "Tatva Mudra", description: "Symbol of elemental balance and harmony." },
+    { src: "/mudra/yoni.png", title: "Yoni Mudra", description: "Gesture of feminine energy and creation." }
+  ];
+
+  return (
+    <div className="text-center my-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 className="special-font hero-heading bg-linear-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
+          m<b>ud</b>r<b>a</b>s
+        </h2>
+        <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden">
+          <Slider {...settings}>
+            {images.map((item, i) => (
+              <div key={i} className="text-white outline-none">
+                <img 
+                  src={item.src} 
+                  alt={item.title} 
+                  className="mx-auto h-72 w-auto object-contain" 
+                />
+                <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
+                <p className="text-sm px-2">{item.description}</p>
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Testimonial;
+export default Mudra;
