@@ -135,7 +135,7 @@ We provide remedial solutions for Manglika Dosha, delayed marriage and progeny e
 
           <BentoTilt className="bento-title_1 md:col-span-1">
             <BentoCard
-              src="videos/feature-4.mp4"
+              src="videos/3d.mp4"
               title={
                 <>
                   <b>gems,</b> <b>talisman &</b> <b>yantras</b>
