@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect, type FC } from "react"; // Removed 'React' to fix Vercel TS6133
 import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 import { HiStar } from "react-icons/hi";
@@ -6,13 +6,9 @@ import { HiStar } from "react-icons/hi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// @ts-ignore - Critical for Vite Production builds to avoid Error #130
+const Slider = (SliderComponent as any).default || SliderComponent;
 
-const Slider = (SliderComponent as any).default 
-  ? (SliderComponent as any).default 
-  : SliderComponent;
-
-
-// 1. Define the Interface for Service Data
 interface ServicePost {
   heading: string;
   heading2: string;
@@ -97,21 +93,37 @@ const postData: ServicePost[] = [
   },
 ];
 
-const MultipleItems: React.FC = () => {
-  // 2. Apply the Settings type from react-slick
+const MultipleItems: FC = () => {
+  // 1. Dynamic slides state (Same as Mudra component)
+  const [slidesToShow, setSlidesToShow] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setSlidesToShow(3); // Desktop
+      } else if (width >= 640) {
+        setSlidesToShow(2); // Tablet
+      } else {
+        setSlidesToShow(1); // Mobile
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const settings: Settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 3,
+    speed: 500,
+    slidesToShow: slidesToShow, // Use our dynamic state
     slidesToScroll: 1,
-    arrows: false,
     autoplay: true,
-    speed: 5000,
+    arrows: false,
+    autoplaySpeed: 5000,
     cssEase: "linear",
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 640, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-    ],
   };
 
   return (
@@ -128,13 +140,10 @@ const MultipleItems: React.FC = () => {
           <source src="/videos/service.mp4" type="video/mp4" />
         </video>
         
-        {/* Overlay for text readability */}
         <div className="absolute inset-0 bg-black/30" />
 
         <div className="relative z-10 flex flex-col items-center justify-center w-full px-6 text-white text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Services
-          </h1>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">Services</h1>
           <h2 className="text-2xl md:text-3xl font-semibold mb-4">
             Strategic Tantra advice and tailored solutions
           </h2>
@@ -153,59 +162,49 @@ const MultipleItems: React.FC = () => {
             Popular Services
           </h2>
 
-          <Slider {...settings}>
-            {postData.map((item, i) => (
-              <div key={i} className="outline-none">
-                <div className="bg-white mx-3 p-4 shadow-xl rounded-2xl transition-all duration-300 hover:shadow-2xl mb-10">
-                  <div className="relative overflow-hidden rounded-xl group">
-                    <img
-                      src={item.imgSrc}
-                      alt={item.name}
-                      width={396}
-                      height={296}
-                      className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute right-4 -bottom-2 bg-blue-900 rounded-full p-4 shadow-lg">
-                      <h3 className="text-white uppercase text-center text-[10px] font-bold leading-tight">
-                        best <br /> wanted
-                      </h3>
+          <div className="w-full min-w-0">
+            <Slider {...settings} key={slidesToShow}>
+              {postData.map((item, i) => (
+                <div key={i} className="outline-none">
+                  <div className="bg-white mx-3 p-4 shadow-xl rounded-2xl transition-all duration-300 hover:shadow-2xl mb-10">
+                    <div className="relative overflow-hidden rounded-xl group">
+                      <img
+                        src={item.imgSrc}
+                        alt={item.name}
+                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute right-4 -bottom-2 bg-blue-900 rounded-full p-4 shadow-lg">
+                        <h3 className="text-white uppercase text-center text-[10px] font-bold leading-tight">
+                          best <br /> wanted
+                        </h3>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="pt-8">
-                    <h4 className="text-xl font-bold text-gray-900 line-clamp-1">
-                      {item.heading}
-                    </h4>
-                    <h4 className="text-sm font-semibold text-gray-600 mt-1">
-                      {item.heading2}
-                    </h4>
+                    <div className="pt-8">
+                      <h4 className="text-xl font-bold text-gray-900 line-clamp-1">{item.heading}</h4>
+                      <h4 className="text-sm font-semibold text-gray-600 mt-1">{item.heading2}</h4>
+                      <h3 className="text-base font-normal text-gray-500 mt-4 min-h-12">{item.name}</h3>
 
-                    <h3 className="text-base font-normal text-gray-500 mt-4 min-h-12">
-                      {item.name}
-                    </h3>
-
-                    <div className="flex flex-col md:flex-row justify-between items-center py-6 gap-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-red-600 text-xl font-bold">
-                          {item.rating}
-                        </span>
-                        <div className="flex">
-                          {[...Array(5)].map((_, idx) => (
-                            <HiStar key={idx} className="h-4 w-4 text-yellow-500" />
-                          ))}
+                      <div className="flex flex-col md:flex-row justify-between items-center py-6 gap-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-red-600 text-xl font-bold">{item.rating}</span>
+                          <div className="flex">
+                            {[...Array(5)].map((_, idx) => (
+                              <HiStar key={idx} className="h-4 w-4 text-yellow-500" />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="text-2xl font-black text-gray-900">
+                          ₹{item.price.toLocaleString()}/=
                         </div>
                       </div>
-                      <div className="text-2xl font-black text-gray-900">
-                        ₹{item.price.toLocaleString()}/=
-                      </div>
+                      <hr className="border-gray-100" />
                     </div>
-
-                    <hr className="border-gray-100" />
                   </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
+              ))}
+            </Slider>
+          </div>
         </div>
       </div>
     </div>
