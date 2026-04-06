@@ -100,4 +100,18 @@ const Testimonial: FC = () => {
           t<b>es</b>ti<b>mo</b>ni<b>a</b>ls
         </h1>
         <Slider {...settings}>
-          {testimonialData.map((item,
+          {testimonialData.map((item, index) => (
+            <TestimonialCard
+              key={index}
+              name={item.name}
+              profession={item.profession}
+              comment={item.comment}
+            />
+          ))}
+        </Slider>
+      </div>
+    </div>
+  );
+};
+
+export default Testimonial;
