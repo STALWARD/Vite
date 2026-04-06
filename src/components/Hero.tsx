@@ -201,7 +201,7 @@ const Hero: React.FC = () => {
               id="kaulbhaskar-guru-ji"
               title="Visit my other WEBSITE"
               leftIcon={<TiLocationArrow className="pointer-events-none" />}
-              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 w-full cursor-pointer active:scale-95 transition-transform"
+              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 cursor-pointer active:scale-95 transition-transform"
               onClick={() =>
                 window.open("https://www.tantrasadhana.org", "_blank")
               }
