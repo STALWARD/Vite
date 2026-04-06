@@ -30,24 +30,34 @@ const Hero: React.FC = () => {
     setLoadedVideos((prev) => prev + 1);
   };
 
+  // Client-only guard
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  // Force autoplay on mount
   useEffect(() => {
     if (bgVideoRef.current) {
-      bgVideoRef.current.play().catch(() => {});
+      bgVideoRef.current.play().catch(() => {
+        console.log("Autoplay blocked, waiting for user interaction");
+      });
     }
   }, []);
 
+  // Failsafe loader
   useEffect(() => {
     if (bgVideoRef.current && bgVideoRef.current.readyState >= 2) {
       setLoadedVideos((prev) => prev + 1);
     }
-    const timeout = setTimeout(() => setIsLoading(false), 5000);
+
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
     return () => clearTimeout(timeout);
   }, []);
 
+  // Sync loading state with ScrollTrigger
   useEffect(() => {
     if (loadedVideos >= 1) {
       setIsLoading(false);
@@ -57,10 +67,12 @@ const Hero: React.FC = () => {
     }
   }, [loadedVideos]);
 
+  // Video Transition Animation
   useGSAP(
     () => {
       if (hasClicked && nextVideoRef.current) {
         gsap.set("#next-video", { visibility: "visible" });
+
         gsap.to("#next-video", {
           transformOrigin: "center center",
           scale: 1,
@@ -68,8 +80,11 @@ const Hero: React.FC = () => {
           height: "100%",
           duration: 1,
           ease: "power1.inOut",
-          onStart: () => { nextVideoRef.current?.play().catch(() => {}); },
+          onStart: () => {
+            nextVideoRef.current?.play().catch(() => {});
+          },
         });
+
         gsap.from("#current-video", {
           transformOrigin: "center center",
           scale: 0,
@@ -81,11 +96,13 @@ const Hero: React.FC = () => {
     { dependencies: [currentIndex], revertOnUpdate: true }
   );
 
+  // Main Intro + Scroll Animation
   useGSAP(() => {
     gsap.set("#video-frame", {
       clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
       borderRadius: "0 0 40% 10%",
     });
+
     gsap.from("#video-frame", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       borderRadius: "0 0 0 0",
@@ -106,51 +123,68 @@ const Hero: React.FC = () => {
       {isLoading && (
         <div className="flex-center absolute z-100 h-screen w-screen bg-violet-50">
           <div className="three-body">
-            <div className="three-body__dot" /><div className="three-body__dot" /><div className="three-body__dot" />
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
           </div>
         </div>
       )}
 
-      <div id="video-frame" className="relative z-10 h-screen w-screen overflow-hidden rounded-lg bg-blue-75">
-        
-        {/* MODIFIED POPUP POSITION: Bottom-Right on Mobile, Center on Desktop */}
-        <div className="mask-clip-path absolute z-50 bottom-5 right-5 md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 size-32 md:size-64 cursor-pointer overflow-hidden rounded-lg border-2 border-yellow-300 md:border-none">
+      <div
+        id="video-frame"
+        className="relative z-10 h-screen w-screen overflow-hidden rounded-lg bg-blue-75"
+      >
+        <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
           <div
             onClick={handleMiniVideoClick}
-            className="origin-center scale-100 opacity-100 md:scale-50 md:opacity-0 transition-all duration-500 ease-in md:hover:scale-100 md:hover:opacity-100"
+            className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
           >
             <video
               ref={currentVideoRef}
               src={getVideoSrc(upcomingVideoIndex)}
-              loop muted playsInline
+              loop
+              muted
+              playsInline
               id="current-video"
-              className="size-32 md:size-64 origin-center scale-150 object-cover object-center"
+              className="size-64 origin-center scale-150 object-cover object-center"
             />
           </div>
         </div>
 
-        {/* Next Video Transition Element */}
         <video
           ref={nextVideoRef}
           src={getVideoSrc(currentIndex)}
-          loop muted playsInline
+          loop
+          muted
+          playsInline
           id="next-video"
-          className="absolute z-20 bottom-5 right-5 md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 invisible size-32 md:size-64 object-cover"
+          className="absolute-center invisible absolute z-20 size-64 object-cover"
         />
 
         {isClient && (
           <video
             ref={bgVideoRef}
             src={getVideoSrc(currentIndex)}
-            autoPlay loop muted playsInline
+            autoPlay
+            loop
+            muted
+            playsInline
             className="absolute left-0 top-0 size-full object-cover"
             onLoadedData={handleVideoLoad}
+            onCanPlay={() => {
+              setIsLoading(false);
+              bgVideoRef.current?.play();
+            }}
           />
         )}
 
+        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 bg-linear-to-r from-green-400 via-red-500 to-indigo-500 bg-clip-text text-transparent">
+          BH<b>as</b>k<b>a</b>r
+        </h1>
+
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading bg-gradient-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="special-font hero-heading bg-linear-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent">
               K<b>a</b>u<b>l</b>
             </h1>
             <p className="mb-5 max-w-72 font-robert-regular text-white">
@@ -159,17 +193,18 @@ const Hero: React.FC = () => {
               अविद्या संसृतेर्हेतु विद्या तस्या निवृत्तिका।<br />
               तस्माद् यत्न: सदाकार्यो विद्याभ्यासे मुमुक्षुभि:।।<br />
               <br />
-              Experience Tantra in a simple way.
+              We can help you on an adventure around the world of Tantra in just
+              a simple way.
             </p>
-            
-            <a href="https://tantrasadhana.org" target="_blank" rel="noopener noreferrer" className="inline-block relative z-[60]">
-              <Button
-                id="kaulbhaskar-guru-ji"
-                title="Visit my other WEBSITE"
-                leftIcon={<TiLocationArrow className="pointer-events-none" />}
-                containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1 cursor-pointer active:scale-95 transition-transform px-6 py-3"
-              />
-            </a>
+            <Button
+              id="kaulbhaskar-guru ji"
+              title="Visit my other WEBSITE"
+              leftIcon={<TiLocationArrow />}
+              containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1"
+              onClick={() =>
+                window.open("https://www.tantrasadhana.org", "_blank")
+              }
+            />
           </div>
         </div>
       </div>
