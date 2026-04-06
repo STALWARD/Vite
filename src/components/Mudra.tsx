@@ -15,21 +15,29 @@ interface MudraImage {
 }
 
 const Mudra: React.FC = () => {
-    const settings: Settings = {
+  // Mobile-First settings: Start small and grow
+  const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1, // Default for mobile
     slidesToScroll: 1,
     autoplay: true,
+    mobileFirst: true, // Swaps breakpoints to min-width logic
     responsive: [
       {
-        breakpoint: 1024,
-        settings: { slidesToShow: 2, slidesToScroll: 1 }
+        breakpoint: 640, // 640px and UP (Tablet)
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
       },
       {
-        breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1 }
+        breakpoint: 1024, // 1024px and UP (Desktop)
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
       }
     ]
   };
@@ -62,17 +70,21 @@ const Mudra: React.FC = () => {
         <h2 className="special-font hero-heading bg-linear-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
           m<b>ud</b>r<b>a</b>s
         </h2>
+        
+        {/* Parent container MUST have min-w-0 for slick to calculate correctly */}
         <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden min-w-0">
           <Slider {...settings}>
             {images.map((item, i) => (
-              <div key={i} className="text-white outline-none">
-                <img 
-                  src={item.src} 
-                  alt={item.title} 
-                  className="mx-auto h-72 w-auto object-contain" 
-                />
-                <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
-                <p className="text-sm px-2">{item.description}</p>
+              <div key={i} className="text-white outline-none w-full px-2">
+                <div className="flex flex-col items-center">
+                  <img 
+                    src={item.src} 
+                    alt={item.title} 
+                    className="h-72 w-auto object-contain" 
+                  />
+                  <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
+                  <p className="text-sm px-2 text-gray-400">{item.description}</p>
+                </div>
               </div>
             ))}
           </Slider>
