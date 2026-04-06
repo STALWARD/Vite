@@ -61,7 +61,7 @@ const Mudra: React.FC = () => {
         <h2 className="special-font hero-heading bg-linear-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
           m<b>ud</b>r<b>a</b>s
         </h2>
-        <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden">
+        <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden min-w-0">
           <Slider {...settings}>
             {images.map((item, i) => (
               <div key={i} className="text-white outline-none">
