@@ -15,25 +15,31 @@ interface MudraImage {
 }
 
 const Mudra: React.FC = () => {
-    const settings: Settings = {
+  const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,      // START with 1 (Mobile)
     slidesToScroll: 1,
     autoplay: true,
+    mobileFirst: true,    // IMPORTANT: Changes breakpoints to 'min-width'
     responsive: [
       {
-        breakpoint: 1024,
-        settings: { slidesToShow: 2, slidesToScroll: 1 }
+        breakpoint: 639,  // 640px and up
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
       },
       {
-        breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1 }
+        breakpoint: 1023, // 1024px and up
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
       }
     ]
   };
-
 
   const images: MudraImage[] = [
     { src: "/mudra/abagunthan.png", title: "Abagunthan Mudra", description: "Symbol of concealment and protection." },
@@ -56,14 +62,14 @@ const Mudra: React.FC = () => {
     { src: "/mudra/yoni.png", title: "Yoni Mudra", description: "Gesture of feminine energy and creation." }
   ];
 
- return (
+  return (
     <div className="text-center my-10">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="special-font hero-heading bg-linear-to-r from-yellow-500 via-red-600 to-indigo-500 bg-clip-text text-transparent text-lg">
           m<b>ud</b>r<b>a</b>s
         </h2>
         
-        {/* Parent container MUST have min-w-0 for slick to calculate correctly */}
+        {/* min-w-0 is vital for calculation */}
         <div className="px-4 py-10 bg-black mt-6 w-full max-w-full overflow-hidden min-w-0">
           <Slider {...settings}>
             {images.map((item, i) => (
@@ -72,7 +78,7 @@ const Mudra: React.FC = () => {
                   <img 
                     src={item.src} 
                     alt={item.title} 
-                    className="h-72 w-auto object-contain" 
+                    className="h-72 w-auto object-contain pointer-events-none" 
                   />
                   <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
                   <p className="text-sm px-2 text-gray-400">{item.description}</p>
