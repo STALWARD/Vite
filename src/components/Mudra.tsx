@@ -1,12 +1,12 @@
 import React from "react";
-import Slider from "react-slick";
+import SliderComponent from "react-slick";
 import type { Settings } from "react-slick";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
 // @ts-ignore
-
+const Slider = (SliderComponent as any).default || SliderComponent;
 
 interface MudraImage {
   src: string;
