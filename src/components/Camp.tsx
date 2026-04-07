@@ -32,9 +32,6 @@ const Camp: FC = () => {
           <p className="text-lg md:text-xl xl:text-2xl mt-5 text-black leading-relaxed">
             The journey into the unknown often leaves the seeker in deep uncertainty. We are here to help you clear the fog and navigate life’s toughest trials through the sacred wisdom of Sri Vidya and Kaul Marg.
           </p>
-          <p className="text-lg md:text-xl xl:text-2xl mt-5 text-black leading-relaxed">
-             Don’t let the fear of the dark hold you back. Let us illuminate your path so you can step out of the shadows and claim your victory.
-          </p>
         </div>
       </div>
     </section>
