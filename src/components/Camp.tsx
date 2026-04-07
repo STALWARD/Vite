@@ -27,10 +27,13 @@ const Camp: FC = () => {
       <div className="flexEnd mt-2 px-4 lg:-mt-60 lg:mr-6">
         <div className="bg-yellow-200 p-12 lg:max-w-125 xl:max-w-183.5 xl:rounded-5xl xl:px-16 xl:py-20 relative w-full overflow-hidden rounded-3xl">
           <h2 className="text-2xl md:text-4xl 2xl:text-6xl font-bold capitalize text-black leading-snug">
-            Feeling Lost And Not Knowing The Way?
+            Feeling Lost? Transform Uncertainty into Spiritual Strength.
           </h2>
           <p className="text-lg md:text-xl xl:text-2xl mt-5 text-black leading-relaxed">
-            Starting from the anxiety of the common man when visiting a new challenge in life, the possibility of getting lost is very large. That's why we are here for those of you who want to be a winner. We shall enlighten your path so that you will never feel darkness.
+            The journey into the unknown often leaves the seeker in deep uncertainty. We are here to help you clear the fog and navigate life’s toughest trials through the sacred wisdom of Sri Vidya and Kaul Marg.
+          </p>
+          <p className="text-lg md:text-xl xl:text-2xl mt-5 text-black leading-relaxed">
+             Don’t let the fear of the dark hold you back. Let us illuminate your path so you can step out of the shadows and claim your victory.
           </p>
         </div>
       </div>
