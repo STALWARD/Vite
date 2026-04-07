@@ -11,6 +11,7 @@ const Services = lazy(() => import('./routes/Services'));
 const Blog = lazy(() => import('./routes/Blog'));
 const BlogPost = lazy(() => import('./routes/BlogPost'));
 const Contact = lazy(() => import('./routes/Contact'));
+const Profile = lazy(() => import('./routes/Profile'));
 
 // 3. Wrap elements in <Suspense>
 const router = createBrowserRouter([
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "blog", element: <Blog /> },
       { path: "contact", element: <Contact /> },
       { path: ":slug", element: <BlogPost /> },
+      { path: "profile", element: <Profile /> },
     ],
   },
 ]);
