@@ -36,7 +36,7 @@ const About: React.FC = () => {
         keywords="Tantra, Astrology, Sri Vidya, Kaulbhaskar Guru Ji"
         breadcrumbs={[
           { name: "Home", url: "https://tantrasadhana.org" },
-          { name: "About", url: "https://tantrasadhana.org" },
+          { name: "About Us", url: "https://tantrasadhana.org/about-us" },
         ]}
       />
 
@@ -52,7 +52,7 @@ const About: React.FC = () => {
         />
 
         <h1 className="absolute top-1/4 left-1/2 transform -translate-x-1/2 text-4xl text-white font-bold pageHeader">
-          About
+          About Us
         </h1>
 
         <h2 className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-xl text-white font-semibold p-6 text-center max-w-3xl pageHeader">
@@ -61,7 +61,7 @@ const About: React.FC = () => {
       </div>
 
       <section className="flex-row md:flex mx-auto items-center w-full bg-gradient-to-r from-green-400 via-indigo-500 to-yellow-400">
-        <div className="sm:w-1/2 sm:ml-10 sm:mr-10 w-full flex justify-center mt-12 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+        <div id="guru-ji" className="sm:w-1/2 sm:ml-10 sm:mr-10 w-full flex justify-center mt-12 overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
           <img
             src="/img/satyendra-large.webp"
             alt="Kaulbhaskar Guru Ji - Tantra Expert"
@@ -74,7 +74,7 @@ const About: React.FC = () => {
         </div>
         <div className="sm:mt-0 sm:w-2/3 w-full mt-6 ml-0 p-10">
           {/* ✅ scroll-mt-24 ensures the sticky header doesn't hide the title */}
-          <h2 id="guru-ji" className="pb-20 text-2xl md:text-4xl font-bold text-center justify-center scroll-mt-24">
+          <h2 className="pb-20 text-2xl md:text-4xl font-bold text-center justify-center scroll-mt-24">
             KAULBHASKAR GURU Ji
           </h2>
           <p className="text-lg text-simple text-justify">
