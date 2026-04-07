@@ -83,7 +83,7 @@ export default function Navbar() {
                 `text-sm font-medium transition-colors hover:text-blue-400 ${isActive ? "text-blue-400" : "text-white"}`
               }
             >
-              {item.label.toUpperCase()}
+              {item.label}
             </NavLink>
           ))}
           
