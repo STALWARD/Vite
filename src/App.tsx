@@ -6,7 +6,7 @@ import ScrollToTop from './components/ScrollToTop';
 
 // 2. Replace static imports with lazy imports
 const Home = lazy(() => import('./routes/Home'));
-const About Us = lazy(() => import('./routes/About'));
+const About = lazy(() => import('./routes/About'));
 const Services = lazy(() => import('./routes/Services'));
 const Blog = lazy(() => import('./routes/Blog'));
 const BlogPost = lazy(() => import('./routes/BlogPost'));
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     ), 
     children: [
       { index: true, element: <Home /> },
-      { path: "about-us", element: <About Us /> },
+      { path: "about-us", element: <About /> },
       { path: "services", element: <Services /> },
       { path: "blog", element: <Blog /> },
       { path: ":slug", element: <BlogPost /> },
