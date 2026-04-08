@@ -15,8 +15,9 @@ export default function Layout() {
       <main className="flex-1">
         <Outlet />
       </main>
-      
-      <Footer />
+       <Suspense fallback={null}>
+        <Footer />
+       </Suspense>
     </div>
   );
 }
