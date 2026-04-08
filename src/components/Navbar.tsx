@@ -1,10 +1,8 @@
 // src/components/Navbar.tsx
 import { useEffect, useState, useRef, Suspense, lazy } from "react";
 import { NavLink, useLocation } from "react-router";
-import TiLocationArrow from "react-icons/lib/ti/location-arrow";
-import FiMenu from "react-icons/lib/fi/menu";
-import FiX from "react-icons/lib/fi/x";
-
+import { TiLocationArrow } from "react-icons/ti";
+import { FiMenu, FiX } from "react-icons/fi";
 // Optimization: Sub-components that aren't needed for the initial render
 const AudioPlayer = lazy(() => import("./AudioPlayer"));
 
