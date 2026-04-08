@@ -1,18 +1,18 @@
 // src/components/Footer.tsx
-import { Link } from "react-router"; // RRv7
-import { FaFacebookF } from "react-icons/fa/index.js";
-import { FaTwitter } from "react-icons/fa/index.js";
-import { FaYoutube } from "react-icons/fa/index.js";
-import { FaLinkedin } from "react-icons/fa/index.js";
-import { FaWhatsapp } from "react-icons/fa/index.js";
-
+import { Link } from "react-router";
+// Optimization: Import specific icons to enable better tree-shaking
+import { FaFacebookF } from "react-icons/fa6/index.js";
+import { FaTwitter } from "react-icons/fa6/index.js";
+import { FaYoutube } from "react-icons/fa6/index.js";
+import { FaLinkedin } from "react-icons/fa6/index.js";
+import { FaWhatsapp } from "react-icons/fa6/index.js";
 
 const socialLinks = [
-  { href: "https://facebook.com/KAULBHASKAR", icon: <FaFacebookF />, label: "Follow us on Facebook" },
-  { href: "https://twitter.com/KAULMARGA", icon: <FaTwitter />, label: "Follow us on Twitter" },
-  { href: "https://youtube.com/@kaulbhaskar/videos", icon: <FaYoutube />, label: "Visit our YouTube channel" },
-  { href: "https://www.linkedin.com/in/kaul-bhaskar/006a12234/", icon: <FaLinkedin />, label: "Connect with us on LinkedIn" },
-  { href: "https://wa.me/919934418459", icon: <FaWhatsapp />, label: "Chat with us on WhatsApp" },
+  { href: "https://facebook.com", icon: <FaFacebookF />, label: "Follow us on Facebook" },
+  { href: "https://twitter.com", icon: <FaTwitter />, label: "Follow us on Twitter" },
+  { href: "https://youtube.com", icon: <FaYoutube />, label: "Visit our YouTube channel" },
+  { href: "https://linkedin.com", icon: <FaLinkedin />, label: "Connect with us on LinkedIn" },
+  { href: "https://wa.me", icon: <FaWhatsapp />, label: "Chat with us on WhatsApp" },
 ];
 
 const navLinks = [
@@ -23,7 +23,7 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="w-full bg-[#5542ff] py-10 text-white">
       <div className="container mx-auto flex flex-col items-center justify-between gap-8 px-6 md:flex-row">
@@ -46,7 +46,7 @@ const Footer = () => {
           ))}
         </nav>
 
-        {/* Social Links - ACCESSIBILITY FIX APPLIED HERE */}
+        {/* Social Links */}
         <div className="flex gap-4 md:flex-1 md:justify-end">
           {socialLinks.map((social, index) => (
             <a
@@ -55,9 +55,9 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:scale-110 transition-transform text-xl focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1"
-              aria-label={social.label} // Fix for discernible name
+              aria-label={social.label}
             >
-              {/* aria-hidden="true" ensures the icon itself isn't announced */}
+              {/* aria-hidden ensures the raw SVG icon code isn't read by screen readers */}
               <span aria-hidden="true">{social.icon}</span>
             </a>
           ))}
@@ -73,6 +73,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
