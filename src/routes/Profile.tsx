@@ -5,7 +5,7 @@ const profileData = {
   subtitle: "I am a TANTRA and ASTROLOGY mentor.",
   knownAs: "KAULBHASKAR",
   discipleOf: "KULBHUSHANANAD NATH",
-  guruAs: "- A legend KAUL of Prayagraj",
+  guruAs: "- An Esteemed KAUL of Prayagraj",
   lineage: [
     { label: "Sri Guru", name: "Sri KULBHUSHANANAND NATH Ji" },
     { label: "Grand Guru (Param Guru)", name: "Sri BHARTRIHARYANAND NATH Ji" },
