@@ -48,7 +48,7 @@ const Profile: React.FC = () => {
           <h2 className="text-4xl font-bold mb-10 text-stone-900 border-b-2 border-orange-100 pb-4">Biography</h2>
           
           {/* Using prose-2xl for a much larger, readable font size */}
-          <div className="prose prose-stone prose-xl md:prose-2xl max-w-none text-stone-700 leading-relaxed space-y-10">
+          <div className="bg-white prose prose-stone prose-xl md:prose-2xl max-w-none text-stone-700 leading-relaxed space-y-10">
             <p className="text-2xl">
               I, of <span className="font-semibold text-stone-900">Kaushik Gotra</span>, was born into a respectable Bhumihar Brahmin Family of Bihar. 
               After completing my <span className="italic">B.Sc. and L.L.B.</span> degrees, I practiced law at the 
