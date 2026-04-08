@@ -17,7 +17,7 @@ const profileData = {
 
 const Profile: React.FC = () => {
   return (
-    <div className="bg-stone-900 min-h-screen font-serif text-stone-800 selection:bg-orange-200 pt-32">
+    <div className="bg-gray-200 min-h-screen font-serif text-stone-800 selection:bg-orange-200 pt-32">
       {/* Header Section */}
       <header className="bg-white border-b border-stone-200 py-20 px-6 text-center shadow-sm">
         <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-stone-900">
