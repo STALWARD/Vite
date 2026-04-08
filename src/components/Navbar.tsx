@@ -1,8 +1,11 @@
 // src/components/Navbar.tsx
-import { useEffect, useState, useRef } from "react";
-import { NavLink, useLocation } from "react-router"; // RRv7
+import { useEffect, useState, useRef, Suspense, lazy } from "react";
+import { NavLink, useLocation } from "react-router";
 import { TiLocationArrow } from "react-icons/ti";
 import { FiMenu, FiX } from "react-icons/fi";
+
+// Optimization: Sub-components that aren't needed for the initial render
+const AudioPlayer = lazy(() => import("./AudioPlayer"));
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -18,41 +21,43 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
+  const [hasInteractedWithAudio, setHasInteractedWithAudio] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
-  const audioElementRef = useRef<HTMLAudioElement>(null);
 
   const location = useLocation();
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentY = window.scrollY;
-      setIsScrolled(currentY > 20 || location.pathname !== "/");
+      // Throttle scroll events using requestAnimationFrame
+      if (rafId.current) return;
 
-      if (currentY > lastScrollY && currentY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      setLastScrollY(currentY);
+      rafId.current = window.requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+
+        // Optimization: Only update state if the value actually changes
+        const shouldBeScrolled = currentY > 20 || location.pathname !== "/";
+        setIsScrolled((prev) => (prev !== shouldBeScrolled ? shouldBeScrolled : prev));
+
+        const shouldBeVisible = currentY <= lastScrollY || currentY <= 100;
+        setIsVisible((prev) => (prev !== shouldBeVisible ? shouldBeVisible : prev));
+
+        setLastScrollY(currentY);
+        rafId.current = null;
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, location.pathname]); 
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId.current) window.cancelAnimationFrame(rafId.current);
+    };
+  }, [lastScrollY, location.pathname]);
 
   const toggleAudio = () => {
+    if (!hasInteractedWithAudio) setHasInteractedWithAudio(true);
     setIsAudioPlaying((prev) => !prev);
-    setIsIndicatorActive((prev) => !prev);
   };
-
-  useEffect(() => {
-    if (isAudioPlaying) {
-      audioElementRef.current?.play();
-    } else {
-      audioElementRef.current?.pause();
-    }
-  }, [isAudioPlaying]);
 
   return (
     <div
@@ -63,7 +68,7 @@ export default function Navbar() {
       <nav className="flex items-center justify-between w-full px-4" aria-label="Main Navigation">
         <div className="flex items-center gap-6">
           <NavLink to="/" aria-label="Go to Home">
-            <img src="/img/logo.svg" alt="Company Logo" className="w-10" />
+            <img src="/img/logo.svg" alt="Company Logo" className="w-10" loading="eager" />
           </NavLink>
           <button 
             onClick={() => window.location.href='tel:+919934418459'}
@@ -88,15 +93,21 @@ export default function Navbar() {
           ))}
           
           <button 
-            className="ml-4 flex items-center gap-1" 
+            className="ml-4 flex items-center gap-1 min-w-10" 
             onClick={toggleAudio}
-            aria-label={isAudioPlaying ? "Pause background music" : "Play background music"}
+            aria-label={isAudioPlaying ? "Pause music" : "Play music"}
           >
-            <audio ref={audioElementRef} src="/audio/loop.mp3" loop />
+            {/* Optimization: Audio element only loads after first click */}
+            {hasInteractedWithAudio && (
+              <Suspense fallback={null}>
+                <AudioPlayer isPlaying={isAudioPlaying} />
+              </Suspense>
+            )}
+            
             {[1, 2, 3, 4].map((bar) => (
               <div
                 key={bar}
-                className={`w-0.75 h-4 bg-blue-400 transition-all duration-300 ${isIndicatorActive ? "animate-bounce" : "h-1"}`}
+                className={`w-0.75 h-4 bg-blue-400 transition-all duration-300 ${isAudioPlaying ? "animate-bounce" : "h-1"}`}
                 style={{ animationDelay: `${bar * 0.1}s` }}
                 aria-hidden="true" 
               />
@@ -104,22 +115,19 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu Toggle - FIX APPLIED HERE */}
         <button 
           className="md:hidden text-white text-2xl" 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={isMobileMenuOpen}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+          {isMobileMenuOpen ? <FiX /> : <FiMenu />}
         </button>
       </nav>
 
-      {/* Mobile Menu Links */}
+      {/* Mobile Menu */}
       <div 
         className={`md:hidden absolute top-20 left-0 w-full overflow-hidden transition-all duration-500 ${isMobileMenuOpen ? "max-h-100 opacity-100" : "max-h-0 opacity-0"}`}
-        inert={!isMobileMenuOpen ? true : undefined} 
-        aria-hidden={!isMobileMenuOpen}
+        inert={!isMobileMenuOpen ? true : undefined} // Changed "" to true
       >
         <div className="bg-black/90 backdrop-blur-xl border border-white/10 m-2 p-6 rounded-2xl flex flex-col gap-4">
           {navItems.map((item) => (
@@ -127,7 +135,7 @@ export default function Navbar() {
                 key={item.path} 
                 to={item.path} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-white text-lg font-semibold hover:text-blue-400"
+                className="text-white text-lg font-semibold"
             >
               {item.label}
             </NavLink>
