@@ -1,6 +1,11 @@
 // src/components/Footer.tsx
 import { Link } from "react-router"; // RRv7
-import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa/index.js";
+import { FaTwitter } from "react-icons/fa/index.js";
+import { FaYoutube } from "react-icons/fa/index.js";
+import { FaLinkedin } from "react-icons/fa/index.js";
+import { FaWhatsapp } from "react-icons/fa/index.js";
+
 
 const socialLinks = [
   { href: "https://facebook.com/KAULBHASKAR", icon: <FaFacebookF />, label: "Follow us on Facebook" },
