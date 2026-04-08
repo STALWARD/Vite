@@ -1,11 +1,13 @@
 // src/components/Footer.tsx
 import { Link } from "react-router";
 // Optimization: Import specific icons to enable better tree-shaking
-import { FaFacebookF } from "react-icons/fa6/index.js";
-import { FaTwitter } from "react-icons/fa6/index.js";
-import { FaYoutube } from "react-icons/fa6/index.js";
-import { FaLinkedin } from "react-icons/fa6/index.js";
-import { FaWhatsapp } from "react-icons/fa6/index.js";
+import { 
+  FaFacebookF, 
+  FaTwitter, 
+  FaYoutube, 
+  FaLinkedin, 
+  FaWhatsapp 
+} from "react-icons/fa6";
 
 const socialLinks = [
   { href: "https://facebook.com", icon: <FaFacebookF />, label: "Follow us on Facebook" },
