@@ -1,10 +1,10 @@
 // src/App.tsx
-import { lazy, Suspense } from 'react'; // 1. Import lazy and Suspense
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 
-// 2. Replace static imports with lazy imports
+// 1. Lazy load all page components
 const Home = lazy(() => import('./routes/Home'));
 const About = lazy(() => import('./routes/About'));
 const Services = lazy(() => import('./routes/Services'));
@@ -13,23 +13,25 @@ const BlogPost = lazy(() => import('./routes/BlogPost'));
 const Contact = lazy(() => import('./routes/Contact'));
 const Profile = lazy(() => import('./routes/Profile'));
 
-// 3. Wrap elements in <Suspense>
+// 2. Helper to wrap elements in Suspense for cleaner code
+const withSuspense = (Component: React.ReactNode) => (
+  <Suspense fallback={<div className="loading-spinner" />}>
+    {Component}
+  </Suspense>
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Suspense fallback={<div className="loading-spinner" />}>
-        <Layout />
-      </Suspense>
-    ), 
+    element: <Layout />, // Layout stays static so it doesn't unmount/flicker
     children: [
-      { index: true, element: <Home /> },
-      { path: "about-us", element: <About /> },
-      { path: "services", element: <Services /> },
-      { path: "blog", element: <Blog /> },
-      { path: "contact", element: <Contact /> },
-      { path: ":slug", element: <BlogPost /> },
-      { path: "profile", element: <Profile /> },
+      { index: true, element: withSuspense(<Home />) },
+      { path: "about-us", element: withSuspense(<About />) },
+      { path: "services", element: withSuspense(<Services />) },
+      { path: "blog", element: withSuspense(<Blog />) },
+      { path: "contact", element: withSuspense(<Contact />) },
+      { path: ":slug", element: withSuspense(<BlogPost />) },
+      { path: "profile", element: withSuspense(<Profile />) },
     ],
   },
 ]);
