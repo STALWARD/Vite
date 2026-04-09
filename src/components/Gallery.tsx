@@ -28,9 +28,9 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       ref={itemRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ 
+      style={{
         transform: transformStyle,
-        transition: "transform 0.3s ease-out" // Added smooth glide back
+        transition: "transform 0.3s ease-out",
       }}
     >
       {children}
@@ -61,6 +61,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     return `${cleanUrl}?autoplay=1`;
   };
 
+  // Modified: load thumbnails from public/img folder
   const getYouTubeThumbnail = (url: string): string => {
     let videoId = "";
     if (url.includes("watch?v=")) {
@@ -68,7 +69,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     } else if (url.includes("youtu.be")) {
       videoId = url.split("youtu.be/")[1];
     }
-    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    // Ensure you have /public/img/{videoId}.jpg or .webp files
+    return `/img/${videoId}.webp`;
   };
 
   return (
