@@ -65,7 +65,7 @@ const Story: React.FC = () => {
 
             {/* Overlapping text at top with spacing */}
             <AnimatedTitle
-              title="kaulbhaskar guru ji a hidden master"
+              title="kaulbhaskar guru ji , a hidden master"
               containerClass="absolute top-5 left-0 w-full flex items-start justify-center text-white text-3xl font-bold mix-blend-difference z-20 pointer-events-none"
             />
 
