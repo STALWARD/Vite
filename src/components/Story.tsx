@@ -1,10 +1,9 @@
 import gsap from "gsap";
 import { useRef } from "react";
-import type { MouseEvent } from "react"; 
+import type { MouseEvent } from "react";
 import AnimatedTitle from "./AnimatedTitle";
 
 const Story: React.FC = () => {
-  // Specify the element type for the ref
   const frameRef = useRef<HTMLImageElement>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLImageElement>) => {
@@ -27,7 +26,7 @@ const Story: React.FC = () => {
       rotateX,
       rotateY,
       transformPerspective: 500,
-      ease: "power1.out", // Typically "out" feels snappier for mouse follows
+      ease: "power1.out",
     });
   };
 
@@ -47,12 +46,8 @@ const Story: React.FC = () => {
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
       <div className="flex size-full flex-col items-center py-10 pb-24">
         <div className="relative size-full">
-          <AnimatedTitle
-            title="<b>KAULBHASKAR</b> Guru Ji, <br /> a hidden <b>master</b>"
-            containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10"
-          />
-
-          <div className="story-img-container">
+          {/* Image container */}
+          <div className="story-img-container relative">
             <div className="story-img-mask">
               <div className="story-img-content">
                 <img
@@ -63,10 +58,16 @@ const Story: React.FC = () => {
                   onMouseEnter={handleMouseLeave}
                   src="/img/satyendra-large.webp"
                   alt="entrance.webp"
-                   className="size-full object-cover object-center" 
+                  className="size-full object-cover object-center"
                 />
               </div>
             </div>
+
+            {/* Overlapping text */}
+            <AnimatedTitle
+              title="kaulbhaskar guru ji a hidden master"
+              containerClass="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold mix-blend-difference z-20 pointer-events-none"
+            />
 
             <svg
               className="invisible absolute size-0"
@@ -88,6 +89,7 @@ const Story: React.FC = () => {
           </div>
         </div>
 
+        {/* Description section */}
         <div className="mt-10 flex w-full justify-center md:justify-end md:px-20">
           <div className="flex flex-col items-center md:items-start max-w-sm">
             <p className="font-circular-web text-lg text-violet-50 text-center md:text-start">
