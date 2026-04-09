@@ -9,9 +9,9 @@ const profileData = {
   lineage: [
     { label: "Sri Guru", name: "Sri KULBHUSHANANAND NATH Ji" },
     { label: "Grand Guru (Param Guru)", name: "Sri BHARTRIHARYANAND NATH Ji" },
-    { label: "Great Grand Guru (Paratpara)", name: "Sri MATSYENDRANAND NATH (Machendra Nath)" },
-    { label: "Great-Great Grand Guru", name: "Lord ISHANA (Lord Shiva)" },
-    { label: "Great-Great-Great Grand Guru", name: "Sri ADINATHANAND NATH (PARAMA SHIVA)" },
+    { label: "Great Grand Guru (Paratpara Guru)", name: "Sri MATSYENDRANAND NATH (Machendra Nath)" },
+    { label: "Great-Great Grand Guru (Par-Paratpara Guru)", name: "Lord ISHANA (Lord Shiva)" },
+    { label: "Great-Great-Great Grand Guru (Parmeshthi Guru)", name: "Sri ADINATHANAND NATH (PARAMA SHIVA)" },
   ]
 };
 
