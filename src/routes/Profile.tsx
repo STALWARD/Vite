@@ -64,7 +64,7 @@ const Profile: React.FC = () => {
 
             {/* Fields separated as requested */}
             <p className="text-2xl">
-              As a staunch follower of <span className="uppercase tracking-wide">Kaul Marg</span>, I carry the spiritual discipline of my Great lineage into my practice. 
+              As a staunch follower of <span className="uppercase tracking-wide">Kaul Marg</span>, I carry the spiritual discipline of my Great lineage descending from Param Shiva to my Kaulavadhuta Guru, into my practice. 
               In the realm of <span className="font-semibold"> Astrology </span>, my expertise spans the <span className="font-semibold"> Parasara, Jaimini, </span> and <span className="font-semibold"> Krishnamurthi </span> systems.
             </p>
      
