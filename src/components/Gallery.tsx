@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import type { ReactNode, MouseEvent, FC } from "react";
 
-// --- BentoTilt Component ---
 interface BentoTiltProps {
   children: ReactNode;
   className?: string;
@@ -37,14 +36,12 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
   );
 };
 
-// --- BentoCard Component ---
 interface BentoCardProps {
   src: string;
   title?: ReactNode;
-  description?: string;
 }
 
-const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
+const BentoCard: FC<BentoCardProps> = ({ src, title }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
@@ -58,12 +55,13 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     return "/img/default-thumb.webp";
   };
 
-  // FIXED: Inline logic to prevent TS6133 unused variable error
+  // FIXED: Logic is now purely functional with no variable declarations to trigger TS6133
   const getYouTubeEmbedUrl = (url: string): string => {
-    const id = url.includes("watch?v=") 
-      ? url.split("watch?v=")[1].split("&")[0] 
-      : url.split("youtu.be/")[1];
-    return `https://youtube.com{id}?autoplay=1&rel=0`;
+    return `https://youtube.com{
+      url.includes("watch?v=") 
+        ? url.split("watch?v=")[1].split("&")[0] 
+        : url.split("youtu.be/")[1]
+    }?autoplay=1&rel=0`;
   };
 
   return (
@@ -95,13 +93,11 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
 
       <div className="relative z-10 flex size-full flex-col justify-between p-5 pointer-events-none">
         <h1 className="bento-title special-font text-white uppercase text-2xl">{title}</h1>
-        {description && <p className="mt-3 max-w-64 text-xs text-gray-200">{description}</p>}
       </div>
     </div>
   );
 };
 
-// --- Gallery Component ---
 const Gallery: FC = () => {
   const mediaItems = [
     { src: "https://youtu.be", title: <>Vid<b>e</b>o 1</> },
