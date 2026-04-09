@@ -49,7 +49,7 @@ const Story: React.FC = () => {
         <div className="relative size-full">
           <AnimatedTitle
             title="<b>KAULBHASKAR</b> Guru Ji, <br /> a hidden <b>master</b>"
-            containerClass="mt-5 pointer-events-none mix-blend-difference relative z-20"
+            containerClass="mt-5 pointer-events-none mix-blend-difference relative z-40"
           />
 
           <div className="story-img-container">
