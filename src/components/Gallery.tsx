@@ -15,13 +15,10 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
     if (!itemRef.current) return;
     const { clientX, clientY } = e;
     const { left, top, width, height } = itemRef.current.getBoundingClientRect();
-
     const relativeX = (clientX - left) / width;
     const relativeY = (clientY - top) / height;
-
     const tiltX = (relativeY - 0.5) * 10;
     const tiltY = (relativeX - 0.5) * -10;
-
     setTransformStyle(`perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.98, 0.98, 0.98)`);
   };
 
@@ -33,10 +30,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       ref={itemRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        transform: transformStyle,
-        transition: "transform 0.3s ease-out",
-      }}
+      style={{ transform: transformStyle, transition: "transform 0.3s ease-out" }}
     >
       {children}
     </div>
@@ -56,26 +50,21 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  // FIXED: Logic handles thumbnail mapping without duplicate key errors
+  // FIXED: Using if/else logic to avoid duplicate key errors (TS1117)
   const getThumbnailPath = (url: string): string => {
-    const thumbMap: Record<string, string> = {
-      "https://youtu.be": "/img/thumb1.webp",
-      "https://youtu.be": "/img/thumb2.webp",
-      "https://youtu.be": "/img/thumb3.webp",
-      "https://youtu.be": "/img/thumb4.webp",
-    };
-    return thumbMap[url] || "/img/default-thumb.webp";
+    if (url.includes("KJn2Leu8yVo")) return "/img/thumb1.webp";
+    if (url.includes("WhknjROROXM")) return "/img/thumb2.webp";
+    if (url.includes("ht_cYcnxlSQ")) return "/img/thumb3.webp";
+    if (url.includes("XJPMQzTKq0g")) return "/img/thumb4.webp";
+    return "/img/default-thumb.webp";
   };
 
-  // FIXED: Cleaned up videoId extraction to satisfy TypeScript
+  // FIXED: Simplified extraction to avoid unused variable errors (TS6133)
   const getYouTubeEmbedUrl = (url: string): string => {
-    let id = "";
-    if (url.includes("watch?v=")) {
-      id = url.split("watch?v=")[1].split("&")[0];
-    } else if (url.includes("youtu.be/")) {
-      id = url.split("youtu.be/")[1];
-    }
-    return `https://youtube.com{id}?autoplay=1&rel=0`;
+    const videoId = url.includes("watch?v=") 
+      ? url.split("watch?v=")[1].split("&")[0] 
+      : url.split("youtu.be/")[1];
+    return `https://youtube.com{videoId}?autoplay=1&rel=0`;
   };
 
   return (
@@ -90,15 +79,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
             allowFullScreen
           />
         ) : (
-          <div 
-            className="relative size-full cursor-pointer group" 
-            onClick={() => setIsPlaying(true)}
-          >
-            <img
-              src={getThumbnailPath(src)}
-              alt="Video Thumbnail"
-              className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
+          <div className="relative size-full cursor-pointer group" onClick={() => setIsPlaying(true)}>
+            <img src={getThumbnailPath(src)} alt="Thumbnail" className="absolute inset-0 size-full object-cover transition-transform group-hover:scale-110" />
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
               <div className="size-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl">
                 <div className="ml-1 border-y-[10px] border-y-transparent border-l-[15px] border-l-white" />
@@ -107,39 +89,20 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           </div>
         )
       ) : isImage ? (
-        <img
-          src={src}
-          alt="Gallery Content"
-          className="absolute inset-0 size-full object-cover"
-        />
+        <img src={src} alt="Gallery" className="absolute inset-0 size-full object-cover" />
       ) : (
-        <video
-          src={src}
-          loop
-          autoPlay
-          muted
-          playsInline
-          className="absolute inset-0 size-full object-cover"
-        />
+        <video src={src} loop autoPlay muted playsInline className="absolute inset-0 size-full object-cover" />
       )}
 
       <div className="relative z-10 flex size-full flex-col justify-between p-5 pointer-events-none">
-        <div>
-          <h1 className="bento-title special-font text-white uppercase text-2xl md:text-4xl">
-            {title}
-          </h1>
-          {description && (
-            <p className="mt-3 max-w-64 text-xs md:text-base text-gray-200">
-              {description}
-            </p>
-          )}
-        </div>
+        <h1 className="bento-title special-font text-white uppercase text-2xl">{title}</h1>
+        {description && <p className="mt-3 max-w-64 text-xs text-gray-200">{description}</p>}
       </div>
     </div>
   );
 };
 
-// --- Main Gallery Component ---
+// --- Gallery Component ---
 const Gallery: FC = () => {
   const mediaItems = [
     { src: "https://youtu.be", title: <>Vid<b>e</b>o 1</> },
@@ -155,24 +118,10 @@ const Gallery: FC = () => {
   return (
     <section className="bg-black py-20">
       <div className="container mx-auto px-4 md:px-10">
-        <div className="mb-20 px-5">
-          <p className="special-font hero-heading bg-gradient-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent text-5xl font-black uppercase">
-            g<b>a</b>ll<b>er</b>y
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {mediaItems.map((item, i) => (
-            <BentoTilt
-              key={i}
-              className={`relative h-[300px] md:h-[400px] w-full overflow-hidden rounded-xl border border-white/10 ${
-                i === 0 || i === 3 ? "md:col-span-2" : ""
-              }`}
-            >
-              <BentoCard 
-                src={item.src} 
-                title={item.title} 
-              />
+            <BentoTilt key={i} className={`relative h-[400px] w-full overflow-hidden rounded-xl border border-white/10 ${i === 0 || i === 3 ? "md:col-span-2" : ""}`}>
+              <BentoCard src={item.src} title={item.title} />
             </BentoTilt>
           ))}
         </div>
