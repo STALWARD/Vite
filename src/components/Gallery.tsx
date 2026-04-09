@@ -50,7 +50,6 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  // FIXED: Using if/else logic to avoid duplicate key errors (TS1117)
   const getThumbnailPath = (url: string): string => {
     if (url.includes("KJn2Leu8yVo")) return "/img/thumb1.webp";
     if (url.includes("WhknjROROXM")) return "/img/thumb2.webp";
@@ -59,12 +58,12 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     return "/img/default-thumb.webp";
   };
 
-  // FIXED: Simplified extraction to avoid unused variable errors (TS6133)
+  // FIXED: Inline logic to prevent TS6133 unused variable error
   const getYouTubeEmbedUrl = (url: string): string => {
-    const videoId = url.includes("watch?v=") 
+    const id = url.includes("watch?v=") 
       ? url.split("watch?v=")[1].split("&")[0] 
       : url.split("youtu.be/")[1];
-    return `https://youtube.com{videoId}?autoplay=1&rel=0`;
+    return `https://youtube.com{id}?autoplay=1&rel=0`;
   };
 
   return (
@@ -118,6 +117,11 @@ const Gallery: FC = () => {
   return (
     <section className="bg-black py-20">
       <div className="container mx-auto px-4 md:px-10">
+        <div className="mb-20 px-5">
+           <p className="special-font hero-heading bg-gradient-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent text-5xl font-black uppercase">
+            g<b>a</b>ll<b>er</b>y
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {mediaItems.map((item, i) => (
             <BentoTilt key={i} className={`relative h-[400px] w-full overflow-hidden rounded-xl border border-white/10 ${i === 0 || i === 3 ? "md:col-span-2" : ""}`}>
