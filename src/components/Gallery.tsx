@@ -47,29 +47,12 @@ const BentoCard: FC<BentoCardProps> = ({ src, title }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  const getThumbnailPath = (url: string): string => {
-    if (url.includes("KJn2Leu8yVo")) return "/img/thumb1.webp";
-    if (url.includes("WhknjROROXM")) return "/img/thumb2.webp";
-    if (url.includes("ht_cYcnxlSQ")) return "/img/thumb3.webp";
-    if (url.includes("XJPMQzTKq0g")) return "/img/thumb4.webp";
-    return "/img/default-thumb.webp";
-  };
-
-  // FIXED: Logic is now purely functional with no variable declarations to trigger TS6133
-  const getYouTubeEmbedUrl = (url: string): string => {
-    return `https://youtube.com{
-      url.includes("watch?v=") 
-        ? url.split("watch?v=")[1].split("&")[0] 
-        : url.split("youtu.be/")[1]
-    }?autoplay=1&rel=0`;
-  };
-
   return (
     <div className="relative size-full overflow-hidden">
       {isYouTube ? (
         isPlaying ? (
           <iframe
-            src={getYouTubeEmbedUrl(src)}
+            src={`https://youtube.com{src.includes("watch?v=") ? src.split("watch?v=")[1].split("&")[0] : src.split("youtu.be/")[1]}?autoplay=1&rel=0`}
             title="Video Player"
             className="absolute inset-0 size-full border-none"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -77,7 +60,11 @@ const BentoCard: FC<BentoCardProps> = ({ src, title }) => {
           />
         ) : (
           <div className="relative size-full cursor-pointer group" onClick={() => setIsPlaying(true)}>
-            <img src={getThumbnailPath(src)} alt="Thumbnail" className="absolute inset-0 size-full object-cover transition-transform group-hover:scale-110" />
+            <img 
+              src={src.includes("KJn2Leu8yVo") ? "/img/thumb1.webp" : src.includes("WhknjROROXM") ? "/img/thumb2.webp" : src.includes("ht_cYcnxlSQ") ? "/img/thumb3.webp" : src.includes("XJPMQzTKq0g") ? "/img/thumb4.webp" : "/img/default-thumb.webp"} 
+              alt="Thumbnail" 
+              className="absolute inset-0 size-full object-cover transition-transform group-hover:scale-110" 
+            />
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
               <div className="size-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl">
                 <div className="ml-1 border-y-[10px] border-y-transparent border-l-[15px] border-l-white" />
