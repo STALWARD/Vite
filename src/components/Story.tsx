@@ -63,46 +63,7 @@ const Story: React.FC = () => {
               </div>
             </div>
 
-            {/* Overlapping text at top */}
+            {/* Overlapping text at top with spacing */}
             <AnimatedTitle
               title="kaulbhaskar guru ji, a hidden master"
-              containerClass="absolute top-0 left-0 w-full flex items-start justify-center text-white text-3xl font-bold mix-blend-difference z-20 pointer-events-none mt-5"
-            />
-
-            <svg
-              className="invisible absolute size-0"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter id="flt_tag">
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-                  <feColorMatrix
-                    in="blur"
-                    mode="matrix"
-                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                    result="flt_tag"
-                  />
-                  <feComposite in="SourceGraphic" in2="flt_tag" operator="atop" />
-                </filter>
-              </defs>
-            </svg>
-          </div>
-        </div>
-
-        {/* Description section */}
-        <div className="mt-10 flex w-full justify-center md:justify-end md:px-20">
-          <div className="flex flex-col items-center md:items-start max-w-sm">
-            <p className="font-circular-web text-lg text-violet-50 text-center md:text-start">
-              Guru Ji, popularly known as KAULBHASKAR, is from the lineage of Sri Matsyendra Nath (also known as Machendra Nath) ji, a legend of Naths and one of 84 Maha Siddhas.
-            </p>
-            <p className="mt-5 font-circular-web text-lg text-violet-50 text-center md:text-start">
-              Guru Ji, a Great KAUL, is a SRI VIDYA UPASAKA of DAKSHINAMURTI SAMPRADAYA.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Story;
+              containerClass="absolute top-5 left-0 w-full flex items-start justify-center text-white text-3xl font-bold mix-blend-d
