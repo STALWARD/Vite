@@ -51,8 +51,8 @@ const Profile: React.FC = () => {
           <div className="prose prose-stone prose-xl md:prose-2xl max-w-none text-stone-700 leading-relaxed space-y-10">
             <p className="text-2xl">
               I, of <span className="font-semibold text-stone-900">Kaushik Gotra</span>, was born into a respectable Bhumihar Brahmin Family of Bihar. 
-              After completing my <span className="italic">B.Sc. and L.L.B.</span> degrees, I practiced law at the 
-              <span className="font-semibold text-stone-900"> Patna High Court</span> until 2020.
+              After completing my <span className="italic">B.Sc. and L.L.B.</span> degrees, I did roaring practice of law at the 
+              <span className="font-semibold text-stone-900"> Patna High Court</span> until 2010.
             </p>
             
             <p className="text-2xl">
@@ -64,7 +64,8 @@ const Profile: React.FC = () => {
 
             {/* Fields separated as requested */}
             <p className="text-2xl">
-              As a staunch follower of <span className="uppercase tracking-wide">Kaul Marg</span>, I carry the spiritual discipline of my lineage into my practice. In the realm of <span className="font-semibold"> Astrology </span>, my expertise spans the <span className="font-semibold"> Parasara, Jaimini, </span> and <span className="font-semibold"> Krishnamurthi </span> systems.
+              As a staunch follower of <span className="uppercase tracking-wide">Kaul Marg</span>, I carry the spiritual discipline of my Great lineage into my practice. 
+              In the realm of <span className="font-semibold"> Astrology </span>, my expertise spans the <span className="font-semibold"> Parasara, Jaimini, </span> and <span className="font-semibold"> Krishnamurthi </span> systems.
             </p>
      
             <p className="bg-orange-50 p-8 rounded-xl border-l-8 border-orange-200 italic text-stone-800 text-xl md:text-2xl">
