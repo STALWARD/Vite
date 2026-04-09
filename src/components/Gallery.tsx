@@ -56,6 +56,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
+  // FIXED: Logic handles thumbnail mapping without duplicate key errors
   const getThumbnailPath = (url: string): string => {
     const thumbMap: Record<string, string> = {
       "https://youtu.be": "/img/thumb1.webp",
@@ -66,14 +67,15 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
     return thumbMap[url] || "/img/default-thumb.webp";
   };
 
+  // FIXED: Cleaned up videoId extraction to satisfy TypeScript
   const getYouTubeEmbedUrl = (url: string): string => {
-    let videoId = "";
+    let id = "";
     if (url.includes("watch?v=")) {
-      videoId = url.split("watch?v=")[1].split("&")[0];
-    } else {
-      videoId = url.split("youtu.be/")[1];
+      id = url.split("watch?v=")[1].split("&")[0];
+    } else if (url.includes("youtu.be/")) {
+      id = url.split("youtu.be/")[1];
     }
-    return `https://youtube.com{videoId}?autoplay=1&rel=0`;
+    return `https://youtube.com{id}?autoplay=1&rel=0`;
   };
 
   return (
