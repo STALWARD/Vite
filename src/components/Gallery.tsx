@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import type { ReactNode, MouseEvent, FC } from "react";
 
+// --- BentoTilt Component ---
 interface BentoTiltProps {
   children: ReactNode;
   className?: string;
@@ -13,11 +14,15 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!itemRef.current) return;
     const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
+    const { left, top, width, height } = itemRef.current.getBoundingClientRect();
 
-    const rotateX = (clientY / innerHeight) * 20;
-    const rotateY = (clientX / innerWidth) * -20;
-    setTransformStyle(`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
+    const relativeX = (clientX - left) / width;
+    const relativeY = (clientY - top) / height;
+
+    const tiltX = (relativeY - 0.5) * 10;
+    const tiltY = (relativeX - 0.5) * -10;
+
+    setTransformStyle(`perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.98, 0.98, 0.98)`);
   };
 
   const handleMouseLeave = () => setTransformStyle("");
@@ -28,9 +33,9 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
       ref={itemRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ 
+      style={{
         transform: transformStyle,
-        transition: "transform 0.3s ease-out" // Added smooth glide back
+        transition: "transform 0.3s ease-out",
       }}
     >
       {children}
@@ -38,6 +43,7 @@ const BentoTilt: FC<BentoTiltProps> = ({ children, className = "" }) => {
   );
 };
 
+// --- BentoCard Component ---
 interface BentoCardProps {
   src: string;
   title?: ReactNode;
@@ -50,114 +56,125 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  const getYouTubeEmbedUrl = (url: string): string => {
-    let cleanUrl = url;
-    if (url.includes("watch?v=")) {
-      cleanUrl = url.replace("watch?v=", "embed/");
-    } else if (url.includes("youtu.be")) {
-      const videoId = url.split("youtu.be/")[1];
-      cleanUrl = `https://www.youtube.com/embed/${videoId}`;
-    }
-    return `${cleanUrl}?autoplay=1`;
+  // Mapping YouTube URLs to local thumbnails in public/img
+  const getThumbnailPath = (url: string): string => {
+    const thumbMap: Record<string, string> = {
+      "https://youtu.be": "/img/saptsati.webp",
+      "https://youtu.be": "/img/sriyantra.webp",
+      "https://youtu.be": "/img/vandurga.webp",
+      "https://youtu.be": "/img/mahalakshmi.webp",
+    };
+    return thumbMap[url] || "/img/default-thumb.webp";
   };
 
-  const getYouTubeThumbnail = (url: string): string => {
+  const getYouTubeEmbedUrl = (url: string): string => {
     let videoId = "";
     if (url.includes("watch?v=")) {
       videoId = url.split("watch?v=")[1].split("&")[0];
-    } else if (url.includes("youtu.be")) {
+    } else {
       videoId = url.split("youtu.be/")[1];
     }
-    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    return `https://youtube.com{videoId}?autoplay=1&rel=0`;
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative size-full overflow-hidden">
       {isYouTube ? (
         isPlaying ? (
           <iframe
             src={getYouTubeEmbedUrl(src)}
-            title={typeof title === "string" ? title : "YouTube video"}
-            frameBorder="0"
+            title="Video Player"
+            className="absolute inset-0 size-full object-cover"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="w-full h-auto aspect-video"
           />
         ) : (
-          <img
-            src={getYouTubeThumbnail(src)}
-            alt={typeof title === "string" ? title : "YouTube thumbnail"}
-            className="w-full h-auto object-contain bg-black"
-          />
+          <div 
+            className="relative size-full cursor-pointer group" 
+            onClick={() => setIsPlaying(true)}
+          >
+            <img
+              src={getThumbnailPath(src)}
+              alt="Video Thumbnail"
+              className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+              <div className="size-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl transform transition-transform group-hover:scale-110">
+                <div className="ml-1 border-y-[10px] border-y-transparent border-l-[15px] border-l-white" />
+              </div>
+            </div>
+          </div>
         )
       ) : isImage ? (
         <img
           src={src}
-          alt={typeof title === "string" ? title : "Gallery image"}
-          className="w-full h-auto object-contain bg-black"
+          alt="Gallery Content"
+          className="absolute inset-0 size-full object-cover"
         />
       ) : (
         <video
           src={src}
           loop
           autoPlay
-          playsInline
           muted
-          className="w-full h-auto object-contain bg-black"
+          playsInline
+          className="absolute inset-0 size-full object-cover"
         />
       )}
 
-      <div className="relative z-10 flex flex-col justify-between p-5 text-red-500">
-        <div className="bento-title special-font">
-          {title}
+      {/* Content Overlay */}
+      <div className="relative z-10 flex size-full flex-col justify-between p-5 pointer-events-none">
+        <div>
+          <h1 className="bento-title special-font text-white uppercase text-2xl md:text-4xl">
+            {title}
+          </h1>
           {description && (
-            <p className="mt-3 max-w-64 wrap-break-word text-xs md:text-base text-yellow-400">
+            <p className="mt-3 max-w-64 text-xs md:text-base text-gray-200">
               {description}
             </p>
           )}
         </div>
-
-        {isYouTube && (
-          <button
-            onClick={() => setIsPlaying((prev) => !prev)}
-            className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-md text-sm transition-colors hover:bg-black/90"
-          >
-            {isPlaying ? "⏸ Pause" : "▶ Play"}
-          </button>
-        )}
       </div>
     </div>
   );
 };
 
+// --- Main Gallery Component ---
 const Gallery: FC = () => {
   const mediaItems = [
-    "https://youtu.be/KJn2Leu8yVo",
-    "https://youtu.be/WhknjROROXM",
-    "https://youtu.be/ht_cYcnxlSQ",
-    "https://youtu.be/XJPMQzTKq0g",
-    "/img/Vindhyachal1.webp",
-    "/img/Vindhyachal2.webp",
-    "/img/Vindhyachal3.webp",
-    "/img/img-2.webp",
+    { src: "https://youtu.be", title: <>Vid<b>e</b>o 1</>, desc: "Exploring the heights." },
+    { src: "https://youtu.be", title: <>Vid<b>e</b>o 2</>, desc: "The deep blue sea." },
+    { src: "/img/Vindhyachal1.webp", title: <>Vi<b>n</b>dhya 1</> },
+    { src: "/img/Vindhyachal2.webp", title: <>Vi<b>n</b>dhya 2</> },
+    { src: "https://youtu.be", title: <>Vid<b>e</b>o 3</> },
+    { src: "https://youtu.be", title: <>Vid<b>e</b>o 4</> },
+    { src: "/img/Vindhyachal3.webp", title: <>Vi<b>n</b>dhya 3</> },
+    { src: "/img/img-2.webp", title: <>Im<b>a</b>ge 2</> },
   ];
 
   return (
-    <section className="bg-black">
-      <div className="container mx-auto px-3 md:px-10">
-        <div className="px-5 py-32">
-          <p className="special-font hero-heading bg-linear-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent text-lg">
+    <section className="bg-black py-20">
+      <div className="container mx-auto px-4 md:px-10">
+        <div className="mb-20 px-5">
+          <p className="special-font hero-heading bg-gradient-to-r from-red-500 via-green-400 to-pink-500 bg-clip-text text-transparent text-5xl font-black uppercase">
             g<b>a</b>ll<b>er</b>y
           </p>
         </div>
 
-        <div className="grid h-auto grid-cols-1 md:grid-cols-2 gap-5">
-          {mediaItems.map((src, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          {mediaItems.map((item, i) => (
             <BentoTilt
               key={i}
-              className="border-hsl relative mb-7 w-full overflow-hidden rounded-md"
+              className={`relative h-[300px] md:h-[400px] w-full overflow-hidden rounded-xl border border-white/10 ${
+                i === 0 || i === 3 ? "md:col-span-2" : ""
+              }`}
             >
-              <BentoCard src={src} />
+              <BentoCard 
+                src={item.src} 
+                title={item.title} 
+                description={item.desc} 
+              />
             </BentoTilt>
           ))}
         </div>
