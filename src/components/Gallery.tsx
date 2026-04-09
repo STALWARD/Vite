@@ -56,13 +56,12 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
   const isYouTube = src.includes("youtube.com") || src.includes("youtu.be");
   const isImage = /\.(jpeg|jpg|png|gif|webp)$/i.test(src);
 
-  // Mapping YouTube URLs to local thumbnails in public/img
   const getThumbnailPath = (url: string): string => {
     const thumbMap: Record<string, string> = {
-      "https://youtu.be": "/img/saptsati.webp",
-      "https://youtu.be": "/img/sriyantra.webp",
-      "https://youtu.be": "/img/vandurga.webp",
-      "https://youtu.be": "/img/mahalakshmi.webp",
+      "https://youtu.be": "/img/thumb1.webp",
+      "https://youtu.be": "/img/thumb2.webp",
+      "https://youtu.be": "/img/thumb3.webp",
+      "https://youtu.be": "/img/thumb4.webp",
     };
     return thumbMap[url] || "/img/default-thumb.webp";
   };
@@ -84,7 +83,7 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
           <iframe
             src={getYouTubeEmbedUrl(src)}
             title="Video Player"
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 size-full border-none"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
@@ -98,9 +97,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
               alt="Video Thumbnail"
               className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-            {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-              <div className="size-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl transform transition-transform group-hover:scale-110">
+              <div className="size-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl">
                 <div className="ml-1 border-y-[10px] border-y-transparent border-l-[15px] border-l-white" />
               </div>
             </div>
@@ -123,7 +121,6 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
         />
       )}
 
-      {/* Content Overlay */}
       <div className="relative z-10 flex size-full flex-col justify-between p-5 pointer-events-none">
         <div>
           <h1 className="bento-title special-font text-white uppercase text-2xl md:text-4xl">
@@ -143,8 +140,8 @@ const BentoCard: FC<BentoCardProps> = ({ src, title, description }) => {
 // --- Main Gallery Component ---
 const Gallery: FC = () => {
   const mediaItems = [
-    { src: "https://youtu.be", title: <>Vid<b>e</b>o 1</>, desc: "Exploring the heights." },
-    { src: "https://youtu.be", title: <>Vid<b>e</b>o 2</>, desc: "The deep blue sea." },
+    { src: "https://youtu.be", title: <>Vid<b>e</b>o 1</> },
+    { src: "https://youtu.be", title: <>Vid<b>e</b>o 2</> },
     { src: "/img/Vindhyachal1.webp", title: <>Vi<b>n</b>dhya 1</> },
     { src: "/img/Vindhyachal2.webp", title: <>Vi<b>n</b>dhya 2</> },
     { src: "https://youtu.be", title: <>Vid<b>e</b>o 3</> },
@@ -173,7 +170,6 @@ const Gallery: FC = () => {
               <BentoCard 
                 src={item.src} 
                 title={item.title} 
-                description={item.desc} 
               />
             </BentoTilt>
           ))}
