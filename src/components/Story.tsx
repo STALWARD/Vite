@@ -63,10 +63,10 @@ const Story: React.FC = () => {
               </div>
             </div>
 
-            {/* Overlapping text */}
+            {/* Overlapping text at top */}
             <AnimatedTitle
               title="kaulbhaskar guru ji a hidden master"
-              containerClass="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold mix-blend-difference z-20 pointer-events-none"
+              containerClass="absolute top-0 left-0 w-full flex items-start justify-center text-white text-3xl font-bold mix-blend-difference z-20 pointer-events-none mt-5"
             />
 
             <svg
