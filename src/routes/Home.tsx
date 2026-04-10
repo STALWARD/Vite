@@ -15,6 +15,7 @@ const Testimonial = lazy(() => import("../components/Testimonial"));
 const Mentor = lazy(() => import("../components/Team"));
 const Meet = lazy(() => import("../components/Meet"));
 const LatestPost = lazy(() => import("../components/LatestPost"));
+const StatsComponent = lazy(() => import("../components/StatsComponent"));
 
 const Home: React.FC = () => {
   return (
@@ -60,6 +61,7 @@ const Home: React.FC = () => {
         <Gallery />
         <Mudra />
         <FAQ />
+        <StatsComponent />
         <Story />
         <Testimonial />
         <Mentor />
