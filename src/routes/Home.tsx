@@ -25,8 +25,8 @@ const Home: React.FC = () => {
         keywords="Tantra, Astrology, KAULBHASKAR Guru Ji, Sri MATSYENDRA NATH lineage, Puja Rituals, Astrology Consultation, Yantra"
         canonical="https://yourdomain.com"
         faq={[
-          { question: "Who we are ?", answer: "We are a team of experts in Tantra & Astrology from renowned lineages. Our mentor Sri KAULBHASKAR Ji belongs to the lineage of the famous siddha yogi Sri MATSYENDRA NATH Ji." },
-          { question: "What services we provide ?", answer: "We provide Tantra teachings and rituals, Astrology consultation, Gems, Talismans, and Worship Yantras like Meru & Kurma." },
+          { question: "Who is KAUL BHASKAR ?", answer: "Kaul Bhaskar is a Sri Vidya Upaska and a dedicated follower of Kaul Marg. He provides guidance in authentic Tantra, spiritual initiation, and astrological consultations." },
+          { question: "What are the primary services offered ?", answer: "We provide Tantra teachings and rituals, Astrology consultation, Gems, Talismans, and Worship Yantras like Meru & Kurma." },
           { question: "What is the charges, if any ?", answer: "Services range from Astrology Consultation (₹5,000) to specialized rituals like Shat Chandi (₹2,50,000). Contact us for specific details." }
         ]}
         mentors={[
