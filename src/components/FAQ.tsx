@@ -21,10 +21,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "How can I get in touch for services ?",
-    answer: "You can reach out via the following channels:
-    • Phone: +91 9934418459
-    • Email: admin@kaulbhaskar.com
-    • Contact Form: Available on the website's "Contact" page."
+    answer: "You can reach out via the following channels: \n• Phone: +91 9934418459 \n• Email: admin@kaulbhaskar.com \n• Contact Form: Available on the website's "Contact" page."
   }
 ];
 
