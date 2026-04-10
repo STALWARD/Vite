@@ -13,7 +13,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What are the primary services offered ?",
-    answer: "• TANTRA: Free teaching, initiation, and ordination for deserving seekers, • Specialized ceremonies like Rudrabhishekam, Baglamukhi, and Maha Vidya Homa \n• ASTROLOGY: Teaching , • Horoscope reading, Palmistry, Kerala Jyotish, and remedial solutions for various life challenges.\n• Gems, Talisman, Rosary of Rudraksh/Sfatik/Pearl\n• Worship yantra- Meru & Kurma type etc."
+    answer: "• TANTRA: Free teaching, initiation, and ordination for deserving seekers, • Specialized ceremonies like Maha-Viprita Pratyangira, Baglamukhi, and Maha Vidya Homa \n• ASTROLOGY: Teaching , • Horoscope reading, Palmistry, Kerala Jyotish, and remedial solutions for various life challenges.\n• Gems, Talisman, Rosary of Rudraksh/Sfatik/Pearl\n• Worship yantra- Meru & Kurma type etc."
   },
   {
     question: "What is the charges, if any ?",
