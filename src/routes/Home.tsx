@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import Hero from "../components/Hero"; 
 import Intro from "../components/Intro"; 
 import SEO from "../components/SEO"; 
+import StatsComponent from "../components/StatsComponent";
 
 // Lazy load the rest
 const Feature = lazy(() => import("../components/Feature"));
@@ -15,7 +16,6 @@ const Testimonial = lazy(() => import("../components/Testimonial"));
 const Mentor = lazy(() => import("../components/Team"));
 const Meet = lazy(() => import("../components/Meet"));
 const LatestPost = lazy(() => import("../components/LatestPost"));
-const StatsComponent = lazy(() => import("../components/StatsComponent"));
 
 const Home: React.FC = () => {
   return (
