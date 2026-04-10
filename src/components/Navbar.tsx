@@ -84,7 +84,7 @@ export default function Navbar() {
               key={item.path}
               to={item.path}
               className={({ isActive }) => 
-                `text-sm font-medium transition-colors hover:text-blue-400 ${isActive ? "text-blue-400" : "text-white"}`
+                `text-lg font-medium transition-colors hover:text-blue-400 ${isActive ? "text-blue-400" : "text-white"}`
               }
             >
               {item.label}
