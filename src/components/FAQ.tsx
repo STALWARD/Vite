@@ -17,7 +17,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What is the charges, if any ?",
-    answer: "• Lalita Sahastranamavali Archanam: Rupees 50,000/=\n• ASTROLOGY CONSULTATION: Rupees 5,000/=\n• Maha Viprita Pratyangira: Rupees 70,000/=\n• Maha Mrityunjaya: Rupees 90,000/=\n• BAGLAMUKHI: Rupees 1,20,000/=\n• Maha Vidya Havan: Rupees 40,000/=\n• Shat Chandi: Rupees 2,50,000/=\n• Contact us for other services not mentioned here."
+    answer: "While general Tantra teaching is free, specialized rituals involving extensive materials and expertise carry specific fees: \n• Lalita Sahastranamavali Archanam: Rupees 50,000/=\n• ASTROLOGY CONSULTATION: Rupees 5,000/=\n• Maha Viprita Pratyangira: Rupees 70,000/=\n• Maha Mrityunjaya: Rupees 90,000/=\n• BAGLAMUKHI: Rupees 1,20,000/=\n• Maha Vidya Havan: Rupees 40,000/=\n• Shat Chandi: Rupees 2,50,000/=\n• Contact us for other services not mentioned here."
   }
 ];
 
