@@ -8,12 +8,12 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "Who we are ?",
-    answer: "We are the team of experts in Tantra & Astrology.\nAll experts in Tantra are from renowned lineage.\nAstro team have also expertise in the subject.\nAnd MORE our mentor and GURU Sri KAULBHASKAR Ji belongs to the lineage of famous siddha yogi Sri MATSYENDRA NATH Ji."
+    question: "Who is Kaul Bhaskar ?",
+    answer: "Kaul Bhaskar is a Sri Vidya Upaska and a dedicated follower of Kaul Marg. He provides guidance in authentic Tantra, spiritual initiation, and astrological consultations."
   },
   {
-    question: "What services we provide ?",
-    answer: "• TANTRA: Teaching of tantra, Various type of Tantra Puja & Ritual\n• ASTROLOGY: Teaching and Consultation\n• Gems, Talisman, Rosary of Rudraksh/Sfatik/Pearl\n• Worship yantra- Meru & Kurma type etc."
+    question: "What are the primary services offered ?",
+    answer: "• TANTRA: Free teaching, initiation, and ordination for deserving seekers, • Specialized ceremonies like Rudrabhishekam, Baglamukhi, and Maha Vidya Homa \n• ASTROLOGY: Teaching , • Horoscope reading, Palmistry, Kerala Jyotish, and remedial solutions for various life challenges.\n• Gems, Talisman, Rosary of Rudraksh/Sfatik/Pearl\n• Worship yantra- Meru & Kurma type etc."
   },
   {
     question: "What is the charges, if any ?",
