@@ -1,7 +1,7 @@
 
 const StatsComponent = () => {
   const stats = [
-    { label: 'Trusted Followers', value: '1000 +' },
+    { label: 'Followers', value: '1000 +' },
     { label: 'Success Rate', value: '90 %' },
     { label: 'Projects', value: '100 +' },
     { label: 'Speeches/Posts', value: '400 +' },
