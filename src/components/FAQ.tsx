@@ -8,7 +8,7 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "Who is Kaul Bhaskar ?",
+    question: "Who is KAUL BHASKAR ?",
     answer: "Kaul Bhaskar is a Sri Vidya Upaska and a dedicated follower of Kaul Marg. He provides guidance in authentic Tantra, spiritual initiation, and astrological consultations."
   },
   {
@@ -39,9 +39,10 @@ const FAQ: FC = () => {
         frequently asked questions !
       </h2>
       <p className="my-10 text-lg text-blue-50">
-        Who we are ? <br />
+        Who is KAUL BHASKAR ? <br />
         What services we provide ? <br />
         Are our services chargable ? <br />
+        How can I get in touch for services ? <br />
         - Answer to the such questions are here.
       </p>
       
