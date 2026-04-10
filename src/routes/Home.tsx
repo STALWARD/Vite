@@ -4,7 +4,6 @@ import Intro from "../components/Intro";
 import SEO from "../components/SEO"; 
 import StatsComponent from "../components/StatsComponent";
 
-// Lazy load the rest
 const Feature = lazy(() => import("../components/Feature"));
 const Camp = lazy(() => import("../components/Camp"));
 const CalendarComponent = lazy(() => import("../components/CalendarComponent"));
@@ -25,28 +24,17 @@ const Home: React.FC = () => {
         description="Connect with experts in Tantra & Astrology led by Sri KAULBHASKAR Ji, lineage of Sri MATSYENDRA NATH Ji. Services include Puja, Rituals, and Astro-consultation."
         keywords="Tantra, Astrology, KAULBHASKAR Guru Ji, Sri MATSYENDRA NATH lineage, Puja Rituals, Astrology Consultation, Yantra"
         canonical="https://yourdomain.com"
-        // FAQ Schema Data from your provided list
         faq={[
-          {
-            question: "Who we are ?",
-            answer: "We are a team of experts in Tantra & Astrology from renowned lineages. Our mentor Sri KAULBHASKAR Ji belongs to the lineage of the famous siddha yogi Sri MATSYENDRA NATH Ji."
-          },
-          {
-            question: "What services we provide ?",
-            answer: "We provide Tantra teachings and rituals, Astrology consultation, Gems, Talismans, and Worship Yantras like Meru & Kurma."
-          },
-          {
-            question: "What is the charges, if any ?",
-            answer: "Services range from Astrology Consultation (₹5,000) to specialized rituals like Shat Chandi (₹2,50,000). Contact us for specific details."
-          }
+          { question: "Who we are ?", answer: "We are a team of experts in Tantra & Astrology from renowned lineages. Our mentor Sri KAULBHASKAR Ji belongs to the lineage of the famous siddha yogi Sri MATSYENDRA NATH Ji." },
+          { question: "What services we provide ?", answer: "We provide Tantra teachings and rituals, Astrology consultation, Gems, Talismans, and Worship Yantras like Meru & Kurma." },
+          { question: "What is the charges, if any ?", answer: "Services range from Astrology Consultation (₹5,000) to specialized rituals like Shat Chandi (₹2,50,000). Contact us for specific details." }
         ]}
-        // Mentor Schema Data
         mentors={[
           { 
             name: "KAULBHASKAR Guru Ji", 
             role: "Spiritual Mentor & Expert in Tantra", 
             description: "Belongs to the lineage of famous siddha yogi Sri MATSYENDRA NATH Ji.",
-            image: "https://yourdomain.comguru-ji-photo.jpg" // Update with actual URL
+            image: "https://yourdomain.com/guru-ji-photo.jpg"
           }
         ]}
       />
@@ -54,7 +42,7 @@ const Home: React.FC = () => {
       <Hero />
       <Intro />
 
-      <Suspense fallback={<div className="h-40" />}>
+      <Suspense fallback={<div className="flex justify-center items-center h-40">Loading...</div>}>
         <Feature />
         <Camp />
         <CalendarComponent />
