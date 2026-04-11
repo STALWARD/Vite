@@ -11,17 +11,36 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        // Manual chunking function
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'react'
-            if (id.includes('@headlessui') || id.includes('@heroicons')) return 'ui'
-            if (id.includes('tailwindcss')) return 'tailwind'
-            return 'vendor'
+            // 1. Group React core separately (High cache priority)
+            if (id.includes('react')) return 'react-core';
+            
+            // 2. Isolate heavy Calendar & Date logic
+            if (id.includes('react-big-calendar') || id.includes('date-fns')) {
+              return 'calendar-vendor';
+            }
+
+            // 3. Isolate Animations (GSAP)
+            if (id.includes('gsap')) return 'animations';
+
+            // 4. Isolate Markdown parsing (Remark/Markdown)
+            if (id.includes('react-markdown') || id.includes('remark')) {
+              return 'content-parser';
+            }
+
+            // 5. Keep UI icons/components separate
+            if (id.includes('@headlessui') || id.includes('@heroicons') || id.includes('react-icons')) {
+              return 'ui-vendor';
+            }
+
+            // Everything else goes to a general vendor chunk
+            return 'vendor';
           }
         },
       },
     },
-    assetsInlineLimit: 10000,
+    // Reduced from 10000 to 4096 to prevent inlining large assets into JS
+    assetsInlineLimit: 4096, 
   },
 })
