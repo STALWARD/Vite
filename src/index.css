@@ -49,9 +49,9 @@
   body {
     width: 100%; 
     overflow-x: hidden;
-    background-color: #000000;
+    background-color: #dfdff0;
     font-family: "General Sans", sans-serif;
-    color: #1a1a1a;
+    color: #000000;
     margin: 0;
     padding: 0;
   }
