@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import Hero from "../components/Hero"; 
-import Intro from "../components/Intro"; 
 import SEO from "../components/SEO"; 
-import StatsComponent from "../components/StatsComponent";
 
+const Intro = lazy(() => import("../components/Intro")); 
+const StatsComponent = lazy(() => import("../components/StatsComponent"));
 const Feature = lazy(() => import("../components/Feature"));
 const Camp = lazy(() => import("../components/Camp"));
 const CalendarComponent = lazy(() => import("../components/CalendarComponent"));
@@ -40,9 +40,10 @@ const Home: React.FC = () => {
       />
 
       <Hero />
-      <Intro />
+     
 
       <Suspense fallback={<div className="flex justify-center items-center h-40">Loading...</div>}>
+        <Intro />
         <Feature />
         <Camp />
         <CalendarComponent />
