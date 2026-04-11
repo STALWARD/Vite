@@ -5,47 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <!-- 2. Preload critical assets -->
+    <!-- 1. Font Preloads (Crucial for FCP) -->
     <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 2. Hero Image Preload (Crucial for LCP) -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
-    <!-- 3. Preload + load CSS without blocking -->
-    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-    <!-- Inline critical CSS (above-the-fold only) -->
+    <!-- 3. Inline Critical CSS -->
     <style>
-      body {
-        margin: 0;
-        font-family: system-ui, sans-serif;
-      }
-      header {
-        background: #fff;
-        padding: 0rem;
-      }
+      body { margin: 0; font-family: system-ui, sans-serif; background: #000; color: #fff; }
+      #root { min-height: 100vh; }
+      header { background: #fff; padding: 1rem; }
     </style>
 
-    <!-- Fallback for users with JavaScript disabled -->
-    <noscript>
-      <link rel="stylesheet" href="/assets/index-CZMhnSqO.css">
-      <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css">
-    </noscript>
-
-    <title>KAULBHASKAR a Legend KAUL | Tantra, Astrology & Spiritual Guidance</title>
+    <title>KAULBHASKAR | Tantra, Astrology & Spiritual Guidance</title>
   </head>
   <body>
     <div id="root"></div>
-
-    <!-- Preload main JS bundle -->
-    <link rel="preload" href="/src/main.tsx" as="script" />
-
-    <!-- Defer JS execution -->
-    <script type="module" src="/src/main.tsx" defer></script>
-
-    <!-- Example: defer non-critical scripts -->
-    <!-- <script src="/assets/analytics.js" defer></script> -->
+    <!-- Vite handles the rest! -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
