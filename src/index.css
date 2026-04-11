@@ -66,11 +66,40 @@
 
 /* 5. COMPONENTS & ACCESSIBILITY OVERRIDES */
 @layer utilities {
+  /* --- Accessibility Contrast Fixes --- */
+  /* Fix for Calendar Navigation & View Buttons (Today, Back, Next, Week, Month, etc.) */
+  .rbc-toolbar button {
+    @apply bg-white border-gray-300 !important;
+    color: #1a1a1a !important; /* High contrast black-on-white */
+  }
+  .rbc-toolbar button:hover {
+    @apply bg-gray-200 !important;
+  }
+  .rbc-active {
+    background-color: #111827 !important; /* Dark background for active state */
+    color: #ffffff !important;            /* White text for active state */
+  }
+
+  /* Fix for Date Numbers (01-31) */
+  .rbc-button-link { color: #111827 !important; font-weight: 700 !important; }
+  .rbc-off-range .rbc-button-link { color: #4b5563 !important; }
+
+  /* Fix for FAQ/Inquiry Buttons (Who is KAUL BHASKAR, etc.) */
+  button[style*="padding: 0.75rem"] {
+    background-color: #111827 !important; /* Deep dark background */
+    color: #ffffff !important;            /* Bright white text */
+    border-radius: 0.5rem;
+    transition: opacity 0.2s;
+  }
+  button[style*="padding: 0.75rem"]:hover {
+    opacity: 0.9;
+  }
+
+  /* --- Existing Styles --- */
   .text-orange-600 { color: #c2410c !important; }
   .rbc-calendar { @apply min-w-full overflow-x-auto; }
   .rbc-off-range-bg { background-color: #e5e7eb !important; }
-  .rbc-off-range .rbc-button-link { color: #4b5563 !important; }
-  .rbc-button-link { color: #111827 !important; font-weight: 600; }
+  
   .nav-hover-btn { @apply relative ms-5 md:ms-10 font-general text-xs uppercase text-blue-900 cursor-pointer; }
   .floating-nav { @apply bg-black rounded-lg border; }
   .mask-clip-path { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
