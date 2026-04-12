@@ -78,11 +78,13 @@ const About: React.FC = () => {
             KAULBHASKAR GURU Ji
           </h2>
           <p className="text-lg text-simple text-justify">
-            <strong>KAULBHASKAR Guru Ji</strong> is popularly known as KAULBHASKAR, the name given to him by my his Guru. His KAULAVADHUTA GURU bestow him the MAHA PURN KRAM DIKSHA of all the Amnayas. Guru Ji, popularly known as <strong>KAULBHASKAR</strong>, is from
+            <strong>KAULBHASKAR Guru Ji</strong> is popularly known as KAULBHASKAR, the name given to him by his Guru. His KAULAVADHUTA GURU bestow him the MAHA PURN KRAM DIKSHA of all the Amnayas. Guru Ji, popularly known as <strong>KAULBHASKAR</strong>, is from
             the lineage of Sri <strong>Matsyendra Nath</strong> (also known as Machendra Nath) ji, a legend of Naths and one of{" "} <strong>84 Maha Siddhas</strong>. A direct disciple of esteemed KAUL
             of Prayag, Sri <strong>KULBHUSHANANAND NATH</strong>, Guru Ji is basically an Urdhvamanayee Upasaka of MAHATRIPURSUNDARI. Sri Kaulbhaskar Ji, an expert of <strong>KAUL MARGA</strong>, has spent
             more than 30 years painstakingly perfecting his practice of SRI VIDYA UPASANA of highly mysterious{" "} <strong>DAKSHINAMURTI SAMPRADAYA</strong>.
+            <a href="/profile" className="text-blue-600 font-semibold ml-2">KNOW MORE</a>
           </p>
+
         </div>
       </section>
             
