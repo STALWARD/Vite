@@ -83,7 +83,7 @@ const About: React.FC = () => {
             of Prayag, Sri <strong>KULBHUSHANANAND NATH</strong>, Guru Ji is basically an Urdhvamanayee Upasaka of MAHATRIPURSUNDARI. Sri Kaulbhaskar Ji, an expert of <strong>KAUL MARGA</strong>, has spent
             more than 30 years painstakingly perfecting his practice of SRI VIDYA UPASANA of highly mysterious{" "} <strong>DAKSHINAMURTI SAMPRADAYA</strong>.
             <a href="/profile" className="text-blue-600 font-semibold ml-4 inline-flex items-center">
-            KNOW MORE <span className="ml-1">→</span>
+            KNOW MORE <span className="ml-1">→</span> </a>
           </p>
 
         </div>
