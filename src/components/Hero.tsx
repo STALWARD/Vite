@@ -1,5 +1,5 @@
 // src/components/Hero.tsx
-import React, { useEffect, useRef, useState, Suspense } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import { TiLocationArrow } from "react-icons/ti";
 
@@ -7,7 +7,6 @@ const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [hasClicked, setHasClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [loadedVideos, setLoadedVideos] = useState<number>(0);
   const [isClient, setIsClient] = useState(false);
 
   const currentVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -17,7 +16,6 @@ const Hero: React.FC = () => {
   const totalVideo = 4;
   const upcomingVideoIndex = (currentIndex % totalVideo) + 1;
 
-  // 1. DYNAMIC GSAP LOADING: Only loads when the browser is ready
   useEffect(() => {
     setIsClient(true);
     
@@ -26,7 +24,6 @@ const Hero: React.FC = () => {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
-      // Animation for Scroll
       gsap.set("#video-frame", {
         clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
         borderRadius: "0 0 40% 10%",
@@ -44,7 +41,6 @@ const Hero: React.FC = () => {
         },
       });
 
-      // Animation for Video Click (Logic moved into manual call to avoid useGSAP hook dependency)
       if (hasClicked && nextVideoRef.current) {
         gsap.set("#next-video", { visibility: "visible" });
         gsap.to("#next-video", {
@@ -54,7 +50,10 @@ const Hero: React.FC = () => {
           height: "100%",
           duration: 1,
           ease: "power1.inOut",
-          onStart: () => nextVideoRef.current?.play().catch(() => {}),
+          onStart: () => { 
+            // Fixed: Wrapped in a standard non-async arrow function
+            nextVideoRef.current?.play().catch(() => {});
+          },
         });
         gsap.from("#current-video", {
           transformOrigin: "center center",
@@ -73,10 +72,6 @@ const Hero: React.FC = () => {
     setCurrentIndex(upcomingVideoIndex);
   };
 
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
-
   useEffect(() => {
     const timeout = setTimeout(() => setIsLoading(false), 5000);
     return () => clearTimeout(timeout);
@@ -86,7 +81,6 @@ const Hero: React.FC = () => {
 
   return (
     <div className="relative h-screen w-screen overflow-x-hidden">
-      {/* Loading Overlay */}
       {isLoading && (
         <div className="flex-center absolute z-100 h-screen w-screen bg-violet-50">
           <div className="three-body">
@@ -98,7 +92,6 @@ const Hero: React.FC = () => {
       )}
 
       <div id="video-frame" className="relative z-10 h-screen w-screen overflow-hidden rounded-lg bg-blue-75">
-        {/* Mini Video Preview */}
         <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
           <div
             onClick={handleMiniVideoClick}
@@ -116,7 +109,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Transition Video */}
         <video
           ref={nextVideoRef}
           src={getVideoSrc(currentIndex)}
@@ -127,7 +119,6 @@ const Hero: React.FC = () => {
           className="absolute-center invisible absolute z-20 size-64 object-cover"
         />
 
-        {/* Main Background Video */}
         {isClient && (
           <video
             ref={bgVideoRef}
@@ -137,7 +128,7 @@ const Hero: React.FC = () => {
             muted
             playsInline
             className="absolute left-0 top-0 size-full object-cover"
-            onLoadedData={handleVideoLoad}
+            onLoadedData={() => setIsLoading(false)}
           />
         )}
 
