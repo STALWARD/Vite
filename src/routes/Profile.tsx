@@ -8,10 +8,10 @@ const profileData = {
   guruAs: "- An Esteemed KAUL of Prayagraj",
   lineage: [
     { label: "Sri Guru", name: "Sri KULBHUSHANANAND NATH Ji" },
-    { label: "Grand Guru (Param Guru)", name: "Sri BHARTRIHARYANAND NATH Ji" },
-    { label: "Great Grand Guru (Paratpara Guru)", name: "Sri MATSYENDRANAND NATH (Machendra Nath)" },
-    { label: "Great-Great Grand Guru (Par-Paratpara Guru)", name: "Lord ISHANA (Lord Shiva)" },
-    { label: "Great-Great-Great Grand Guru (Parmeshthi Guru)", name: "Sri ADINATHANAND NATH (PARAMA SHIVA)" },
+    { label: "Grand Guru (Param Guru)", name: "Sri GUPTAVATAR BABA SRI" },
+    { label: "Great Grand Guru (Paratpara Guru)", name: "Sri MATSYENDRA NATH" },
+    { label: "Great-Great Grand Guru (Par-Paratpara Guru)", name: "Lord ISHANA" },
+    { label: "Great-Great-Great Grand Guru (Parmeshthi Guru)", name: "PARAMA SHIVA" },
   ]
 };
 
