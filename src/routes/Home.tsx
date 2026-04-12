@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
-import Hero from "../components/Hero"; 
 import SEO from "../components/SEO"; 
 
+const Hero = lazy(() => import("../components/Hero"));
 const Intro = lazy(() => import("../components/Intro")); 
 const StatsComponent = lazy(() => import("../components/StatsComponent"));
 const Feature = lazy(() => import("../components/Feature"));
