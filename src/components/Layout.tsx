@@ -1,30 +1,25 @@
 // src/components/Layout.tsx
-import { lazy, Suspense } from 'react';
 import { Outlet, ScrollRestoration } from 'react-router'; 
 import Navbar from './Navbar'; 
-
-const Footer = lazy(() => import('./Footer'));
+// 1. Change to a standard static import
+import Footer from './Footer'; 
 
 export default function Layout() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <ScrollRestoration /> 
 
       <header className="layout-header">
         <Navbar /> 
       </header>
 
+      {/* 2. flex-1 ensures this area fills the gap, keeping footer at bottom */}
       <main className="flex-1">
         <Outlet />
       </main>
       
-      {/* 
-          FIX: Use a div with the same background color and height 
-          as your footer to prevent the "jump" when it loads.
-      */}
-      <Suspense fallback={<div className="h-[160px] bg-[#5542ff] w-full" />}>
-        <Footer />
-      </Suspense>
+      {/* 3. Render it directly without Suspense */}
+      <Footer />
     </div>
   );
 }
