@@ -32,7 +32,7 @@ const Meet: FC = () => {
         {/* Left decoration */}
         <div className="absolute -left-20 top-0 hidden h-full w-72 overflow-hidden sm:block lg:left-20 lg:w-96">
           <ImageClipBox src="/img/contact-1.webp" clipClass="contact-clip-path-1" />
-          <ImageClipBox src="/img/contact-2.webp" clipClass="contact-clip-path-2 lg:translate-y-40 translate-y-60" />
+          <ImageClipBox src="/img/contact-3.webp" clipClass="contact-clip-path-2 lg:translate-y-40 translate-y-60" />
         </div>
 
         {/* Right decoration */}
