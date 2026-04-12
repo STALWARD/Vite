@@ -14,8 +14,9 @@ const Hero: React.FC = () => {
   const [loadedVideos, setLoadedVideos] = useState<number>(0);
   const [isClient, setIsClient] = useState(false);
 
-  const bgVideoRef = useRef<HTMLVideoElement | null>(null);
+  const currentVideoRef = useRef<HTMLVideoElement | null>(null);
   const nextVideoRef = useRef<HTMLVideoElement | null>(null);
+  const bgVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const totalVideo = 4;
   const upcomingVideoIndex = (currentIndex % totalVideo) + 1;
@@ -29,18 +30,40 @@ const Hero: React.FC = () => {
     setLoadedVideos((prev) => prev + 1);
   };
 
+  // Client-only guard
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Optimized Loading Logic: Refresh only after a slight delay for stability
+  // Force autoplay on mount
+  useEffect(() => {
+    if (bgVideoRef.current) {
+      bgVideoRef.current.play().catch(() => {
+        console.log("Autoplay blocked, waiting for user interaction");
+      });
+    }
+  }, []);
+
+  // Failsafe loader
+  useEffect(() => {
+    if (bgVideoRef.current && bgVideoRef.current.readyState >= 2) {
+      setLoadedVideos((prev) => prev + 1);
+    }
+
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Sync loading state with ScrollTrigger
   useEffect(() => {
     if (loadedVideos >= 1) {
       setIsLoading(false);
-      const timer = setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100);
-      return () => clearTimeout(timer);
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh(true);
+      });
     }
   }, [loadedVideos]);
 
@@ -53,17 +76,11 @@ const Hero: React.FC = () => {
         gsap.to("#next-video", {
           transformOrigin: "center center",
           scale: 1,
-          // REMOVED: width/height animations (triggers reflow)
-          // ADDED: use x/y/scale transforms for performance
           duration: 1,
           ease: "power1.inOut",
           onStart: () => {
             nextVideoRef.current?.play().catch(() => {});
           },
-          onComplete: () => {
-            // Refresh layout once animation settles
-            ScrollTrigger.refresh();
-          }
         });
 
         gsap.from("#current-video", {
@@ -93,7 +110,6 @@ const Hero: React.FC = () => {
         start: "center center",
         end: "bottom center",
         scrub: true,
-        invalidateOnRefresh: true, // Recalculates on resize/refresh
       },
     });
   }, []);
@@ -103,7 +119,7 @@ const Hero: React.FC = () => {
   return (
     <div className="relative h-screen w-screen overflow-x-hidden">
       {isLoading && (
-        <div className="flex-center absolute z-[100] h-screen w-screen bg-violet-50">
+        <div className="flex-center absolute z-100 h-screen w-screen bg-violet-50">
           <div className="three-body">
             <div className="three-body__dot" />
             <div className="three-body__dot" />
@@ -115,7 +131,6 @@ const Hero: React.FC = () => {
       <div
         id="video-frame"
         className="relative z-10 h-screen w-screen overflow-hidden rounded-lg bg-blue-75"
-        style={{ willChange: "clip-path, border-radius" }} // Hint to browser
       >
         <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
           <div
@@ -123,6 +138,7 @@ const Hero: React.FC = () => {
             className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
           >
             <video
+              ref={currentVideoRef}
               src={getVideoSrc(upcomingVideoIndex)}
               loop
               muted
@@ -140,7 +156,7 @@ const Hero: React.FC = () => {
           muted
           playsInline
           id="next-video"
-          className="absolute-center invisible absolute z-20 size-full object-cover" // Start at full size, scale handled by GSAP
+          className="absolute-center invisible absolute z-20 size-64 object-cover"
         />
 
         {isClient && (
@@ -153,8 +169,16 @@ const Hero: React.FC = () => {
             playsInline
             className="absolute left-0 top-0 size-full object-cover"
             onLoadedData={handleVideoLoad}
+            onCanPlay={() => {
+              setIsLoading(false);
+              bgVideoRef.current?.play();
+            }}
           />
         )}
+
+        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 bg-linear-to-r from-green-400 via-red-500 to-indigo-500 bg-clip-text text-transparent">
+          BH<b>as</b>k<b>a</b>r
+        </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
@@ -162,15 +186,22 @@ const Hero: React.FC = () => {
               K<b>a</b>u<b>l</b>
             </h1>
             <p className="mb-5 max-w-72 font-robert-regular text-white">
-               {/* Your Sanskrit Text */}
-               We can help you on an adventure around the world of Tantra in just a simple way.
+              त्रिपुरास्या महादेवी भुक्ति-मुक्ति-फल-प्रदा।<br />
+              न गुरोः सदृशं वस्तु न देवः शङ्करोपमः॥<br />
+              न च कौलात् परो योगी न विद्या त्रैपुरी समा।<br />
+              न च शान्तेः परं ज्ञानं न च क्षान्तेः परं सुखम्॥<br />
+              <br />
+              We can help you on an adventure around the world of Tantra in just
+              a simple way.
             </p>
             <Button
               id="kaulbhaskar-guru ji"
               title="Visit my other WEBSITE"
               leftIcon={<TiLocationArrow />}
               containerClass="!bg-yellow-300 hover:!bg-white flex-center gap-1"
-              onClick={() => window.open("https://tantrasadhana.org", "_blank")}
+              onClick={() =>
+                window.open("https://www.tantrasadhana.org", "_blank")
+              }
             />
           </div>
         </div>
