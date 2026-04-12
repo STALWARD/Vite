@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 
+// vite.config.ts
 export default defineConfig({
   plugins: [
     react(),
@@ -10,26 +11,30 @@ export default defineConfig({
   ],
   build: {
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 500, // Optional: alerts you if a chunk gets too big
+    chunkSizeWarningLimit: 600, 
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // 1. Separate core framework (rarely changes, highly cacheable)
-          if (id.includes('node_modules/react/') || 
-              id.includes('node_modules/react-dom/') || 
-              id.includes('node_modules/react-router/')) {
-            return 'vendor-core';
-          }
-          
-          // 2. Separate heavy UI/Icon libraries if they are large
-          if (id.includes('node_modules/@headlessui') || id.includes('node_modules/@heroicons')) {
-            return 'vendor-ui';
-          }
+          if (id.includes('node_modules')) {
+            // 1. Core Framework
+            if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router/')) {
+              return 'vendor-core';
+            }
+            
+            // 2. The "Weight" (Pull these out of the main bundle)
+            if (id.includes('react-big-calendar')) return 'vendor-calendar';
+            if (id.includes('gsap')) return 'vendor-gsap';
+            if (id.includes('react-slick') || id.includes('slick-carousel')) return 'vendor-carousel';
+            if (id.includes('react-icons')) return 'vendor-icons';
+            if (id.includes('react-markdown') || id.includes('remark-gfm')) return 'vendor-content';
 
-          // 3. Let Vite handle smaller libraries automatically 
-          // (Removing the 'vendor' catch-all allows Vite to split them per-route)
+            // 3. DO NOT return a 'vendor' catch-all.
+            // This lets smaller things like date-fns and emailjs 
+            // stay inside the lazy-loaded pages that use them.
+          }
         },
       },
     },
   },
 })
+
