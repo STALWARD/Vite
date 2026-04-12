@@ -17,6 +17,8 @@ export default defineConfig({
             if (id.includes('react')) return 'react'
             if (id.includes('@headlessui') || id.includes('@heroicons')) return 'ui'
             if (id.includes('tailwindcss')) return 'tailwind'
+            if (id.includes('chart.js')) return 'charts'
+            if (id.includes('lodash')) return 'lodash'
             return 'vendor'
           }
         },
