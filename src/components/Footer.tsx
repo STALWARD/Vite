@@ -32,7 +32,7 @@ export default function Footer() {
         
         {/* Copyright */}
         <p className="text-center text-sm font-light md:text-left">
-          © TANTRA SADHANA 2026. All rights reserved
+          © KAUL BHASKAR 2026. All rights reserved
         </p>
 
         {/* Navigation Links */}
