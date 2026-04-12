@@ -1,7 +1,6 @@
 import gsap from "gsap";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react"; // Import useGSAP
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,14 +12,14 @@ interface AnimatedTitleProps {
 const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "" }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useGSAP(
-    () => {
-      const container = containerRef.current;
-      if (!container) return;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-      const words = container.querySelectorAll(".animated-word");
-      if (!words.length) return;
+    const words = container.querySelectorAll(".animated-word");
+    if (!words || words.length === 0) return;
 
+    const ctx = gsap.context(() => {
       const titleAnimation = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -40,13 +39,12 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
         stagger: 0.02,
         duration: 0.8,
         overwrite: "auto",
-        // PERFORMANCE BOOSTS:
-        force3D: true, // Uses GPU layer
-        lazy: true,    // Batches DOM writes to avoid reflow
+        force3D: true,
       });
-    },
-    { dependencies: [title], scope: containerRef } // Scoping prevents GSAP from searching the whole DOM
-  );
+    }, container);
+
+    return () => ctx.revert();
+  }, [title]);
 
   return (
     <div ref={containerRef} className={`animated-title ${containerClass}`}>
@@ -54,13 +52,13 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ title, containerClass = "
         <div
           key={index}
           className="flex-center max-w-full flex-wrap gap-2 px-10 md:gap-3"
+          style={{ overflow: "hidden" }}
         >
           {line.split(" ").map((word, i) => (
             <span
               key={i}
               className="animated-word"
               dangerouslySetInnerHTML={{ __html: word }}
-              style={{ willChange: "transform, opacity" }} // Hint to the browser
             />
           ))}
         </div>
