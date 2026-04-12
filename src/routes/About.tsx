@@ -82,7 +82,8 @@ const About: React.FC = () => {
             the lineage of Sri <strong>Matsyendra Nath</strong> (also known as Machendra Nath) ji, a legend of Naths and one of{" "} <strong>84 Maha Siddhas</strong>. A direct disciple of esteemed KAUL
             of Prayag, Sri <strong>KULBHUSHANANAND NATH</strong>, Guru Ji is basically an Urdhvamanayee Upasaka of MAHATRIPURSUNDARI. Sri Kaulbhaskar Ji, an expert of <strong>KAUL MARGA</strong>, has spent
             more than 30 years painstakingly perfecting his practice of SRI VIDYA UPASANA of highly mysterious{" "} <strong>DAKSHINAMURTI SAMPRADAYA</strong>.
-            <a href="/profile" className="text-blue-600 font-semibold ml-2">KNOW MORE</a>
+            <a href="/profile" className="text-blue-600 font-semibold ml-4 inline-flex items-center">
+            KNOW MORE <span className="ml-1">→</span>
           </p>
 
         </div>
