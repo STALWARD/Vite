@@ -42,6 +42,15 @@ const Hero: React.FC = () => {
         console.log("Autoplay blocked, waiting for user interaction");
       });
     }
+
+    // Fallback: trigger play on first user click
+    const handler = () => {
+      bgVideoRef.current?.play();
+      window.removeEventListener("click", handler);
+    };
+    window.addEventListener("click", handler);
+
+    return () => window.removeEventListener("click", handler);
   }, []);
 
   // Failsafe loader
@@ -52,7 +61,8 @@ const Hero: React.FC = () => {
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+      bgVideoRef.current?.play();
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -116,7 +126,9 @@ const Hero: React.FC = () => {
     });
   }, []);
 
-  const getVideoSrc = (index: number) => `videos/hero-bg-${index}.mp4`;
+  // Cache-busting video source
+  const getVideoSrc = (index: number) =>
+    `videos/hero-bg-${index}.mp4?ts=${Date.now()}`;
 
   return (
     <div className="relative h-screen w-screen overflow-x-hidden">
@@ -145,6 +157,7 @@ const Hero: React.FC = () => {
               loop
               muted
               playsInline
+              preload="auto"
               id="current-video"
               className="size-64 origin-center scale-150 object-cover object-center"
             />
@@ -157,6 +170,7 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
+          preload="auto"
           id="next-video"
           className="absolute-center invisible absolute z-20 size-64 object-cover"
         />
@@ -169,6 +183,7 @@ const Hero: React.FC = () => {
             loop
             muted
             playsInline
+            preload="auto"
             className="absolute left-0 top-0 size-full object-cover"
             onLoadedData={handleVideoLoad}
             onCanPlay={() => {
