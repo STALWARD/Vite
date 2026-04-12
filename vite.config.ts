@@ -16,7 +16,7 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('node_modules')) {
              return id.toString().split('node_modules/')[1].split('/')[0].toString();
-          }
+          
             // 1. Framework: The absolute bare minimum
             if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router/')) {
               return 'vendor-framework';
