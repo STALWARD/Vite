@@ -3,7 +3,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 
-// vite.config.ts
 export default defineConfig({
   plugins: [
     react(),
@@ -16,25 +15,27 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // 1. Core Framework
+            // 1. Core Framework (React essentials)
             if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router/')) {
               return 'vendor-core';
             }
             
-            // 2. The "Weight" (Pull these out of the main bundle)
+            // 2. Isolate heavy Node-polyfilled libs (gray-matter, buffer)
+            if (id.includes('gray-matter') || id.includes('buffer')) {
+              return 'vendor-utils';
+            }
+
+            // 3. Heavy Page-Specific Libs
             if (id.includes('react-big-calendar')) return 'vendor-calendar';
             if (id.includes('gsap')) return 'vendor-gsap';
             if (id.includes('react-slick') || id.includes('slick-carousel')) return 'vendor-carousel';
             if (id.includes('react-icons')) return 'vendor-icons';
             if (id.includes('react-markdown') || id.includes('remark-gfm')) return 'vendor-content';
 
-            // 3. DO NOT return a 'vendor' catch-all.
-            // This lets smaller things like date-fns and emailjs 
-            // stay inside the lazy-loaded pages that use them.
+            // 4. Default: Let Vite group smaller libraries into the chunks that use them
           }
         },
       },
     },
   },
 })
-
