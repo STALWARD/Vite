@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Preload critical fonts -->
-    <link rel="preload" href="/fonts/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/general.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/zentry-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/general.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Preload hero image -->
-    <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="/assets/intro.webp" type="image/webp">
 
     <!-- Inline critical CSS -->
     <style>
@@ -24,28 +24,28 @@
         background: #fff;
         padding: 0rem;
       }
-      /* Add any above-the-fold layout rules here */
     </style>
 
-    <!-- Load main CSS asynchronously -->
+    <!-- Preload + async load CSS -->
     <link rel="preload" href="/assets/index-CabCkKXs.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/index-CabCkKXs.css"></noscript>
+    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-    <!-- Defer non-critical CSS (calendar styles) -->
-    <link rel="preload" href="/assets/react-big-calendar-BiPGZdAr.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/react-big-calendar-BiPGZdAr.css"></noscript>
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <link rel="stylesheet" href="/assets/index-CabCkKXs.css">
+      <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css">
+    </noscript>
 
     <title>KAULBHASKAR a Legend KAUL | Tantra, Astrology & Spiritual Guidance</title>
   </head>
   <body>
     <div id="root"></div>
 
-  <!-- Preload main JS bundle -->
-<link rel="preload" href="/assets/index-B5-rmSWN.js" as="script" />
+    <!-- Preload main JS bundle -->
+    <link rel="preload" href="/assets/index-B5-rmSWN.js" as="script" />
 
-<!-- Defer JS execution -->
-<script src="/assets/index-B5-rmSWN.js" defer></script>
-
+    <!-- Defer JS execution -->
+    <script src="/assets/index-B5-rmSWN.js" defer></script>
 
     <!-- Example: defer analytics or other non-critical scripts -->
     <!-- <script src="/assets/analytics.js" defer></script> -->
