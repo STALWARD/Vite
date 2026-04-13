@@ -27,7 +27,8 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#5542ff] py-10 text-white">
+    // FIX 2: Set minimum height (mobile vs desktop) to prevent layout collapse during load
+    <footer className="w-full bg-[#5542ff] py-10 text-white min-h-[300px] md:min-h-[120px] flex items-center">
       <div className="container mx-auto flex flex-col items-center justify-between gap-8 px-6 md:flex-row">
         
         {/* Copyright */}
@@ -51,16 +52,19 @@ export default function Footer() {
         {/* Social Links */}
         <div className="flex gap-4 md:flex-1 md:justify-end">
           {socialLinks.map((social, index) => (
+            // FIX 1: Fixed dimensions (w-8 h-8) on wrapper to reserve space for icons
             <a
               key={index}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:scale-110 transition-transform text-xl focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1"
+              className="w-8 h-8 flex items-center justify-center text-white hover:scale-110 transition-transform text-xl focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1"
               aria-label={social.label}
             >
-              {/* aria-hidden ensures the raw SVG icon code isn't read by screen readers */}
-              <span aria-hidden="true">{social.icon}</span>
+              {/* Internal fixed-size span ensures SVG doesn't cause a jump on load */}
+              <span className="w-5 h-5 flex items-center justify-center" aria-hidden="true">
+                {social.icon}
+              </span>
             </a>
           ))}
         </div>
