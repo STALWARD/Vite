@@ -11,14 +11,10 @@
     <link rel="preload" href="/fonts/robert-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/circularweb-book.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Preload hero image with high priority -->
+    <!-- Preload hero image -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/intro.webp" type="image/webp">
 
-    <!-- Preload + load CSS without blocking -->
-    <link rel="preload" href="/assets/index-CZMhnSqO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/assets/vendor-DITC1bZO.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-    <!-- Inline critical CSS (above-the-fold only) -->
+    <!-- Inline critical CSS -->
     <style>
       body {
         margin: 0;
@@ -28,13 +24,16 @@
         background: #fff;
         padding: 0rem;
       }
+      /* Add any above-the-fold layout rules here */
     </style>
 
-    <!-- Fallback for users with JavaScript disabled -->
-    <noscript>
-      <link rel="stylesheet" href="/assets/index-CZMhnSqO.css">
-      <link rel="stylesheet" href="/assets/vendor-DITC1bZO.css">
-    </noscript>
+    <!-- Load main CSS asynchronously -->
+    <link rel="preload" href="/assets/index-CabCkKXs.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/index-CabCkKXs.css"></noscript>
+
+    <!-- Defer non-critical CSS (calendar styles) -->
+    <link rel="preload" href="/assets/react-big-calendar-BiPGZdAr.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/react-big-calendar-BiPGZdAr.css"></noscript>
 
     <title>KAULBHASKAR a Legend KAUL | Tantra, Astrology & Spiritual Guidance</title>
   </head>
@@ -42,12 +41,12 @@
     <div id="root"></div>
 
     <!-- Preload main JS bundle -->
-    <link rel="preload" href="/src/main.tsx" as="script" />
+    <link rel="preload" href="/assets/index-B5-rmSWN.js" as="script" />
 
     <!-- Defer JS execution -->
-    <script type="module" src="/src/main.tsx" defer></script>
+    <script src="/assets/index-B5-rmSWN.js" defer></script>
 
-    <!-- Example: defer non-critical scripts -->
+    <!-- Example: defer analytics or other non-critical scripts -->
     <!-- <script src="/assets/analytics.js" defer></script> -->
   </body>
 </html>
