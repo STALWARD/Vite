@@ -15,31 +15,26 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // 1. Target the flagged "Esprima" library specifically
-            if (id.includes('esprima')) {
-              return 'vendor-esprima';
-            }
-
-            // 2. Framework Core
+            // 1. Core Framework (React essentials)
             if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router/')) {
-              return 'vendor-framework';
+              return 'vendor-core';
             }
-
-            // 3. Blog Logic
+            
+            // 2. Isolate heavy Node-polyfilled libs (gray-matter, buffer)
             if (id.includes('gray-matter') || id.includes('buffer')) {
-              return 'vendor-blog-logic';
+              return 'vendor-utils';
             }
 
-            // 4. Other Heavy Components (as per your existing config)
+            // 3. Heavy Page-Specific Libs
             if (id.includes('react-big-calendar')) return 'vendor-calendar';
             if (id.includes('gsap')) return 'vendor-gsap';
             if (id.includes('react-slick') || id.includes('slick-carousel')) return 'vendor-carousel';
+            if (id.includes('react-icons')) return 'vendor-icons';
             if (id.includes('react-markdown') || id.includes('remark-gfm')) return 'vendor-content';
 
-            // 5. Catch-all for remaining node_modules to avoid one massive "vendor" chunk
-            return id.toString().split('node_modules/')[1].split('/')[0];
+            // 4. Default: Let Vite group smaller libraries into the chunks that use them
           }
-        }
+        },
       },
     },
   },
