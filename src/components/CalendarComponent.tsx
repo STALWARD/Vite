@@ -40,7 +40,7 @@ const CalendarComponent: FC = () => {
         contain: "layout style",
       }}
     >
-      <h1
+      <h2
         style={{
           textAlign: "center",
           fontSize: "3.5rem",
@@ -50,7 +50,7 @@ const CalendarComponent: FC = () => {
         }}
       >
         Upcoming Event
-      </h1>
+      </h2>
 
       <div
         style={{
