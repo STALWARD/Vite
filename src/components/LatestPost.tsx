@@ -68,7 +68,7 @@ const LatestPost: React.FC = () => {
 
   return (
     <div className="px-6 py-10 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen">
-      <h1 className="text-black text-center text-4xl font-bold mb-10">Latest Posts</h1>
+      <h2 className="text-black text-center text-4xl font-bold mb-10">Latest Posts</h2>
 
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {latestPosts.map((post) => (
