@@ -80,7 +80,7 @@ const LatestPost: React.FC = () => {
               <img
                 src={post.featuredImage}
                 alt={post.title}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-auto object-cover object-center"
               />
               <div className="p-5">
                 <p className="text-sm text-orange-600 font-semibold mb-2">
