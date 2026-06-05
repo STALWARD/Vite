@@ -89,10 +89,10 @@ const Profile: React.FC = () => {
                     index === profileData.lineage.length - 1 ? 'border-b-0' : ''
                   }`}
                 >
-                  <div className="md:w-1/3 text-orange-300/80 text-base md:text-lg uppercase font-bold tracking-tighter mb-1 md:mb-0">
+                  <div className="md:w-1/3 text-orange-300/80 text-base md:text-lg uppercase font-bold tracking-tighter mb-2 md:mb-0 md:pr-4">
                     {item.label}
                   </div>
-                  <div className="md:w-2/3 text-lg md:text-xl font-semibold">
+                  <div className="md:w-2/3 text-lg md:text-xl font-semibold md:pl-4">
                     {item.name}
                   </div>
                 </div>
