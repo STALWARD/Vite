@@ -28,12 +28,58 @@ const navLinks = [
 export default function Footer() {
   return (
     // FIX 2: Set minimum height (mobile vs desktop) to prevent layout collapse during load
-    <!-- Fixed Footer Layout -->
-<footer class="w-full bg-[#5542ff] py-10 text-white min-h-[300px] md:min-h-[120px] flex items-center justify-between unique-footer-container">
-  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    
-    <!-- Left Section: Branding -->
-    <div class="flex items-center min-w-[150px] min-h-[40px]">
+    <footer className="w-full bg-[#5542ff] py-10 text-white min-h-[300px] md:min-h-[120px] flex items-center">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-8 px-6 md:flex-row">
+        
+        {/* Copyright */}
+        <p className="text-center text-sm font-light md:text-left">
+          © KAUL BHASKAR 2026. All rights reserved
+        </p>
+
+        {/* Navigation Links */}
+        <nav className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:flex-1 md:justify-center md:flex-nowrap" aria-label="Footer Navigation">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.href} 
+              to={link.href} 
+              className="text-white text-sm font-medium hover:underline transition-all focus:outline-none focus:ring-2 focus:ring-white rounded-sm"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Social Links */}
+        <div className="flex gap-4 md:flex-1 md:justify-end">
+          {socialLinks.map((social, index) => (
+            // FIX 1: Fixed dimensions (w-8 h-8) on wrapper to reserve space for icons
+            <a
+              key={index}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 flex items-center justify-center text-white hover:scale-110 transition-transform text-xl focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1"
+              aria-label={social.label}
+            >
+              {/* Internal fixed-size span ensures SVG doesn't cause a jump on load */}
+              <span className="w-5 h-5 flex items-center justify-center" aria-hidden="true">
+                {social.icon}
+              </span>
+            </a>
+          ))}
+        </div>
+
+        {/* Privacy Policy */}
+        <Link
+          to="/privacy"
+          className="text-center text-sm font-light hover:underline md:text-right md:ml-4 focus:outline-none focus:ring-2 focus:ring-white rounded-sm"
+        >
+          Privacy Policy
+        </Link>
+      </div>
+    </footer>
+  );
+}
       <span class="text-sm opacity-90">© 2026 Kaul Bhaskar. All rights reserved.</span>
     </div>
 
