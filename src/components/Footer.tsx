@@ -80,20 +80,3 @@ export default function Footer() {
     </footer>
   );
 }
-      <span class="text-sm opacity-90">© 2026 Kaul Bhaskar. All rights reserved.</span>
-    </div>
-
-    <!-- Center/Right Section: Navigation Links -->
-    <nav class="flex flex-wrap justify-center gap-6 text-sm font-medium">
-      <a href="/" class="hover:underline">Home</a>
-      <a href="/about" class="hover:underline">About Us</a>
-      <a href="/services" class="hover:underline">Services</a>
-      <a href="/blog" class="hover:underline">Blog</a>
-      <a href="/contact" class="hover:underline">Contact</a>
-    </nav>
-
-  </div>
-</footer>
-
-  );
-}
