@@ -3,7 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import emailjs from "@emailjs/browser"; 
 import phoneImage from "/img/phone-image.jpeg"; 
 import contactImage from "/img/contact.webp"; 
-import SEO from "../components/seo"; 
+import SEO from "../components/SEO"; 
 
 interface FormData { 
   name: string; 
