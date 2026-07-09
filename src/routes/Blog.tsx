@@ -71,7 +71,7 @@ export default function Blog() {
       
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {currentPosts.map((post) => (
-          <li key={post.slug} className="border rounded-xl bg-white overflow-hidden shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white"">
+          <li key={post.slug} className="border rounded-xl bg-white overflow-hidden shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white">
             {/* Note: Use /{post.slug} if you moved the route to the root level as previously discussed */}
             <Link to={`/${post.slug}`}>
               <img src={post.featuredImage} alt={post.title} className="w-full h-auto" />
